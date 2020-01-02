@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "QIMUIKit"
-  s.version      = "3.0.10211613"
+  s.version      = "4.0.58"
   s.summary      = "QIM App UI 9.0+ version"
   s.description  = <<-DESC
                    QIM UI
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.license      = "Copyright 2018 im.qunar.com"
   s.author       = { "Qunar IM" => "qtalk@qunar.com" }
 
-  s.source       = { :git => "https://github.com/qunarcorp/libqimuikit-ios.git", :tag=> s.version.to_s}
+  s.source       = { :git => "https://github.com/startalkIM/libqimuikit-ios.git", :tag=> s.version.to_s}
 
   s.ios.deployment_target   = '9.0'
 
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'DEBUGLOG=1'}
   s.pod_target_xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"${PODS_ROOT}/Headers/Private/QIMUIKit/**\" \"${PODS_ROOT}/Headers/Public/**\""}
   $debug = ENV['debug']
-  $beta = ENV['beta']
+  $internal = ENV['internal']
 
   s.subspec 'PublicUIHeader'  do |ph|
     ph.public_header_files = "QIMUIKit/QIMNotificationManager*.{h}", "QIMUIKit/QIMJumpURLHandle*.{h}", "QIMUIKit/QIMFastEntrance*.{h}", "QIMUIKit/QIMAppWindowManager*.{h}", "QIMUIKit/QIMCommonUIFramework*.*{h}", "QIMUIKit/QIMRemoteNotificationManager*.{h}"
@@ -39,6 +39,9 @@ Pod::Spec.new do |s|
     app.source_files = "QIMUIKit/Application/**/*.{h,m,c,mm}"
     app.dependency 'QIMUIKit/PublicUIHeader'
     app.dependency 'QIMUIKit/QIMAppUIConfig'
+    app.dependency  'AlipaySDK-iOS'
+    app.xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"$(PODS_ROOT)/AlipaySDK-iOS\""}
+
   end
 
   s.subspec 'QIMGeneralUI' do |generalUI|
@@ -157,10 +160,10 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'QIMRN' do |rn|
-    rn.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'QIMRNEnable=1', "HEADER_SEARCH_PATHS" => "$(PROJECT_DIR)/node_modules/react-native"}
+    rn.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'QIMRNEnable=1'}
     rn.pod_target_xcconfig = {'OTHER_LDFLAGS' => '$(inherited)'}
     rn.source_files = ['QIMRNKit/rn_3rd/**/*{h,m,c}']
-    rn.pod_target_xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"${PODS_ROOT}/Headers/Public/QIMRNKit/**\" \"$(PODS_ROOT)/boost-for-react-native\" \"$(PODS_ROOT)/DoubleConversion\" \"$(PODS_ROOT)/../node_modules\" \"$(PODS_ROOT)/../node_modules/react-native/ReactCommon/yoga\""}
+    rn.pod_target_xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"${PODS_ROOT}/Headers/Public/QIMRNKit/**\" \"$(PODS_ROOT)/boost-for-react-native\" \"$(PODS_ROOT)/DoubleConversion\""}
     rn.resource = 'QIMRNKit/QIMRNKit.bundle'
     rn.frameworks = 'UIKit', 'Foundation'
      if $debug
@@ -173,19 +176,15 @@ Pod::Spec.new do |s|
   s.subspec 'QIMFlutter' do |flutter|
     
     flutter.source_files = ['QIMFlutter/Src/**/*{h,m,c}']
-#    flutter.xcconfig = {"FRAMEWORK_SEARCH_PATHS" => "\"${PODS_ROOT}/../flutter_service/.ios/Flutter/engine\""}
-    flutter.xcconfig = {"FRAMEWORK_SEARCH_PATHS" => "\"${PODS_ROOT}/../libQIMFlutterLibrary/libQIMFlutterFramework/\""}
-#    flutter.xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"$(PODS_ROOT)/QIMFlutterFramework\""}
-
+    #    flutter.xcconfig = {"FRAMEWORK_SEARCH_PATHS" => "\"${PODS_ROOT}/../flutter_service/.ios/Flutter/engine\""}
     if $debug
-#      flutter.xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"$(PODS_ROOT)/QIMFlutterFramework\""}
-#      flutter.dependency 'QIMFlutterFramework', '~> 4.0.7'
-#      flutter.dependency 'QIMFlutterFramework', '~> 0.0.1-beta.qtalk-flutter.19'
-    else
-      flutter.xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"$(PODS_ROOT)/QIMFlutterFramework\""}
+#      flutter.xcconfig = {"FRAMEWORK_SEARCH_PATHS" => "\"${PODS_ROOT}/../libQIMFlutterLibrary/libQIMFlutterFramework/\""}
+    elsif $internal
       flutter.dependency 'QIMFlutterFramework', '~> 4.0'
-    end
-    
+      flutter.xcconfig = {"HEADER_SEARCH_PATHS" => "\"${PODS_ROOT}/Headers/Private/**\" \"$(PODS_ROOT)/QIMFlutterFramework\""}
+    else
+
+    end    
   end
   
   s.subspec 'QIMUIKit-NORN' do |norn|
@@ -243,7 +242,7 @@ Pod::Spec.new do |s|
   s.dependency 'AMap3DMap'
   s.dependency 'SCLAlertView-Objective-C'
   s.dependency 'MMMarkdown'
-#  s.dependency 'Toast' 
+#  s.dependency 'Toast'
   s.dependency 'YYKeyboardManager'
   s.dependency 'RTLabel'
 #  s.dependency 'SuperPlayer'

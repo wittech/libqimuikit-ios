@@ -10,7 +10,9 @@
 #if __has_include(<FlutterPluginRegistrant/GeneratedPluginRegistrant.h>)
 #import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h> // Only if you have Flutter Plugins
 #else
+#if __has_include("GeneratedPluginRegistrant.h")
 #import "GeneratedPluginRegistrant.h" // Only if you have Flutter Plugins
+#endif
 #endif
 #import "UIView+QIMToast.h"
 #import "NSBundle+QIMLibrary.h"
@@ -20,6 +22,8 @@
 @end
 
 @implementation QIMFlutterViewController
+
+#if __has_include(<Flutter/Flutter.h>)
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -71,7 +75,7 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+#endif
 /*
 #pragma mark - Navigation
 
@@ -83,3 +87,4 @@
 */
 
 @end
+

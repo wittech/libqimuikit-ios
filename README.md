@@ -35,7 +35,7 @@ QIMUIKit是QIMSDK中一款高性能，低耦合度的UI栈组件。
 我们建议你通过 [Cocoapods](https://cocoapods.org/) 来进行 `QIMUIKit` 的集成,在 `Podfile` 中加入以下内容:
 
 ```shell
-source 'https://github.com/qunarcorp/libqimkit-ios-cook.git'
+source 'https://github.com/startalkIM/libqimkit-ios-cook.git'
 pod 'QIMUIKit'
 ```
 

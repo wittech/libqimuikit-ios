@@ -250,7 +250,7 @@ typedef enum {
     _changeBtnType = sender.tag - kChangeBtnTagFrom;
     if (_changeBtnType == ChangeBtnTypeRestore) {
         [self restoreChatColorInfo];
-        [[self tipHUDWithText:@"正在恢复..."] show:YES];
+        [[self tipHUDWithText:@"正在恢复..."] showAnimated:YES];
         [self performSelector:@selector(closeHUD) withObject:nil afterDelay:0.5];
         return;
     }
@@ -357,7 +357,7 @@ typedef enum {
     if (_isValueChange == NO) {
         _isValueChange = YES;
     }
-    [[self tipHUDWithText:@"正在保存..."] show:YES];
+    [[self tipHUDWithText:@"正在保存..."] showAnimated:YES];
     [self performSelector:@selector(closeHUD) withObject:nil afterDelay:0.5];
 }
 
@@ -432,16 +432,16 @@ typedef enum {
         _tipHUD = [[MBProgressHUD alloc] initWithView:self.view];
         _tipHUD.minSize = CGSizeMake(120, 120);
         _tipHUD.minShowTime = 1;
-        [_tipHUD setLabelText:@""];
+        _tipHUD.label.text=@"";
         [self.view addSubview:_tipHUD];
     }
-    [_tipHUD setDetailsLabelText:text];
+    _tipHUD.detailsLabel.text=text;
     return _tipHUD;
 }
 
 - (void)closeHUD{
     if (_tipHUD) {
-        [_tipHUD hide:YES];
+        [_tipHUD hideAnimated:YES];
     }
 }
 

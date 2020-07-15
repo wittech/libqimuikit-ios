@@ -31,24 +31,24 @@
         _progreeHUD = [[MBProgressHUD alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _progreeHUD.minSize = CGSizeMake(120, 120);
         _progreeHUD.minShowTime = 1.0f;
-        [_progreeHUD setLabelText:@""];
+        _progreeHUD.label.text=@"";
         [[UIApplication sharedApplication].keyWindow addSubview:_progreeHUD];
     }
-    [_progreeHUD show:YES];
+    [_progreeHUD showAnimated:YES];
     return _progreeHUD;
 }
 
 - (void)showProgressHUDWithTest:(NSString *)text {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.progreeHUD setDetailsLabelText:text];
-        [self.progreeHUD show:YES];
+        self.progreeHUD.detailsLabel.text=text;
+        [self.progreeHUD showAnimated:YES];
     });
 }
 
 - (void)closeHUD{
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_progreeHUD) {
-            [_progreeHUD hide:YES];
+            [_progreeHUD hideAnimated:YES];
         }
     });
 }

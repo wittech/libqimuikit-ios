@@ -377,7 +377,7 @@ NSString * const QTPHGridViewCellIdentifier = @"QTPHGridViewCellIdentifier";
     PHImageRequestOptions * options = [[PHImageRequestOptions alloc] init];
     options.resizeMode = PHImageRequestOptionsResizeModeExact;
     options.networkAccessAllowed = YES;
-    [[self tipHUDWithText:[NSBundle qim_localizedStringForKey:@"Getting_photo"]] show:YES];
+    [[self tipHUDWithText:[NSBundle qim_localizedStringForKey:@"Getting_photo"]] showAnimated:YES];
     __weak typeof(self) weakSelf = self;
     [_imageManager requestImageForAsset:[self.picker.selectedAssets firstObject] targetSize:targetSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
@@ -932,16 +932,16 @@ NSString * const QTPHGridViewCellIdentifier = @"QTPHGridViewCellIdentifier";
         _tipHUD = [[MBProgressHUD alloc] initWithView:[self view]];
         _tipHUD.minSize = CGSizeMake(120, 120);
         _tipHUD.minShowTime = 1;
-        [_tipHUD setLabelText:@""];
+        _tipHUD.label.text=@"";
         [[self view] addSubview:_tipHUD];
     }
-    [_tipHUD setDetailsLabelText:text];
+    _tipHUD.detailsLabel.text=text;
     return _tipHUD;
 }
 
 - (void)closeHUD{
     if (_tipHUD) {
-        [_tipHUD hide:YES];
+        [_tipHUD hideAnimated:YES];
     }
 }
 

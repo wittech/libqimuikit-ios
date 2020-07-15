@@ -1,7 +1,10 @@
 # Uncomment the next line to define a global platform for your project
+plugin "cocoapods-mPaaS", :show_all_specs => true
+mPaaS_baseline '10.1.68'  # 请将 x.x.x 替换成真实基线版本
 platform :ios, '9.0'
-source 'git@github.com:CocoaPods/Specs.git'
-source 'git@github.com:qunarcorp/libqimkit-ios-cook.git'
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/wittech/libqimkit-ios-cook.git'
+source "https://code.aliyun.com/mpaas-public/podspecs.git"
 
 target 'QIMUIKit' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -26,12 +29,24 @@ target 'QIMUIKit' do
     pod 'DACircularProgress'
     pod 'SDWebImage'
     pod 'NJKWebViewProgress'
-    pod 'AMapSearch'
-    pod 'AMapLocation'
-    pod 'AMap3DMap'
+#    pod 'AMapSearch'
+#    pod 'AMapLocation'
+#    pod 'AMap3DMap'
+    # 修复地图依赖
+    pod 'AMapFoundationKit'
+    pod 'MAMapKit'
+    pod 'AMapSearchKit'
+    pod 'APMap'
+    pod 'AntUI'
+    
     pod 'Toast'
     pod 'MMPickerView'
     pod 'SCLAlertView-Objective-C'
     pod 'YYKeyboardManager'
+    #修复缺失pod
+    pod 'FDFullscreenPopGesture'
+    pod 'MMLayout'
+    pod 'RTLabel'
+    pod 'AlipaySDK'
     
 end

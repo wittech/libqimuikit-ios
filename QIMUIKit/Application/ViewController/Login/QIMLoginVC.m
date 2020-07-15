@@ -1001,7 +1001,7 @@
 
 - (void)loginNotify:(NSNotification *)notify{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([notify.object boolValue]) {
             [self stopLoginAnimation];
             [self stopWritingLogo];

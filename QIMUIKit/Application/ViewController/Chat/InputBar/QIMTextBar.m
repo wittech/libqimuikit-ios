@@ -2425,7 +2425,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
     if (asset) {
         if (asset.mediaType ==  PHAssetMediaTypeImage) {
             if (_tipHUD.hidden) {
-                [[self tipHUDWithText:[NSBundle qim_localizedStringForKey:@"Getting_photo"]] show:YES];
+                [[self tipHUDWithText:[NSBundle qim_localizedStringForKey:@"Getting_photo"]] showAnimated:YES];
             }
             [imageManager requestImageDataForAsset:asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                 //gif 图片
@@ -2530,16 +2530,16 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
         _tipHUD = [[MBProgressHUD alloc] initWithView:[(UIViewController *)self.delegate view]];
         _tipHUD.minSize = CGSizeMake(120, 120);
         _tipHUD.minShowTime = 1;
-        [_tipHUD setLabelText:@""];
+        _tipHUD.label.text=@"";
         [[(UIViewController *)self.delegate view] addSubview:_tipHUD];
     }
-    [_tipHUD setDetailsLabelText:text];
+    _tipHUD.detailsLabel.text=text;
     return _tipHUD;
 }
 
 - (void)closeHUD{
     if (_tipHUD) {
-        [_tipHUD hide:YES];
+        [_tipHUD hideAnimated:YES];
     }
 }
 

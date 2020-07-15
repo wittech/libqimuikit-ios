@@ -18,7 +18,7 @@
 #import "QIMMsgBaloonBaseCell.h"
 //#import "UIImageView+QIMWebCache.h"
 #import "QIMRTCChatCell.h"
-#import "RTLabel.h"
+//#import "RTLabel.h"
 @interface QIMRTCChatCell () <QIMMenuImageViewDelegate>
 {
     UIImageView     * _imageView;

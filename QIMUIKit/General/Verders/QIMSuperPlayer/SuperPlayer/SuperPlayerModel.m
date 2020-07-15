@@ -112,7 +112,7 @@ NSNotificationName kSuperPlayerModelFail = @"kSuperPlayerModelFail";
     
     __weak SuperPlayerModel *weakSelf = self;
     __weak SuperPlayerView  *weakPlayerView = playerView;
-    [manager GET:url parameters:params progress:nil
+    [manager GET:url parameters:params headers:nil progress:nil
                                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                     
                                     __strong SuperPlayerModel *self = weakSelf;
@@ -246,7 +246,7 @@ NSNotificationName kSuperPlayerModelFail = @"kSuperPlayerModelFail";
     
     __weak SuperPlayerModel *weakSelf = self;
     __weak SuperPlayerView  *weakPlayerView = playerView;
-    [manager GET:url parameters:params progress:nil
+    [manager GET:url parameters:params headers:nil progress:nil
                                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                     
                                     __strong SuperPlayerModel *self = weakSelf;

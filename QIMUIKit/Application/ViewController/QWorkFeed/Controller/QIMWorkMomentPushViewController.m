@@ -220,15 +220,15 @@ static const NSInteger QIMWORKMOMENTLIMITNUM = 1000;
 
 - (void)showProgressHUDWithMessage:(NSString *)message {
     self.progressHUD.hidden = NO;
-    self.progressHUD.labelText = message;
+    self.progressHUD.label.text = message;
     self.progressHUD.mode = MBProgressHUDModeIndeterminate;
-    [self.progressHUD show:YES];
+    [self.progressHUD showAnimated:YES];
     self.navigationController.navigationBar.userInteractionEnabled = NO;
 }
 
 - (void)hideProgressHUD:(BOOL)animated {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.progressHUD hide:animated];
+        [self.progressHUD hideAnimated:animated];
         self.navigationController.navigationBar.userInteractionEnabled = YES;
     });
 }

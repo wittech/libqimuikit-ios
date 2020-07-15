@@ -209,8 +209,8 @@
     _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
     _progressHUD.minSize = CGSizeMake(120, 120);
     _progressHUD.minShowTime = 1;
-    [_progressHUD setLabelText:@"正在加载"];
-    [_progressHUD show:YES];
+    _progressHUD.label.text=@"正在加载";
+    [_progressHUD showAnimated:YES];
     [self.view addSubview:_progressHUD];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettingBtnAction:)];

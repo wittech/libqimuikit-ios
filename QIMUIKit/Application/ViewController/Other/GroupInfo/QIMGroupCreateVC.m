@@ -233,8 +233,8 @@
                                               WithDesc:@""
                                      WithGroupNickName:groupName
                                           WithComplate:^(BOOL finish,NSString *groupId) {
-                                              
-        [MBProgressHUD hideAllHUDsForView:_loadingView animated:YES];
+                                           
+        [MBProgressHUD hideHUDForView:_loadingView animated:YES];
         [_loadingView removeFromSuperview];
         _loadingView = nil;
         if (finish) {

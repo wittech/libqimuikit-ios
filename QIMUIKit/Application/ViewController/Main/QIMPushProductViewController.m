@@ -94,9 +94,9 @@
         _HUDView.minShowTime = 1;
         [self.view addSubview:_HUDView];
     }
-    [_HUDView setLabelText:@""];
-    [_HUDView setDetailsLabelText:@"正在查询..."];
-    [_HUDView show:YES];
+    _HUDView.label.text=@"";
+    _HUDView.detailsLabel.text=@"正在查询...";
+    [_HUDView showAnimated:YES];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -108,7 +108,7 @@
                     _dataSource = [NSMutableArray arrayWithObject:[infoDic objectForKey:@"data"]];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_mainTableView reloadData];
-                        [_HUDView hide:YES];
+                        [_HUDView hideAnimated:YES];
                     });
                 });
             }

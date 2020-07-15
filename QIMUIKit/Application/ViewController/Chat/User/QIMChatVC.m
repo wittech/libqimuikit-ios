@@ -1112,18 +1112,18 @@
         _progressHUD.minShowTime = 0.7;
         [[UIApplication sharedApplication].keyWindow addSubview:_progressHUD];
     }
-    [_progressHUD show:YES];
+    [_progressHUD showAnimated:YES];
     return _progressHUD;
 }
 
 - (void)setProgressHUDDetailsLabelText:(NSString *)text {
     
-    [self.progressHUD setDetailsLabelText:text];
+    self.progressHUD.detailsLabel.text=text;
 }
 
 - (void)closeHUD {
     if (self.progressHUD) {
-        [self.progressHUD hide:YES];
+        [self.progressHUD hideAnimated:YES];
     }
 }
 

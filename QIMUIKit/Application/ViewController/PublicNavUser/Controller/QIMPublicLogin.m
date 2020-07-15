@@ -16,7 +16,7 @@
 #import "QIMAgreementViewController.h"
 #import "QIMSelectComponyViewController.h"
 #import "QIMZBarViewController.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMWebView.h"
 #import "QIMNavConfigManagerVC.h"
 #import "loginUnSettingNavView.h"

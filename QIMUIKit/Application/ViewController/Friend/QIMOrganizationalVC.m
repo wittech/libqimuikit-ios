@@ -11,7 +11,7 @@
 #import "QIMDatasourceItem.h"
 #import "QIMDatasourceItemManager.h"
 #import "NSBundle+QIMLibrary.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface QIMOrganizationalVC () <UITableViewDelegate, UITableViewDataSource>
 

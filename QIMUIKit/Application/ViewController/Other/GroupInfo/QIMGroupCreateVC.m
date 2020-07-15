@@ -15,7 +15,7 @@
 #import "QIMQRCodeCell.h"
 #import "QIMViewHelper.h"
 #import "QIMPGroupSelectionView.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface GroupMemberButton : UIButton
 @property (nonatomic, strong) NSDictionary *memberDic;

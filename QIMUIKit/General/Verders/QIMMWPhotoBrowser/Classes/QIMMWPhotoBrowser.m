@@ -16,7 +16,7 @@
 #import "QIMMWQRCodeActivity.h"
 #import "QIMCollectionFaceManager.h"
 #import "QIMContactSelectionViewController.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define PADDING                  10
 

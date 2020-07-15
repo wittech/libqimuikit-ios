@@ -8,7 +8,7 @@
 
 #import "QIMAddFriendViewController.h"
 #import "QIMChatVC.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface QIMAddFriendViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *_tableView;

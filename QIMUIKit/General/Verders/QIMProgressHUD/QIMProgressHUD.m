@@ -7,7 +7,7 @@
 //
 
 #import "QIMProgressHUD.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface QIMProgressHUD ()
 

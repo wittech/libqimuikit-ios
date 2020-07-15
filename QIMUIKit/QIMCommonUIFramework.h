@@ -51,7 +51,7 @@
 #import "QIMUISizeConfig.h"
 
 #import "QIMJSONSerializer.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #define FONT_NAME @"FZLTHJW--GB1-0"
 #define FONT_SIZE 18
 

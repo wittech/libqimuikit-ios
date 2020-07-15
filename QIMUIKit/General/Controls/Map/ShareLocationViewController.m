@@ -12,7 +12,7 @@
 #import "ShareLocationUserImageView.h"
 #import "QIMUUIDTools.h"
 #import "FindDirectionsView.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "NSBundle+QIMLibrary.h"
 
 #define kUserHeaderBGViewTagFrom            1000

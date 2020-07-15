@@ -9,7 +9,7 @@
 #import "QIMImageStorage.h"
 #import "QIMImageCache.h"
 #import "QIMImageView.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "DACircularProgressView.h"
 
 @interface QIMImageStorage () {

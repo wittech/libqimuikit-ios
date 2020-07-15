@@ -7,11 +7,10 @@
 //
 
 #import "QIMCommonUIFramework.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "QIMMWGridViewController.h"
 #import "QIMMWZoomingScrollView.h"
-#import "MBProgressHUD.h"
 
 // Declare private methods of browser
 @interface QIMMWPhotoBrowser () {

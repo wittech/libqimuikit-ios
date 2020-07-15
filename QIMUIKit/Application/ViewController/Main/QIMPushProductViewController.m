@@ -11,7 +11,7 @@
 #import "QIMPushProductViewController.h"
 #import "QIMPushProductCell.h"
 #import "QIMJSONSerializer.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "NSBundle+QIMLibrary.h"
 
 @interface QIMPushProductViewController ()<UITableViewDataSource,UITableViewDelegate,QIMPushProductCellDelegate>

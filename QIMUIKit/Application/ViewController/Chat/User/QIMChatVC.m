@@ -25,7 +25,7 @@
 #import "QIMGroupCreateVC.h"
 #import "QIMCollectionFaceManager.h"
 #import "QIMVoiceRecordingView.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMVoiceTimeRemindView.h"
 #import "QIMOriginMessageParser.h"
 #import "QIMChatBgManager.h"

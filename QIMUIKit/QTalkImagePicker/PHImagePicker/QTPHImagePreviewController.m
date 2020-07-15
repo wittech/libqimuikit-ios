@@ -13,7 +13,7 @@
 #import "QTPHGridViewController.h"
 #import "QIMImageUtil.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QTPHImagePickerManager.h"
 #import "QIMStringTransformTools.h"
 

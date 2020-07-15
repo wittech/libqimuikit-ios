@@ -14,7 +14,7 @@
 #import "QIMMWPhotoSectionReusableView.h"
 #import "QIMContactSelectionViewController.h"
 #import "QIMMessageParser.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface QIMMWPhotoSectionBrowserVC () <UICollectionViewDelegate, UICollectionViewDataSource, QIMMWPhotoBrowserDelegate, QIMMWPhotoSectionBrowserChooseDelegate>
 

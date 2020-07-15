@@ -8,7 +8,7 @@
 
 #import "QIMNavConfigSettingVC.h"
 #import "QIMZBarViewController.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface QIMNavConfigSettingVC()<UIAlertViewDelegate,NSURLSessionTaskDelegate>{
     UILabel *_navNickNameLable;

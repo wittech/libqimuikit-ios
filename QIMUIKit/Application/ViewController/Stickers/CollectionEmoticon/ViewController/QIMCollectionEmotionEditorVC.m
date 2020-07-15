@@ -8,7 +8,7 @@
 
 #import "QIMCollectionEmotionEditorVC.h"
 #import "QIMCollectionFaceManager.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 typedef NS_ENUM(NSUInteger, QIMDragCellCollectionViewScrollDirection) {
     QIMDragCellCollectionViewScrollDirectionNone = 0,

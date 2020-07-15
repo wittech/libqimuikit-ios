@@ -36,7 +36,7 @@
 #import "QIMNavConfigSettingVC.h"
 #import "QIMNavConfigManagerVC.h"
 #import "QIMRemoteNotificationManager.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 
 @interface QIMLoginVC () <UITextFieldDelegate,UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource> {

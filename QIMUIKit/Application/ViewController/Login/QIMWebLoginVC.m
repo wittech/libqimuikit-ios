@@ -9,7 +9,7 @@
 #import "QIMWebLoginVC.h"
 #import "QIMJSONSerializer.h"
 #import "QIMNavConfigManagerVC.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "NSBundle+QIMLibrary.h"
 
 @interface QIMWebLoginVC ()<UIWebViewDelegate>{

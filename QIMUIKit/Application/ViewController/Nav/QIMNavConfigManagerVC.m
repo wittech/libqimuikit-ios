@@ -8,10 +8,9 @@
 
 #import "QIMNavConfigManagerVC.h"
 #import "QIMNavConfigSettingVC.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMZBarViewController.h"
 #import "SCLAlertView.h"
-#import "MBProgressHUD.h"
 #import "NSBundle+QIMLibrary.h"
 #import "QIMNacConfigTableViewCell.h"
 

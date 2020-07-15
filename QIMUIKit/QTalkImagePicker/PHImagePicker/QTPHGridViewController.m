@@ -16,7 +16,7 @@
 #import "QTalkTipsView.h"
 #import "QTalkVideoAssetViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMWatchDog.h"
 #import "QTPHImagePickerManager.h"
 

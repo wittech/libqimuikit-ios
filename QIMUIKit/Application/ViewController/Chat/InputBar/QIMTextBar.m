@@ -51,7 +51,7 @@
 #import "CameraViewController.h"
 #import "QIMCollectionFaceManager.h"
 #import "QTImagePickerController.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMEmojiTextAttachment.h"
 
 #import "QIMUIImagePickerBrowserVC.h"

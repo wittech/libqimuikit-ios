@@ -27,7 +27,7 @@ typedef enum {
 #import "QIMMessageParser.h"
 #import "QIMTextContainer.h"
 #import "QIMMessageCellCache.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "NSBundle+QIMLibrary.h"
 
 @interface QIMChatBubbleFontChangeViewController ()<UITableViewDataSource,UITableViewDelegate>

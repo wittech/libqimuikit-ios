@@ -19,7 +19,7 @@
 #import "QIMMessageTextAttachment.h"
 #import "QIMContactSelectionViewController.h"
 #import "QIMCollectionFaceManager.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "NSBundle+QIMLibrary.h"
 #import "QIMRedMindView.h"
 #import "QIMTapGestureRecognizer.h"

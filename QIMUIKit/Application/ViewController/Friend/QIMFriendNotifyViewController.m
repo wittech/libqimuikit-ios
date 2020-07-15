@@ -10,7 +10,7 @@
 #import "QIMFriendNotifyCell.h"
 #import "QIMAddFriendViewController.h"
 #import "QIMChatVC.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 @interface QIMFriendNotifyViewController()<UITableViewDelegate,UITableViewDataSource,QIMFriendNotifyCellDelete>{
     UITableView *_tableView;
     NSMutableArray *_dataSource;

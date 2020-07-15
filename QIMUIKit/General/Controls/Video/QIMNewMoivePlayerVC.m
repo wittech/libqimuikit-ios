@@ -8,7 +8,7 @@
 #import "QIMNewMoivePlayerVC.h"
 #import "SuperPlayer.h"
 #import "UIView+MMLayout.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "LCActionSheet.h"
 #import "QIMNewVideoCacheManager.h"
 #import "YYModel.h"

@@ -23,7 +23,7 @@
 #import "QIMContactSelectVC.h"
 #import "QIMZBarViewController.h"
 #import "QIMJumpURLHandle.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMCustomPopViewController.h"
 #import "QIMCustomPresentationController.h"
 #import "QIMCustomPopManager.h"

@@ -29,7 +29,7 @@
 #import "QIMWorkMomentModel.h"
 #import "QIMUUIDTools.h"
 #import "YYModel.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QIMProgressHUD.h"
 #import "QIMEmotionManager.h"
 #import "QTalkTipsView.h"

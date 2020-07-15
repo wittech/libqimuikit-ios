@@ -92,10 +92,10 @@ static NSString *collectEmojiCellID = @"collectEmojiCellID";
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
         _progressHUD.minSize = CGSizeMake(120, 120);
         _progressHUD.minShowTime = 1;
-        _progressHUD.label.text=@"";
+        _progressHUD.labelText=@"";
         [self.mainCollectionView addSubview:_progressHUD];
     }
-    _progressHUD.detailsLabel.text=text;
+    _progressHUD.detailsLabelText=text;
     return _progressHUD;
 }
 - (UIButton *)sortBtn {
@@ -276,7 +276,7 @@ static NSString *collectEmojiCellID = @"collectEmojiCellID";
         if (![self isChangeDataList]) {
             
             [[QIMCollectionFaceManager sharedInstance] resetCollectionItems:self.dataList WithUpdate:YES];
-            [[self progressHUDWithText:[NSBundle qim_localizedStringForKey:@"Reordering_your_stickers"]] showAnimated:YES];
+            [[self progressHUDWithText:[NSBundle qim_localizedStringForKey:@"Reordering_your_stickers"]] show:YES];
             [self performSelector:@selector(closeHUD) withObject:nil afterDelay:1.0f];
         }
         [self refresh];
@@ -505,7 +505,7 @@ static NSString *collectEmojiCellID = @"collectEmojiCellID";
 
 - (void)closeHUD{
     if (_progressHUD) {
-        [_progressHUD hideAnimated:YES];
+        [_progressHUD hide:YES];
     }
 }
 

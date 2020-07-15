@@ -29,7 +29,7 @@
         if ([result isEqualToString:@"success"]) {
             [self openChatSession];
         } else {
-            [[self progressHUD] hideAnimated:YES];
+            [[self progressHUD] hide:YES];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSBundle qim_localizedStringForKey:@"Reminder"] message:[NSString stringWithFormat:@"添加好友失败,原因:%@。",reason] delegate:self cancelButtonTitle:[NSBundle qim_localizedStringForKey:@"Confirm"] otherButtonTitles:nil];
             [alertView show];
         }
@@ -277,8 +277,8 @@
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
         _progressHUD.minSize = CGSizeMake(120, 120);
         _progressHUD.minShowTime = 1;
-        _progressHUD.label.text = @"";
-        _progressHUD.detailsLabel.text = [NSBundle qim_localizedStringForKey:@"Please wait for a momente"];
+        _progressHUD.labelText = @"";
+        _progressHUD.detailsLabelText = [NSBundle qim_localizedStringForKey:@"Please wait for a momente"];
         [self.view addSubview:_progressHUD];
     }
     return _progressHUD;
@@ -287,7 +287,7 @@
 - (void)onAgreeClick:(UIButton *)sender{
     NSString *xmppId = [self.userInfoDic objectForKey:@"XmppId"];
     if (xmppId.length > 0) {
-        [[self progressHUD] showAnimated:YES];
+        [[self progressHUD] show:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[QIMKit sharedInstance] agreeFriendRequestWithXmppId:xmppId];
         });

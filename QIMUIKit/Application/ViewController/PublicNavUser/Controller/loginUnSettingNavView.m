@@ -9,7 +9,7 @@
 #import "UIColor+QIMUtility.h"
 #import "QIMIconInfo.h"
 #import "UIImage+QIMIconFont.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 
 @interface loginUnSettingNavView()
 @property (nonatomic , strong) UIView * grayBgView;

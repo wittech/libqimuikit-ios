@@ -35,15 +35,15 @@
 - (void)showProgressHUDWithMessage:(NSString *)message {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.progressHUD.hidden = NO;
-        self.progressHUD.label.text = message;
+        self.progressHUD.labelText = message;
         self.progressHUD.mode = MBProgressHUDModeIndeterminate;
-        [self.progressHUD showAnimated:YES];
+        [self.progressHUD show:YES];
         self.navigationController.navigationBar.userInteractionEnabled = NO;
     });
 }
 
 - (void)hideProgressHUD:(BOOL)animated {
-    [self.progressHUD hideAnimated:animated];
+    [self.progressHUD hide:animated];
     self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
 

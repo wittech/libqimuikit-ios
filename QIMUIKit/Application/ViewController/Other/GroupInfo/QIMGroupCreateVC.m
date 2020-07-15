@@ -234,7 +234,7 @@
                                      WithGroupNickName:groupName
                                           WithComplate:^(BOOL finish,NSString *groupId) {
                                            
-        [MBProgressHUD hideHUDForView:_loadingView animated:YES];
+        [MBProgressHUD hideAllHUDsForView:_loadingView animated:YES];
         [_loadingView removeFromSuperview];
         _loadingView = nil;
         if (finish) {

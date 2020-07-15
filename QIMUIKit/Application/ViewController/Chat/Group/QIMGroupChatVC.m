@@ -883,18 +883,18 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
         _progressHUD.minShowTime = 0.7;
         [[UIApplication sharedApplication].keyWindow addSubview:_progressHUD];
     }
-    [_progressHUD showAnimated:YES];
+    [_progressHUD show:YES];
     return _progressHUD;
 }
 
 - (void)setProgressHUDDetailsLabelText:(NSString *)text {
     
-    self.progressHUD.detailsLabel.text=text;
+    self.progressHUD.detailsLabelText=text;
 }
 
 - (void)closeHUD {
     if (self.progressHUD) {
-        [self.progressHUD hideAnimated:YES];
+        [self.progressHUD hide:YES];
     }
 }
 

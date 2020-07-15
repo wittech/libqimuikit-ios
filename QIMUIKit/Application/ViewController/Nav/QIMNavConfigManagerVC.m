@@ -159,7 +159,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[QIMKit sharedInstance] qimNav_updateNavigationConfigWithCheck:YES withCallBack:^(BOOL success) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                     if (success) {
                         [[QIMKit sharedInstance] setUserObject:navUrlDict forKey:@"QC_CurrentNavDict"];
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -179,7 +179,7 @@
             }];
         });
     } else {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSBundle qim_localizedStringForKey:@"nav_valid_promot"] delegate:nil cancelButtonTitle:[NSBundle qim_localizedStringForKey:@"ok"] otherButtonTitles:nil];
         [alertView show];
     }

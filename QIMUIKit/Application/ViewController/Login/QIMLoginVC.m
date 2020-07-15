@@ -791,7 +791,7 @@
                                                                                       cancelButtonTitle:[NSBundle qim_localizedStringForKey:@"common_got_it"]
                                                                                       otherButtonTitles:nil];
                                             [alertView show];
-                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                             //                                [weakSelf stopLoginAnimation];
                                         } else {
                                             [weakSelf showNetWorkUnableAlert];
@@ -828,7 +828,7 @@
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:errmsg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                                         [alertView show];
-                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                     });
                                 }
                             } else {
@@ -1001,7 +1001,7 @@
 
 - (void)loginNotify:(NSNotification *)notify{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if ([notify.object boolValue]) {
             [self stopLoginAnimation];
             [self stopWritingLogo];

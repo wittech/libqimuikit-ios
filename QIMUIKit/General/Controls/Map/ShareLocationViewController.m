@@ -156,7 +156,7 @@
 //            [_lctnManager startUpdatingLocation];
             [_lctnManager startUpdatingHeading];
             _mapView.showsUserLocation = YES;
-            [[self progressHUDWithText:@"正在定位，请稍后..."] showAnimated:(YES)];
+            [[self progressHUDWithText:@"正在定位，请稍后..."] show:YES];
         }
     }
 }
@@ -179,16 +179,16 @@
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
         _progressHUD.minSize = CGSizeMake(120, 120);
         _progressHUD.minShowTime = 1;
-        _progressHUD.label.text = @"";
+        _progressHUD.labelText = @"";
         [self.view addSubview:_progressHUD];
     }
-    _progressHUD.detailsLabel.text = text;
+    _progressHUD.detailsLabelText = text;
     return _progressHUD;
 }
 
 - (void)closeHUD{
     if (_progressHUD) {
-        [_progressHUD hideAnimated:YES];
+        [_progressHUD hide:YES];
     }
 }
 
@@ -387,7 +387,7 @@
 
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-    [[self progressHUDWithText:@"正在定位，请稍后..."] hideAnimated:YES];
+    [[self progressHUDWithText:@"正在定位，请稍后..."] hide:YES];
     [self stopUpdateUserLocation];
     [self performSelector:@selector(startUpdateUserLocation) withObject:nil afterDelay:5];
     CLLocationCoordinate2D coord = userLocation.location.coordinate;
@@ -434,7 +434,7 @@
 }
 
 -(void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
-    [[self progressHUDWithText:@"定位失败..."] showAnimated:YES];
+    [[self progressHUDWithText:@"定位失败..."] show:YES];
     [self performSelector:@selector(closeHUD) withObject:nil afterDelay:0.5];
 }
 

@@ -3,7 +3,7 @@
 //
 
 #import "QIMRedPackOpenView.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "QIMUIFontConfig.h"
 #import "QIMUIColorConfig.h"
 #import "QIMUISizeConfig.h"

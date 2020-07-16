@@ -9,7 +9,7 @@
 #import <QIMCommonCategories/QIMCommonCategories.h>
 #import "QIMUpdateAlertView.h"
 #import "QIMUIColorConfig.h"
-#import "View+MASAdditions.h"
+#import <Masonry/View+MASAdditions.h>
 #import "NSString+QIMUtility.h"
 #import "YYModel.h"
 

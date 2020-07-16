@@ -15,7 +15,7 @@
 #import "QIMWorkMessageCell.h"
 #import "QIMWorkFeedDetailViewController.h"
 #import "YYModel.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "MJRefreshAutoNormalFooter.h"
 
 static const NSInteger searchMinCharacterCount = 2;

@@ -8,7 +8,7 @@
 
 #import "QIMImageManager.h"
 #import "NSBundle+QIMLibrary.h"
-#import <SDWebImage/SDImageCache.h>
+#import <APWebImage/SDImageCache.h>
 #import "QIMKitPublicHeader.h"
 #import "QIMCommonCategories.h"
 #import "SDImageWebPCoder.h"

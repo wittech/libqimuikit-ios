@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-#import <SDWebImage/SDWebImage.h>
+#import <APWebImage/SDWebImage.h>
 
 /**
  Built in coder that supports WebP and animated WebP

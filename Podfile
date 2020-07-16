@@ -35,13 +35,12 @@ target 'QIMUIKit' do
     pod 'MBProgressHUD', '1.0.0.200406133247'
     pod 'Masonry', '1.0.0.200406133247'
     pod 'DACircularProgress'
-    pod 'SDWebImage'
+    pod 'APWebImage'
     pod 'NJKWebViewProgress'
 #    pod 'AMapSearch'
 #    pod 'AMapLocation'
 #    pod 'AMap3DMap'
 
-    
     pod 'Toast'
     pod 'MMPickerView'
     pod 'SCLAlertView-Objective-C'
@@ -50,7 +49,6 @@ target 'QIMUIKit' do
     pod 'FDFullscreenPopGesture'
     pod 'RTLabel'
     pod 'AlipaySDK'
-    #直接引用
-    pod 'SuperPlayer'
+    pod 'TXLiteAVSDK_Player'
     
 end

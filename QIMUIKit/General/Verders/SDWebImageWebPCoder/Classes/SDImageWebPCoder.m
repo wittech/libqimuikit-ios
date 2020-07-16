@@ -7,12 +7,12 @@
  */
 
 #import "SDImageWebPCoder.h"
-#import <SDWebImage/SDImageCoderHelper.h>
-#if __has_include(<SDWebImage/NSImage+Compatibility.h>)
-#import <SDWebImage/NSImage+Compatibility.h>
+#import <APWebImage/SDImageCoderHelper.h>
+#if __has_include(<APWebImage/NSImage+Compatibility.h>)
+#import <APWebImage/NSImage+Compatibility.h>
 #endif
-#import <SDWebImage/UIImage+Metadata.h>
-#import <SDWebImage/UIImage+ForceDecode.h>
+#import <APWebImage/UIImage+Metadata.h>
+#import <APWebImage/UIImage+ForceDecode.h>
 
 #import "decode.h"
 #import "encode.h"

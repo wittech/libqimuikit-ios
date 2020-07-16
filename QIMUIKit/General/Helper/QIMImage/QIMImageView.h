@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SDWebImage/SDAnimatedImageView.h>
+#import <APWebImage/SDAnimatedImageView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "UIImageView+QIMImageCache.h"
-#import <SDWebImage/SDWebImage.h>
+#import <APWebImage/SDWebImage.h>
 
 @interface QIMImageManager : NSObject
 

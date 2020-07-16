@@ -7,7 +7,7 @@
 //
 
 #import "QIMCommonUIFramework.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <APWebImage/UIImageView+WebCache.h>
 
 @interface UIImageView (QIMImageCache)
 

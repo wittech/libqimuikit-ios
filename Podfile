@@ -48,8 +48,9 @@ target 'QIMUIKit' do
     pod 'YYKeyboardManager'
     #修复缺失pod
     pod 'FDFullscreenPopGesture'
-    pod 'MMLayout'
     pod 'RTLabel'
     pod 'AlipaySDK'
+    #直接引用
+    pod 'SuperPlayer'
     
 end

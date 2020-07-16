@@ -14,6 +14,7 @@
 #import "YYModel.h"
 #import "QIMContactSelectionViewController.h"
 #import "DACircularProgressView.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface QIMNewMoivePlayerVC () <SuperPlayerDelegate>
 @property UIView *playerContainer;
@@ -80,8 +81,8 @@
     
     self.playerContainer = [[UIView alloc] init];
     self.playerContainer.backgroundColor = [UIColor blackColor];
-    self.playerContainer.mm_top([[QIMDeviceManager sharedInstance] getSTATUS_BAR_HEIGHT]);
-    self.playerContainer.mm_width(self.view.mm_w).mm_height(self.view.mm_h - [[QIMDeviceManager sharedInstance] getHOME_INDICATOR_HEIGHT] - [[QIMDeviceManager sharedInstance] getSTATUS_BAR_HEIGHT]);
+    self.playerContainer.m_top([[QIMDeviceManager sharedInstance] getSTATUS_BAR_HEIGHT]);
+    self.playerContainer.m_width(self.view.mm_w).m_height(self.view.mm_h - [[QIMDeviceManager sharedInstance] getHOME_INDICATOR_HEIGHT] - [[QIMDeviceManager sharedInstance] getSTATUS_BAR_HEIGHT]);
     
     _playerView = [[SuperPlayerView alloc] init];
     [_playerView.controlView setValue:nil forKey:@"danmakuBtn"];

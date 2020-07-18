@@ -8,7 +8,7 @@
 
 #import "QIMWorkMomentImageListView.h"
 #import "QIMWorkMomentPicture.h"
-#import <APWebImage/NSData+ImageContentType.h>
+#import <SDWebImage/NSData+ImageContentType.h>
 
 // 图片间距
 #define kImagePadding       5

@@ -12,13 +12,10 @@ target 'QIMUIKit' do
   # use_frameworks!
 	
   # Pods for QIMUIKit
-  # 修复地图依赖
-    pod 'AMapFoundationKit'
-    pod 'MAMapKit'
-    pod 'AMapSearchKit'
-    pod 'APMap'
-    pod 'AntUI'
-  
+    mPaaS_pod "mPaaS_LBS"
+    mPaaS_pod "mPaaS_TinyApp_Location"
+    mPaaS_pod "mPaaS_AlipaySDK"
+    
     pod 'QIMDataBase'
     pod 'QIMKitVendor'
     pod 'QIMCommon'
@@ -32,10 +29,7 @@ target 'QIMUIKit' do
     pod 'MDHTMLLabel'
     pod 'MMMarkdown'
     pod 'MGSwipeTableCell'
-    pod 'MBProgressHUD', '1.0.0.200406133247'
-    pod 'Masonry', '1.0.0.200406133247'
     pod 'DACircularProgress'
-    pod 'APWebImage'
     pod 'NJKWebViewProgress'
 #    pod 'AMapSearch'
 #    pod 'AMapLocation'
@@ -48,7 +42,6 @@ target 'QIMUIKit' do
     #修复缺失pod
     pod 'FDFullscreenPopGesture'
     pod 'RTLabel'
-    pod 'AlipaySDK'
     pod 'TXLiteAVSDK_Player'
     
 end

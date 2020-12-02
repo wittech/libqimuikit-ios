@@ -5,7 +5,7 @@
 //  Created by ping.xue on 14-2-13.
 //
 //
-
+#import <WebKit/WebKit.h>
 #import "QIMSingleChatCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "QIMMsgBaloonBaseCell.h"
@@ -14,7 +14,7 @@
 #import "QIMAttributedLabel.h"
 #import "QIMMessageParser.h"
 #import "QIMCollectionFaceManager.h"
-
+#import <WebKit/WebKit.h>
 #define kTextLabelTop       10
 #define kTextLableLeft      12
 #define kTextLableBottom    10
@@ -27,7 +27,7 @@
 @interface QIMSingleChatCell() <QIMMenuImageViewDelegate, UIActionSheetDelegate>
 {
     QIMAttributedLabel   * _textLabel;
-    UIWebView * _webView;
+    WKWebView * _webView;
     UIView    * _propressView;
     UILabel   * _progressLabel;
     UIActivityIndicatorView * _actIndView;//加载菊花

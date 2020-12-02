@@ -8,17 +8,20 @@
 
 #import "QIMSourceCodeVC.h"
 #import "NSBundle+QIMLibrary.h"
+#import <WebKit/WebKit.h>
 
 @interface QIMSourceCodeVC ()
 
 @end
 
 @implementation QIMSourceCodeVC{
-    UIWebView *_webView;
+    WKWebView *_webView;
 }
 
 - (void)dealloc{
     [self setSourceCodeDic:nil];
+    //需要在dealloc中把代理置nil: _wkWebView.scrollView.delegate = nil;否则会崩溃
+    _webView.scrollView.delegate = nil;
 }
 
 - (void)viewDidLoad {
@@ -28,9 +31,11 @@
     
     [self.navigationItem setTitle:@"代码段"];
     
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
     [_webView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-    [_webView setScalesPageToFit:YES];
+    //[_webView setScalesPageToFit:YES];
+    //参考：https://www.jianshu.com/p/e2959be73128
+    _webView.scrollView.delegate = self;
     [_webView setMultipleTouchEnabled:YES];
     [self.view addSubview:_webView];
     

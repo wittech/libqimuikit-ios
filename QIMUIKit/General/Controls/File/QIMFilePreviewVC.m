@@ -13,10 +13,11 @@
 #import "QIMAudioPlayer.h"
 #import "QIMIconInfo.h"
 #import "QIMContactSelectionViewController.h"
+#import <WebKit/WebKit.h>
 
-@interface QIMFilePreviewVC ()<UIWebViewDelegate>{
+@interface QIMFilePreviewVC ()<WKUIDelegate>{
     dispatch_queue_t _writeDataQueue;
-    UIWebView *_previewWebView;
+    WKWebView *_previewWebView;
     
     UIView *_downloadView;
     
@@ -202,6 +203,7 @@
     if (!_downloadComplate) {
         [[NSFileManager defaultManager] removeItemAtPath:_filePath error:nil];
     }
+    _previewWebView.scrollView.delegate = nil;
 }
 
 - (void)showFile {
@@ -553,10 +555,11 @@
 
 - (void)initWebView{
     
-    _previewWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, _bottomView.top)];
+    _previewWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, _bottomView.top)];
     [_previewWebView setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-    [_previewWebView setDelegate:self];
-    [_previewWebView setScalesPageToFit:YES];
+//    [_previewWebView setDelegate:self];
+//    [_previewWebView setScalesPageToFit:YES];
+    _previewWebView.scrollView.delegate = self;
     [_previewWebView setMultipleTouchEnabled:YES]; 
     [self.view addSubview:_previewWebView];
 }
@@ -618,7 +621,7 @@
     [_downloadView addSubview:infoLabel];
 }
 
-- (void)loadFilePath:(NSString*)filePath inView:(UIWebView*)webView {
+- (void)loadFilePath:(NSString*)filePath inView:(WKWebView*)webView {
     if (filePath.length >= 0) {
         NSURL *url = [NSURL fileURLWithPath:filePath];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -628,7 +631,8 @@
         QIMVerboseLog(@"WebView 预览文件: %@, MiMEType : %@", filePath, MIMEType);
         NSData *tempData = [NSData dataWithContentsOfFile:filePath];
         //将数据传给webView显示，并且告知文档类型、编码格式
-        [webView loadData:tempData MIMEType:MIMEType textEncodingName:@"UTF-8" baseURL:nil];
+        [webView loadData:tempData MIMEType:MIMEType characterEncodingName:@"UTF-8" baseURL:nil];
+        //[webView loadData:tempData MIMEType:MIMEType textEncodingName:@"UTF-8" baseURL:nil];
     } else {
         [self loadFileError];
     }

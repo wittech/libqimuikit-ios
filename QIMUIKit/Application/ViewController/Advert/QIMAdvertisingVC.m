@@ -10,7 +10,7 @@
 #import "QIMWebView.h"
 #import "QIMAdvertItem.h"
 #import "QIMTapGestureRecognizer.h"
-
+#import <WebKit/WebKit.h>
 
 @interface WebViewScrollerDelegate : NSObject<UIScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray *scrollerList;
@@ -58,8 +58,8 @@
     [_adImageView removeFromSuperview];
     _adImageView = nil;
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
-    [webView setDelegate:self];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+    //[webView setDelegate:self];
     NSURL *url = [NSURL URLWithString:[tap.imageLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
@@ -90,7 +90,7 @@
     }
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType{
     if ([[QIMKit sharedInstance] qimNav_AdCarousel] == NO && [[[request URL] description] isEqualToString:[_currentAdvertItem adLinkUrl]] == NO) {
         [self cancelLoadingState];
     } else if ([[QIMKit sharedInstance] qimNav_AdCarousel] && [[QIMKit sharedInstance] qimNav_AdItems].count > 1) {
@@ -173,10 +173,10 @@
         switch ([adItem adType]) {
             case AdvertType_Touch:
             {
-                UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(index * _scrollView.width, 0, _scrollView.width, _scrollView.height)];
+                WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(index * _scrollView.width, 0, _scrollView.width, _scrollView.height)];
                 [webView.scrollView setDelegate:_webviewScrollerDelegate];
                 [_webviewScrollerDelegate.scrollerList addObject:webView.scrollView];
-                [webView setDelegate:self];
+                //[webView setDelegate:self];
                 NSURL *url = [NSURL URLWithString:[adItem.adLinkUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
                 [webView loadRequest:request];
@@ -211,10 +211,10 @@
             switch ([lastItem adType]) {
                 case AdvertType_Touch:
                 {
-                    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, _scrollView.width, _scrollView.height)];
+                    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, _scrollView.width, _scrollView.height)];
                     [webView.scrollView setDelegate:_webviewScrollerDelegate];
                     [_webviewScrollerDelegate.scrollerList addObject:webView.scrollView];
-                    [webView setDelegate:self];
+                    //[webView setDelegate:self];
                     NSURL *url = [NSURL URLWithString:[lastItem.adLinkUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                     NSURLRequest *request = [NSURLRequest requestWithURL:url];
                     [webView loadRequest:request];
@@ -248,10 +248,10 @@
             switch ([firstItem adType]) {
                 case AdvertType_Touch:
                 {
-                    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(count * _scrollView.width, 0, _scrollView.width, _scrollView.height)];
+                    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(count * _scrollView.width, 0, _scrollView.width, _scrollView.height)];
                     [webView.scrollView setDelegate:_webviewScrollerDelegate];
                     [_webviewScrollerDelegate.scrollerList addObject:webView.scrollView];
-                    [webView setDelegate:self];
+                    //[webView setDelegate:self];
                     NSURL *url = [NSURL URLWithString:[firstItem.adLinkUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                     NSURLRequest *request = [NSURLRequest requestWithURL:url];
                     [webView loadRequest:request];
@@ -334,10 +334,10 @@
         switch ([_currentAdvertItem adType]) {
             case AdvertType_Touch:
             {
-                UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+                WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
                 [webView.scrollView setDelegate:_webviewScrollerDelegate];
                 [_webviewScrollerDelegate.scrollerList addObject:webView.scrollView];
-                [webView setDelegate:self];
+                //[webView setDelegate:self];
                 NSURL *url = [NSURL URLWithString:[_currentAdvertItem.adLinkUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
                 [webView loadRequest:request];

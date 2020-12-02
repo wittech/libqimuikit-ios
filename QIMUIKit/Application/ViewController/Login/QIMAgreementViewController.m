@@ -8,10 +8,11 @@
 
 #import "QIMAgreementViewController.h"
 #import "NSBundle+QIMLibrary.h"
+#import <WebKit/WebKit.h>
 
 @interface QIMAgreementViewController ()
 {
-    UIWebView * _webView;
+    WKWebView * _webView;
 }
 
 @end
@@ -39,8 +40,9 @@
 
 - (void)setUpWebView
 {
-    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    _webView.scalesPageToFit = YES;
+    _webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    //_webView.scalesPageToFit = YES;
+    _webView.scrollView.delegate = self;
     [self.view addSubview:_webView];
     NSString *eulaFileName = [NSString stringWithFormat:@"%@", [QIMKit getQIMProjectType] == QIMProjectTypeStartalk ? @"Startalkeula" : @"QTalkeula"];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:eulaFileName ofType:@"html"];
@@ -51,6 +53,11 @@
 - (void)closeHandle:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)dealloc
+{
+    _webView.scrollView.delegate = nil;
 }
 
 @end

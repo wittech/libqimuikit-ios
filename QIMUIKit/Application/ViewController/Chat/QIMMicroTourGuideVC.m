@@ -13,9 +13,10 @@
 #import "QIMGroupChatVC.h"
 #import "QIMWebView.h"
 #import "NSBundle+QIMLibrary.h"
+#import <WebKit/WebKit.h>
 
-@interface QIMMicroTourGuideVC ()<UIWebViewDelegate>{
-    UIWebView *_msgWebView;
+@interface QIMMicroTourGuideVC ()<WKUIDelegate>{
+    WKWebView *_msgWebView;
     NSMutableArray *_dataSource;
     BOOL _ready;
 }
@@ -46,8 +47,12 @@
 }
 
 - (void)scrollToBottom{
-    NSInteger height = [[_msgWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"] intValue];
-    [_msgWebView.scrollView scrollRectToVisible:CGRectMake(0, height - _msgWebView.frame.size.height, _msgWebView.width, _msgWebView.height) animated:YES];
+//    NSInteger height = [[_msgWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"] intValue];
+    [_msgWebView evaluateJavaScript:@"document.body.offsetHeight;" completionHandler:^(id result, NSError *error) {
+        NSInteger height = result;
+        [_msgWebView.scrollView scrollRectToVisible:CGRectMake(0, height - _msgWebView.frame.size.height, _msgWebView.width, _msgWebView.height) animated:YES];
+    }];
+    
 }
 
 - (void)updateMessageList:(NSNotification *)notify{
@@ -91,8 +96,8 @@
     NSString *ua = [[QIMWebView defaultUserAgent] stringByAppendingString:@" qunariphone"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent":ua}];
     
-    _msgWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
-    [_msgWebView setDelegate:self];
+    _msgWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+    //[_msgWebView setDelegate:self];
     [self.view addSubview:_msgWebView];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"QIMMicroTourRoot" ofType:@"html"];
@@ -101,11 +106,11 @@
     
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType{
     return YES;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(WKWebView *)webView{
 //    [self resgisterJSMethod];
     [self resgisterJSMethod];
 //    [self appendTimeStemp:@"2016-06-03 08:30"];

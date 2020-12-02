@@ -15,9 +15,9 @@
 #import "QIMNoteUICommonFramework.h"
 #import "QIMPublicRedefineHeader.h"
 
-@interface QTalkEverNoteVC () <UIWebViewDelegate,WKNavigationDelegate>
+@interface QTalkEverNoteVC () <WKUIDelegate,WKNavigationDelegate>
 @property(nonatomic, copy) NSString *rootHtmlPath;
-@property(nonatomic, strong) UIWebView *webView;
+@property(nonatomic, strong) WKWebView *webView;
 @property(nonatomic, strong) UITextField *titleTF;//笔记标题
 @property(nonatomic, strong) UIButton *addBtn;//第一次新建，保存
 @property(nonatomic, strong) UIButton *rightBtn;//之后保存或者编辑状态切换
@@ -149,8 +149,8 @@
 }
 
 - (void)createUI {
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
-    _webView.delegate = self;
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
+    //_webView.delegate = self;
     [self.view addSubview:_webView];
     
     [self refreshCKEditorWithReadOnly:!(self.everNoteType == ENUM_EverNote_TypeNew)];
@@ -182,7 +182,7 @@
     }
 }
 
-- (BOOL)webView: (UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView: (WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *requestUrl = request.URL;
     NSString *urlStr = [requestUrl absoluteString];
     QIMVerboseLog(@"request:%@",urlStr);
@@ -200,7 +200,7 @@
     return YES;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(WKWebView *)webView {
     NSString *js = @"function imgAutoFit() { \
     var imgs = document.getElementsByTagName('img'); \
     for (var i = 0; i < imgs.length; ++i) {\
@@ -210,8 +210,13 @@
     }";
     js = [NSString stringWithFormat:js, [UIScreen mainScreen].bounds.size.width - 20];
     
-    [webView stringByEvaluatingJavaScriptFromString:js];
-    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+//    [webView stringByEvaluatingJavaScriptFromString:js];
+//    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    [webView evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
+       [webView evaluateJavaScript:@"imgAutoFit()" completionHandler:^(id result, NSError *error) {
+          
+       }];
+    }];
 }
 
 #pragma WKWebView代理方法

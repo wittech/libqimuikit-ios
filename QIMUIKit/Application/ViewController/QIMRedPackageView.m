@@ -2,13 +2,15 @@
 #import "QIMRedPackageView.h"
 #import "QIMWebView.h"
 #import "QIMContactSelectionViewController.h"
+#import <WebKit/WebKit.h>
+
 static UIWindow *__redPackageWindow = nil;
 static UIViewController *__redPackageVC = nil;
-@interface QIMRedPackageView()<UIWebViewDelegate,QIMContactSelectionViewControllerDelegate,UIAlertViewDelegate>
+@interface QIMRedPackageView()<WKUIDelegate,QIMContactSelectionViewControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic,copy) NSString  * rId;
 @end
 @implementation QIMRedPackageView{
-    UIWebView *_webView;
+    WKWebView *_webView;
 }
 
 - (void)loadUrl:(NSString *)url{
@@ -58,7 +60,7 @@ static UIViewController *__redPackageVC = nil;
     }
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType
 {
     NSString * urlStr = [[request URL] absoluteString];
     NSArray * components = [urlStr componentsSeparatedByString:@":"];
@@ -149,13 +151,14 @@ static UIViewController *__redPackageVC = nil;
             NSString *ua = [[QIMWebView defaultUserAgent] stringByAppendingString:@" qunarchat-ios-client"];
             [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent":ua}];
         }
-            _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+            _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
             [_webView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+            _webView.scrollView.delegate = self;
             [_webView.scrollView setShowsHorizontalScrollIndicator:NO];
             [_webView.scrollView setShowsVerticalScrollIndicator:NO];
-            [_webView setScalesPageToFit:YES];
+            //[_webView setScalesPageToFit:YES];
             [_webView setMultipleTouchEnabled:YES];
-            [_webView setDelegate:self];
+            //[_webView setDelegate:self];
             [_webView setOpaque:NO];
             [_webView setBackgroundColor:[UIColor clearColor]];
             [_webView.scrollView setBounces:NO];
@@ -164,7 +167,7 @@ static UIViewController *__redPackageVC = nil;
     return self;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webViewDidFinishLoad:(WKWebView *)webView
 {
     //修改服务器页面的meta的值
 //    NSString *meta = [NSString stringWithFormat:@"document.getElementsByName(\"viewport\")[0].content = \"width=%f, height=%f, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\"", webView.frame.size.width, webView.frame.size.height];
@@ -175,16 +178,24 @@ static UIViewController *__redPackageVC = nil;
 - (void)contactSelectionViewController:(QIMContactSelectionViewController *)contactVC groupChatVC:(QIMGroupChatVC *)vc{
     dispatch_async(dispatch_get_main_queue(), ^{ 
         NSString * jsStr = [NSString stringWithFormat:@"relay_red_env('%@','%@','%@','%@');",[[[NSString stringWithFormat:@"%@00d8c4642c688fd6bfa9a41b523bdb6b",self.rId] qim_getMD5] lowercaseString],@"qunartalk-ios",[[contactVC getSelectInfoDic] objectForKey:@"userId"],@""];
-        [_webView stringByEvaluatingJavaScriptFromString:jsStr];
+//        [_webView stringByEvaluatingJavaScriptFromString:jsStr];
+        [_webView evaluateJavaScript:jsStr completionHandler:^(id obj, NSError *error) {
+        }];
         [self close];
     });
 }
 - (void)contactSelectionViewController:(QIMContactSelectionViewController *)contactVC chatVC:(QIMChatVC *)vc{
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString * jsStr = [NSString stringWithFormat:@"relay_red_env('%@','%@','%@','%@');",[[[NSString stringWithFormat:@"%@00d8c4642c688fd6bfa9a41b523bdb6b",self.rId] qim_getMD5] lowercaseString],@"qunartalk-ios",@"",[[contactVC getSelectInfoDic] objectForKey:@"userId"]];
-        [_webView stringByEvaluatingJavaScriptFromString:jsStr];
+//        [_webView stringByEvaluatingJavaScriptFromString:jsStr];
+        [_webView evaluateJavaScript:jsStr completionHandler:^(id obj, NSError *error) {
+        }];
         [self close];
     });
-} 
+}
+
+- (void)dealloc {
+    _webView.scrollView.delegate = nil;
+}
 
 @end

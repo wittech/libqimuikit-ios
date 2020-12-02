@@ -11,13 +11,14 @@
 #import "QIMGroupChatVC.h"
 #import "QIMContactSelectionViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "NJKWebViewProgress.h"
-#import "NJKWebViewProgressView.h"
+//#import "NJKWebViewProgress.h"
+//#import "NJKWebViewProgressView.h"
 #import "UIImage+QIMButtonIcon.h"
 #import "NSBundle+QIMLibrary.h"
 #import "QIMJSONSerializer.h"
 #import "QIMKit+QIMNavConfig.h"
 #import "QIMMWPhoto.h"
+#import <WebKit/WebKit.h>
 
 static NSString *__default_ua = nil;
 
@@ -165,7 +166,7 @@ static NSString *__default_ua = nil;
 @end
 
 @interface QActivityRefresh : UIActivity
-@property (nonatomic, weak) UIWebView *webView;
+@property (nonatomic, weak) WKWebView *webView;
 @end
 @implementation QActivityRefresh
 + (UIActivityCategory)activityCategory {
@@ -196,7 +197,7 @@ static NSString *__default_ua = nil;
 
 @end
 
-@interface QIMWebView() <NJKWebViewProgressDelegate, UIWebViewDelegate, QActivityToFriendDelegate,QIMContactSelectionViewControllerDelegate>
+@interface QIMWebView() <WKUIDelegate, QActivityToFriendDelegate,QIMContactSelectionViewControllerDelegate>
 @property (nonatomic, strong) UIActivityViewController *activityViewController;
 @property (nonatomic,strong) UIBarButtonItem *backButton;
 @property (nonatomic,strong) UIBarButtonItem *forwardButton;
@@ -210,15 +211,20 @@ static NSString *__default_ua = nil;
     BOOL _publicIm;
     BOOL _qcGrab;
     BOOL _qcZhongbao;
-    NJKWebViewProgressView *_progressProxyView;
-    NJKWebViewProgress *_progressProxy;
-    UIWebView *_webView;
+//    NJKWebViewProgressView *_progressProxyView;
+//    NJKWebViewProgress *_progressProxy;
+    WKWebView *_webView;
 }
 
 + (NSString *)defaultUserAgent{
     if (__default_ua == nil) {
-        UIWebView *tempWebView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        __default_ua = [tempWebView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+        WKWebView *tempWebView = [[WKWebView alloc] initWithFrame:CGRectZero];
+        [tempWebView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError *error)
+        {
+            //NSLog(@"%@", result);
+            __default_ua = result;
+        }];
+        //__default_ua = [tempWebView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     }
     return __default_ua;
 }
@@ -246,12 +252,12 @@ static NSString *__default_ua = nil;
 
 //分享到会话delegate
 - (void)performActivity{
-    NSURL *url = _webView.request.URL;
+    NSURL *url = _webView.URL;
     QIMContactSelectionViewController *controller = [[QIMContactSelectionViewController alloc] init];
     QIMNavController *nav = [[QIMNavController alloc] initWithRootViewController:controller];
     
     NSString *title = self.title;
-    NSURL *linkurl = _webView.request.URL;
+    NSURL *linkurl = _webView.URL;
     NSString *img = [NSString stringWithFormat:@"%@://%@/favicon.ico", [linkurl scheme], [linkurl host]];
     NSString *desc = @"点击查看全文";
     
@@ -276,7 +282,7 @@ static NSString *__default_ua = nil;
 //分享到驼圈delegate
 - (void)performShareWorkMomentActivity {
     NSString *title = self.title;
-    NSURL *linkurl = _webView.request.URL;
+    NSURL *linkurl = _webView.URL;
     NSString *img = [NSString stringWithFormat:@"%@://%@/favicon.ico", [linkurl scheme], [linkurl host]];
     NSString *desc = @"点击查看全文";
     BOOL auth = NO;
@@ -288,14 +294,14 @@ static NSString *__default_ua = nil;
 
 //拷贝Url
 - (void)performCopyLinkActivity {
-    NSURL *linkurl = _webView.request.URL;
+    NSURL *linkurl = _webView.URL;
     [[UIPasteboard generalPasteboard] setString:linkurl.absoluteString];
 }
 
 - (void)onMoreClick{
     
-    NSURL * tempUrl = _webView.request.URL;
-    QIMVerboseLog(@"onMoreClick webView Url : %@", _webView.request.URL);
+    NSURL * tempUrl = _webView.URL;
+    QIMVerboseLog(@"onMoreClick webView Url : %@", _webView.URL);
     {
         //
         // 给appstore帐号审核用
@@ -366,19 +372,19 @@ static NSString *__default_ua = nil;
         [self.navigationItem setRightBarButtonItem:rightItem];
     }
     
-    _progressProxy = [[NJKWebViewProgress alloc] init];
-    _progressProxy.webViewProxyDelegate = self;
-    _progressProxy.progressDelegate = self;
+//    _progressProxy = [[NJKWebViewProgress alloc] init];
+//    _progressProxy.webViewProxyDelegate = self;
+//    _progressProxy.progressDelegate = self;
     CGFloat progressBarHeight = 2.f;
     CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
     CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
     
-    _progressProxyView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
-    _progressProxyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [_progressProxyView setProgress:0 animated:YES];
-    [self.navigationController.navigationBar addSubview:_progressProxyView];
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
-    _webView.delegate = _progressProxy;
+//    _progressProxyView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
+//    _progressProxyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+//    [_progressProxyView setProgress:0 animated:YES];
+//    [self.navigationController.navigationBar addSubview:_progressProxyView];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+    //_webView.delegate = _progressProxy;
     if (self.needAuth) {
         if ([QIMKit getQIMProjectType] != QIMProjectTypeQChat) {
             NSString *ua = [[QIMWebView defaultUserAgent] stringByAppendingString:[[NSString alloc] initWithFormat:@"%@ - %@", @" qunartalk-ios-client", [[QIMKit sharedInstance] getDefaultUserAgentString]]];
@@ -402,7 +408,7 @@ static NSString *__default_ua = nil;
     if (![[QIMKit sharedInstance] getIsIpad]) {
         [_webView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
     }
-    [_webView setScalesPageToFit:YES];
+    //[_webView setScalesPageToFit:YES];
     [_webView setMultipleTouchEnabled:YES];
     [self.view addSubview:_webView];
     if (self.htmlString) {
@@ -657,8 +663,8 @@ static NSString *__default_ua = nil;
         request = [[NSMutableURLRequest alloc] initWithURL:_requestUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         [_webView loadRequest:request];
     }
-    _webView.mediaPlaybackRequiresUserAction = NO;
-    _webView.allowsInlineMediaPlayback = YES;
+    //_webView.mediaPlaybackRequiresUserAction = NO;
+    //_webView.allowsInlineMediaPlayback = YES;
     QIMVerboseLog(@"WebView LoadRequest : %@ \n Cookie : %@", _requestUrl, [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies);
     if ([[QIMDeviceManager sharedInstance] isIphoneXSeries] == YES && @available(iOS 11.0, *)) {
         _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -678,7 +684,7 @@ static NSString *__default_ua = nil;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     } else {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        [self.navigationController.navigationBar addSubview:_progressProxyView];
+        //[self.navigationController.navigationBar addSubview:_progressProxyView];
     }
 }
 
@@ -688,7 +694,7 @@ static NSString *__default_ua = nil;
     if (self.navBarHidden) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
-    [_progressProxyView removeFromSuperview];
+    //[_progressProxyView removeFromSuperview];
     self.toolbarItems = nil;
     [self.navigationController setToolbarHidden:YES animated:NO];
 }
@@ -845,10 +851,10 @@ static NSString *__default_ua = nil;
     [_webView goForward];
 }
 
-- (void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
-    [_progressProxyView setProgress:progress animated:YES];
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-}
+//- (void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress {
+//    [_progressProxyView setProgress:progress animated:YES];
+//    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+//}
 
 - (void)openSingleChat:(NSString *)jid{
     
@@ -913,7 +919,7 @@ static NSString *__default_ua = nil;
     };
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(WKWebView *)webView {
     if (self.fromQiangDan) {
         [self resgisterJSMethod];
     }
@@ -922,8 +928,10 @@ static NSString *__default_ua = nil;
             [self.navigationController setNavigationBarHidden:self.navBarHidden animated:YES];
         }
     } else {
-        NSString *webTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-        [[self navigationItem] setTitle:webTitle];
+        //NSString *webTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        [webView evaluateJavaScript:@"document.title" completionHandler:^(id result, NSError *error) {
+           [[self navigationItem] setTitle:result];
+        }];
         
         UIView *leftItem = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 70, 44)];
         //            [leftItem setBackgroundColor:[UIColor redColor]];
@@ -946,7 +954,7 @@ static NSString *__default_ua = nil;
     }
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType
 {
     NSString *urlStr = [[request URL] absoluteString];
     NSArray * components = [urlStr componentsSeparatedByString:@":"];
@@ -1048,11 +1056,11 @@ static NSString *__default_ua = nil;
     return YES;
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(WKWebView *)webView {
     
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailLoadWithError:(NSError *)error
 {
     // 如果是被取消，什么也不干
     if([error code] == NSURLErrorCancelled)  {

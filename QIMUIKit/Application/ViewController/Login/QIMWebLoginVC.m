@@ -11,9 +11,10 @@
 #import "QIMNavConfigManagerVC.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "NSBundle+QIMLibrary.h"
+#import <WebKit/WebKit.h>
 
 @interface QIMWebLoginVC ()<UIWebViewDelegate>{
-    UIWebView *_webView;
+    WKWebView *_webView;
     MBProgressHUD *_progressHUD;
     UIButton *_settingButton;
     NSString *_loginUrl;
@@ -88,7 +89,7 @@
     _progressHUD = nil;
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType
 {
     [_progressHUD setHidden:NO];
     NSHTTPCookieStorage *myCookie = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -160,18 +161,18 @@
     return YES;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(WKWebView *)webView{
     
     [_progressHUD setHidden:YES];
-    if ([webView.request.URL.description hasPrefix:@"https://user.qunar.com/mobile/login.jsp"]) {
-        NSString *meta = @"document.getElementsByClassName(\"back\")[0].style.display=\"none\";";
-        [webView stringByEvaluatingJavaScriptFromString:meta];
-    }
+//    if ([webView.request.URL.description hasPrefix:@"https://user.qunar.com/mobile/login.jsp"]) {
+//        NSString *meta = @"document.getElementsByClassName(\"back\")[0].style.display=\"none\";";
+//        [webView stringByEvaluatingJavaScriptFromString:meta];
+//    }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    QIMVerboseLog(@"WebLogin : %@, Error : %@", webView.request.URL.absoluteString, error);
-    if ([webView.request.URL.absoluteString containsString:@"user.qunar.com"]) {
+- (void)webView:(WKWebView *)webView didFailLoadWithError:(NSError *)error {
+    QIMVerboseLog(@"WebLogin : %@, Error : %@", webView.URL.absoluteString, error);
+    if ([webView.URL.absoluteString containsString:@"user.qunar.com"]) {
         [self clearLoginCookie];
         __weak typeof(self) weakSelf = self;
         UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSBundle qim_localizedStringForKey:@"common_prompt"] message:[NSBundle qim_localizedStringForKey:@"relogin_checkNetWork"] preferredStyle:UIAlertControllerStyleAlert];
@@ -201,9 +202,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotify:) name:kNotificationLoginState object:nil];
     
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, self.view.width, self.view.height)];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 20, self.view.width, self.view.height)];
     [_webView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-    [_webView setDelegate:self];
+    //[_webView setDelegate:self];
     [self.view addSubview:_webView];
     
     _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];

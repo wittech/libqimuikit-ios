@@ -30,7 +30,8 @@ target 'QIMUIKit' do
     pod 'MMMarkdown'
     pod 'MGSwipeTableCell'
     pod 'DACircularProgress'
-    pod 'NJKWebViewProgress'
+    #使用WKWebView内核，不需要假进度条了
+#    pod 'NJKWebViewProgress'
 #    pod 'AMapSearch'
 #    pod 'AMapLocation'
 #    pod 'AMap3DMap'

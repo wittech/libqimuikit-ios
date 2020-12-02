@@ -197,7 +197,7 @@ static NSString *__default_ua = nil;
 
 @end
 
-@interface QIMWebView() <WKUIDelegate, QActivityToFriendDelegate,QIMContactSelectionViewControllerDelegate>
+@interface QIMWebView() <WKNavigationDelegate, QActivityToFriendDelegate,QIMContactSelectionViewControllerDelegate>
 @property (nonatomic, strong) UIActivityViewController *activityViewController;
 @property (nonatomic,strong) UIBarButtonItem *backButton;
 @property (nonatomic,strong) UIBarButtonItem *forwardButton;

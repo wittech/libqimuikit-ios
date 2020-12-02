@@ -15,7 +15,7 @@
 #import "NSBundle+QIMLibrary.h"
 #import <WebKit/WebKit.h>
 
-@interface QIMMicroTourGuideVC ()<WKUIDelegate>{
+@interface QIMMicroTourGuideVC ()<WKNavigationDelegate>{
     WKWebView *_msgWebView;
     NSMutableArray *_dataSource;
     BOOL _ready;
@@ -97,7 +97,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent" : ua, @"User-Agent":ua}];
     
     _msgWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
-    //[_msgWebView setDelegate:self];
+    _msgWebView.navigationDelegate = self;
     [self.view addSubview:_msgWebView];
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"QIMMicroTourRoot" ofType:@"html"];

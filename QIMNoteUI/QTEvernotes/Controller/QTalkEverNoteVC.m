@@ -150,7 +150,7 @@
 
 - (void)createUI {
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64)];
-    //_webView.delegate = self;
+    _webView.navigationDelegate = self;
     [self.view addSubview:_webView];
     
     [self refreshCKEditorWithReadOnly:!(self.everNoteType == ENUM_EverNote_TypeNew)];
@@ -182,7 +182,7 @@
     }
 }
 
-- (BOOL)webView: (WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView: (WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType {
     NSURL *requestUrl = request.URL;
     NSString *urlStr = [requestUrl absoluteString];
     QIMVerboseLog(@"request:%@",urlStr);

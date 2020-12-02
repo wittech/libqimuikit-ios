@@ -17,10 +17,9 @@
 @property (nonatomic, weak) QIMAdvertisingVC *owner;
 @end
 
-@interface QIMAdvertisingVC ()<UIWebViewDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate>{
+@interface QIMAdvertisingVC ()<WKNavigationDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate>{
     UIScrollView *_scrollView;
     UIPageControl *_pageControl;
-//    UIWebView *_webView;
     QIMImageView *_adImageView;
     UIButton *_loadingButton;
     int _currentLoadingTime;

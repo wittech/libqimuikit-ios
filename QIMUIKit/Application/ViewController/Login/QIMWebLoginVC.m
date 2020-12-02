@@ -13,7 +13,7 @@
 #import "NSBundle+QIMLibrary.h"
 #import <WebKit/WebKit.h>
 
-@interface QIMWebLoginVC ()<UIWebViewDelegate>{
+@interface QIMWebLoginVC ()<WKNavigationDelegate>{
     WKWebView *_webView;
     MBProgressHUD *_progressHUD;
     UIButton *_settingButton;

@@ -6,7 +6,7 @@
 
 static UIWindow *__redPackageWindow = nil;
 static UIViewController *__redPackageVC = nil;
-@interface QIMRedPackageView()<WKUIDelegate,QIMContactSelectionViewControllerDelegate,UIAlertViewDelegate>
+@interface QIMRedPackageView()<WKNavigationDelegate,QIMContactSelectionViewControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic,copy) NSString  * rId;
 @end
 @implementation QIMRedPackageView{
@@ -158,7 +158,7 @@ static UIViewController *__redPackageVC = nil;
             [_webView.scrollView setShowsVerticalScrollIndicator:NO];
             //[_webView setScalesPageToFit:YES];
             [_webView setMultipleTouchEnabled:YES];
-            //[_webView setDelegate:self];
+            _webView.navigationDelegate = self;
             [_webView setOpaque:NO];
             [_webView setBackgroundColor:[UIColor clearColor]];
             [_webView.scrollView setBounces:NO];

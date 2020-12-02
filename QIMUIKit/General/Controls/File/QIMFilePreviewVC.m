@@ -15,7 +15,7 @@
 #import "QIMContactSelectionViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface QIMFilePreviewVC ()<WKUIDelegate>{
+@interface QIMFilePreviewVC ()<WKNavigationDelegate>{
     dispatch_queue_t _writeDataQueue;
     WKWebView *_previewWebView;
     
@@ -557,8 +557,7 @@
     
     _previewWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, _bottomView.top)];
     [_previewWebView setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-//    [_previewWebView setDelegate:self];
-//    [_previewWebView setScalesPageToFit:YES];
+    _previewWebView.navigationDelegate = self;
     _previewWebView.scrollView.delegate = self;
     [_previewWebView setMultipleTouchEnabled:YES]; 
     [self.view addSubview:_previewWebView];
@@ -640,7 +639,7 @@
 
 #pragma mark - webview delegate
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+- (void)webView:(WKWebView *)webView didFailLoadWithError:(NSError *)error{
     [self loadFileError];
 }
 

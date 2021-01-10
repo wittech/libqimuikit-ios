@@ -2186,6 +2186,12 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
 
 #pragma mark - QIMTextBarExpandViewDelegate
 
+- (void)videoCallButtonClick {
+    if ([self.delegate respondsToSelector:@selector(didVideoCallButtonClick)]) {
+        [self.delegate didVideoCallButtonClick];
+    }
+}
+
 - (void)didClickExpandItemForTrdextendId:(NSString *)trdextendId {
     
     if ([trdextendId isEqualToString:QIMTextBarExpandViewItem_Photo]) {

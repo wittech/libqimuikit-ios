@@ -208,6 +208,20 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
 
 @implementation QIMGroupChatVC
 
+- (void)willMoveToParentViewController:(UIViewController*)parent
+{
+    [super willMoveToParentViewController:parent];
+}
+
+- (void)didMoveToParentViewController:(UIViewController*)parent
+{
+    [super didMoveToParentViewController:parent];
+    NSLog(@"%s,%@",__FUNCTION__,parent);
+    if ([self.delegate respondsToSelector:@selector(backButtonClick:)]) {
+        [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
+    }
+}
+
 - (void)updateGroupMemberCards {
     if (__checkGroupMembersCardDic == nil) {
         __checkGroupMembersCardDic = [NSMutableDictionary dictionary];
@@ -1293,6 +1307,11 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
     [self.view endEditing:YES];
     // Mark by OldiPad
     if ([[QIMKit sharedInstance] getIsIpad] == NO) {
+        
+        if ([self.delegate respondsToSelector:@selector(backButtonClick:)]) {
+            [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
+        }
+        
         [self.navigationController popViewControllerAnimated:YES];
     } else {
 #if __has_include("QIMIPadWindowManager.h")

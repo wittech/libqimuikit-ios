@@ -8,7 +8,15 @@
  
 #import "QIMCommonUIFramework.h"
 
+@protocol QIMGroupChatVCDelegate <NSObject>
+
+- (void)backButtonClick:(QIMMessageModel *)msgModel;
+
+@end
+
 @interface QIMGroupChatVC : QTalkViewController
+
+@property (nonatomic, weak) id<QIMGroupChatVCDelegate> delegate;
 
 @property (nonatomic, strong) NSDictionary *groupCardDic;
 @property (nonatomic, strong) NSString *chatId;

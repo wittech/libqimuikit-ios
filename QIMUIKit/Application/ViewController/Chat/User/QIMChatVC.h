@@ -1,6 +1,15 @@
 
 #import "QIMCommonUIFramework.h"
 
+@protocol QIMChatVCDelegate <NSObject>
+
+- (void)audioCallClick;
+
+- (void)backButtonClick:(QIMMessageModel *)msgModel;
+
+
+@end
+
 @interface QIMChatVC : QTalkViewController
 
 @property (nonatomic, strong) NSString *chatId;
@@ -16,6 +25,8 @@
 
 @property (nonatomic, assign) ChatType chatType;
 @property (nonatomic, strong) NSString *virtualJid;
+
+@property (nonatomic, weak) id<QIMChatVCDelegate> delegate;
 
 - (void)refreshCellForMsg : (QIMMessageModel *)msg;
 

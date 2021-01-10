@@ -46,6 +46,8 @@ typedef enum {
 
 - (void)scrollViewDidScrollToIndex:(NSInteger)currentPage;
 
+- (void)videoCallButtonClick;
+
 @end
 
 @interface QIMTextBarExpandView : UIView <QIMMsgBaseVCDelegate>

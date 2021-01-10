@@ -168,6 +168,8 @@
     BOOL _hasServerTransferFeedback;
     BOOL _hasUserTransferFeedback;
     
+    BOOL _isBack;
+    
 }
 @property(nonatomic, strong) QIMTextBar *textBar;
 
@@ -237,6 +239,32 @@
 @end
 
 @implementation QIMChatVC
+
+
+- (void)willMoveToParentViewController:(UIViewController*)parent
+{
+    [super willMoveToParentViewController:parent];
+}
+
+- (void)didMoveToParentViewController:(UIViewController*)parent
+{
+    [super didMoveToParentViewController:parent];
+    NSLog(@"%s,%@",__FUNCTION__,parent);
+    if (_isBack) {
+        if ([self.delegate respondsToSelector:@selector(backButtonClick:)]) {
+            [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
+        }
+    }
+    
+}
+
+//QIMTextBarDelegate
+- (void)didVideoCallButtonClick {
+    if ([self.delegate respondsToSelector:@selector(audioCallClick)]) {
+        [self.delegate audioCallClick];
+    }
+}
+
 
 
 #pragma mark - setter and getter
@@ -786,6 +814,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    _isBack = NO;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     if (![[QIMKit sharedInstance] getIsIpad]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -809,6 +838,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    _isBack = YES;
     [_remoteAudioPlayer stop];
     _currentPlayVoiceMsgId = nil;
     if (_shareLctId && [[QIMKit sharedInstance] getShareLocationUsersByShareLocationId:_shareLctId].count == 0) {
@@ -1521,6 +1551,11 @@
 - (void)leftBarBtnClicked:(id)sender {
     [self.view endEditing:YES];
     if ([[QIMKit sharedInstance] getIsIpad] == NO) {
+        if (self.messageManager.dataSource.count > 0) {
+            if ([self.delegate respondsToSelector:@selector(backButtonClick:)]) {
+                [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
+            }
+        }
         [self.navigationController popViewControllerAnimated:YES];
     } else {
 #if __has_include("QIMIPadWindowManager.h")

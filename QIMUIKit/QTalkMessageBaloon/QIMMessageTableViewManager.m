@@ -58,6 +58,10 @@
 #import "UIApplication+QIMApplication.h"
 #import "QIMRTCChatCell.h"
 
+
+//判断字符串是否为空
+#define kStringIsNull(string) ([string isEqualToString:@""] || (string == nil) || [string isEqualToString:@""] || [string isKindOfClass:[NSNull class]])
+
 @interface QIMMessageTableViewManager () 
 
 @property (nonatomic, copy) NSString *chatId;
@@ -189,6 +193,27 @@
             case QIMMessageType_Text:
             case QIMMessageType_Image:
             case QIMMessageType_ImageNew:{
+                
+                NSLog(@"=====msgRaw=====:%@",message.msgRaw);
+                NSLog(@"=====message=====:%@",message.message);
+
+                //适配app的音视频通话
+//                NSMutableDictionary *msgRaw = [[NSMutableDictionary alloc] initWithDictionary:[self dictionaryWithJsonString:message.msgRaw]];
+//                NSMutableDictionary *body = [[NSMutableDictionary alloc] initWithDictionary:[self conversion:msgRaw[@"body"]]];
+                
+                NSString *content = [self setChatMessage:message.message];
+//                if (kStringIsNull(content)) {
+//                    content = @"";
+//                    [body setObject:@"" forKey:@"content"];
+//                }else {
+//                    [body setObject:content forKey:@"content"];
+//                }
+//                [body setObject:@"" forKey:@"extendInfo"];
+//
+//                [msgRaw setObject:body forKey:@"body"];
+//                NSLog(@"=====msgRaw11111=====:%@",msgRaw);
+//                message.msgRaw = [self convertToJsonData:msgRaw];
+                message.message = content;
                 
                 QIMTextContainer *textContaner = [QIMMessageParser textContainerForMessage:message];
                 return MAX([textContaner getHeightWithFramesetter:nil width:textContaner.textWidth], 20) + 60;
@@ -634,6 +659,13 @@
         }
     }
 #endif
+    
+    
+    
+    
+    NSLog(@"=======type:[%d]",message.messageType);
+        
+    //
     switch ((int) message.messageType) {
         case QIMMessageType_ExProduct: {
             NSString *cellIdentifier = [NSString stringWithFormat:@"QIMMessageType_ExProduct Cell %@", message.messageId];
@@ -813,9 +845,27 @@
                 cell.chatType = self.chatType;
                 [cell setFrameWidth:self.ownerVc.view.width];
                 [cell setDelegate:self.ownerVc];
+                
+                //适配app的音视频通话
+//                NSMutableDictionary *msgRaw = [[NSMutableDictionary alloc] initWithDictionary:[self dictionaryWithJsonString:message.msgRaw]];
+//                NSMutableDictionary *body = [[NSMutableDictionary alloc] initWithDictionary:[self conversion:msgRaw[@"body"]]];
+                
+                NSString *content = [self setChatMessage:message.message];
+//                if (kStringIsNull(content)) {
+//                    content = @"";
+//                    [body setObject:@"" forKey:@"content"];
+//                }else {
+//                    [body setObject:content forKey:@"content"];
+//                }
+//                [body setObject:@"" forKey:@"extendInfo"];
+//                [msgRaw setObject:body forKey:@"body"];
+//                NSLog(@"=====msgRaw11111=====:%@",msgRaw);
+//                message.msgRaw = [self convertToJsonData:msgRaw];
+
+                message.message = content;
                 [cell setMessage:message];
+                [cell refreshUI];
             }
-            [cell refreshUI];
             return cell;
         }
             break;
@@ -1213,6 +1263,108 @@
 - (void)dealloc {
     self.delegate = nil;
     self.dataSource = nil;
+}
+
+
+//文本设置
+- (NSString *)setChatMessage:(NSString *)message {
+    
+    if ([self isJsonString:message]) {
+        NSDictionary *dict = [self dictionaryWithJsonString:message];
+        NSString *type = [NSString stringWithFormat:@"%@",dict[@"type"]];
+        if ([type isEqualToString:@"video"]) {
+            return @"[视频通话]";
+        }else if ([type isEqualToString:@"audio"]) {
+            return @"[语音通话]";
+        }
+        NSString *talkType = [NSString stringWithFormat:@"%@",dict[@"talkType"]];
+        if ([talkType isEqualToString:@"breakOffMetting"]) {
+            return @"[已挂断]";
+        }else {
+            return @"[已挂断]";
+        }
+    }else {
+        NSString *content = [NSString stringWithFormat:@"%@",message];
+        if ([content containsString:@"startSingleMettingJid:"]) {
+            return @"[已挂断]";
+        }else {
+            return message;
+        }
+    }
+}
+
+// 判断是否为JSON字符串
+- (BOOL)isJsonString:(NSString *)jsonString{
+    if (jsonString.length < 2) return NO;
+//    if (!([jsonString hasPrefix:@"{"] || [jsonString hasPrefix:@"["])) return NO;
+    if (![jsonString hasPrefix:@"{"]) return NO;
+    // {:123  }:125  [: 91  ]:93
+    return [jsonString characterAtIndex:jsonString.length-1]-[jsonString characterAtIndex:0] == 2;
+}
+
+// JSON字符串转化为字典
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
+// 字典转json字符串方法
+
+- (NSString *)convertToJsonData:(NSDictionary *)dict
+{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString;
+    if (!jsonData) {
+        NSLog(@"%@",error);
+    }else{
+        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    NSMutableString *mutStr = [NSMutableString stringWithString:jsonString];
+    
+//    NSRange range = {0,jsonString.length};
+    
+    //去掉字符串中的空格
+    
+//    [mutStr replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:range];
+    
+    NSRange range2 = {0,mutStr.length};
+    
+    //去掉字符串中的换行符
+    
+    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
+    
+    //    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
+    
+    return mutStr;
+    
+}
+                                             
+- (NSDictionary *)conversion:(NSDictionary *)params{
+ 
+ NSMutableDictionary *mutableDic = [[NSMutableDictionary alloc] init];
+ 
+ for (NSString *keyStr in params.allKeys) {
+     NSString *vlaue = [NSString stringWithFormat:@"%@",[params objectForKey:keyStr]];
+     if (!kStringIsNull(vlaue)) {
+         [mutableDic setObject:vlaue forKey:keyStr];
+     }
+ }
+ return mutableDic;
 }
 
 @end

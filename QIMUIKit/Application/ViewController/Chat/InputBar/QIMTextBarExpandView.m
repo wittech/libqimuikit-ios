@@ -36,7 +36,8 @@ static NSMutableDictionary *__trdExtendInfoDic = nil;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        });
     }
     return self;
 }
@@ -171,7 +172,22 @@ static NSMutableDictionary *__trdExtendInfoDic = nil;
         }
     }
     
-    NSArray * items = [[QIMKit sharedInstance] getMsgTextBarButtonInfoList];
+    NSMutableArray * items = [[NSMutableArray alloc] initWithArray:[[QIMKit sharedInstance] getMsgTextBarButtonInfoList]];
+    
+//    {
+//        i18NTitle = "";
+//        icon = "http://219.159.12.52:8080/file/v2/download/9c2f927df5a9a72da07f9b380c9dccb2.png";
+//        linkType = 0;
+//        linkurl = "";
+//        scope = 3;
+//        support = 63;
+//        title = "\U62cd\U7167";
+//        trdextendId = Camera;
+//    },
+    if (self.type == QIMTextBarExpandViewTypeSingle) {
+        NSDictionary *dict = @{@"i18NTitle":@"", @"icon":@"", @"linkType":@1, @"linkurl":@"", @"scope":@3, @"support":@90, @"title":@"视频通话",@"trdextendId":@"Video"};
+        [items addObject:dict];
+    }
     
     for (NSDictionary * itemDic in items) {
         NSString *trId = [itemDic objectForKey:@"trdextendId"];
@@ -180,12 +196,30 @@ static NSMutableDictionary *__trdExtendInfoDic = nil;
         [locationButton setAccessibilityIdentifier:trId];
         UIImage *defaultIcon = [UIImage qim_imageNamedFromQIMUIKitBundle:@"textbar_common_icon"];
         if (icon.length > 0) {
-            [locationButton qim_setImageWithURL:[NSURL URLWithString:[icon stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:defaultIcon];
+            if ([trId isEqualToString:@"Video"]) {
+            }else {
+                [locationButton qim_setImageWithURL:[NSURL URLWithString:[icon stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:defaultIcon];
+            }
         } else {
-            NSString *imageName = [itemDic objectForKey:@"ImageName"];
-            [locationButton setImage:[UIImage qim_imageNamedFromQIMUIKitBundle:imageName]];
+            if ([trId isEqualToString:@"Video"]) {
+            }else {
+                NSString *imageName = [itemDic objectForKey:@"ImageName"];
+                [locationButton setImage:[UIImage qim_imageNamedFromQIMUIKitBundle:imageName]];
+            }
+            
         }
         [locationButton setUserInteractionEnabled:YES];
+        
+        //扩展音视频
+        if ([trId isEqualToString:@"Video"]) {
+            //http://219.159.12.52:8080/file/v2/download/9c2f927df5a9a72da07f9b380c9dccb2.png
+//            NSString *path = [[NSBundle mainBundle] pathForResource:@"camel" ofType:@"gif"];
+//            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"video_call_icon" ofType:@"png"];
+            UIImage *image = [UIImage qim_imageNamedFromQIMUIKitBundle:@"chat_files_video"];//chat_files_video@2x
+            [locationButton setImage:image];
+            locationButton.tag = 1000001;
+        }
+        
         [_mainScrollView addSubview:locationButton];
         
         UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(page * _mainScrollView.width + (space + kItemWidth) * (i % 4) + space - 10, locationButton.bottom + 5, kItemWidth + 20, 20)];
@@ -213,23 +247,30 @@ static NSMutableDictionary *__trdExtendInfoDic = nil;
 - (void)itemBtnHandle:(UITapGestureRecognizer *)sender {
     UITapGestureRecognizer *tap = (UITapGestureRecognizer*)sender;
     UIView *view = (UIView*) tap.view;
-    NSString *sendId = [view accessibilityIdentifier];
-    NSDictionary *trdDic = [[QIMKit sharedInstance] getExpandItemsForTrdextendId:sendId];
-    NSString *trdId = [trdDic objectForKey:@"trdextendId"];
-    NSString *trdName = [trdDic objectForKey:@"title"];
+    if (view.tag == 1000001) {
+        if ([self.delegate respondsToSelector:@selector(videoCallButtonClick)]) {
+            [self.delegate videoCallButtonClick];//音视频通话
+        }
+    }else {
+        NSString *sendId = [view accessibilityIdentifier];
+        NSDictionary *trdDic = [[QIMKit sharedInstance] getExpandItemsForTrdextendId:sendId];
+        NSString *trdId = [trdDic objectForKey:@"trdextendId"];
+        NSString *trdName = [trdDic objectForKey:@"title"];
 
-    NSArray *textBarOpenIds = @[QIMTextBarExpandViewItem_Photo, QIMTextBarExpandViewItem_Camera, QIMTextBarExpandViewItem_QuickReply];
-#if __has_include("QIMAutoTracker.h")
-    [[QIMAutoTrackerManager sharedInstance] addACTTrackerDataWithEventId:trdId withDescription:trdName?trdName:trdId];
-#endif
-    if ([textBarOpenIds containsObject:trdId] && self.delegate && [self.delegate respondsToSelector:@selector(didClickExpandItemForTrdextendId:)]) {
-        //这里由TextBar打开
-        [self.delegate didClickExpandItemForTrdextendId:trdId];
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kExpandViewItemHandleNotification object:trdId];
-        });
+        NSArray *textBarOpenIds = @[QIMTextBarExpandViewItem_Photo, QIMTextBarExpandViewItem_Camera, QIMTextBarExpandViewItem_QuickReply];
+    #if __has_include("QIMAutoTracker.h")
+        [[QIMAutoTrackerManager sharedInstance] addACTTrackerDataWithEventId:trdId withDescription:trdName?trdName:trdId];
+    #endif
+        if ([textBarOpenIds containsObject:trdId] && self.delegate && [self.delegate respondsToSelector:@selector(didClickExpandItemForTrdextendId:)]) {
+            //这里由TextBar打开
+            [self.delegate didClickExpandItemForTrdextendId:trdId];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kExpandViewItemHandleNotification object:trdId];
+            });
+        }
     }
+    
 }
 
 #pragma mark - QIMMsgBaseVCDelegate

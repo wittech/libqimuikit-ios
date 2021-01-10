@@ -37,6 +37,9 @@ typedef enum {
 - (void)sendNormalEmotion:(NSString *)faceStr WithPackageId:(NSString *)packageId;
 - (void)sendCollectionFaceStr:(NSString *)faceStr;
 - (void)clickFaildCollectionFace;
+
+- (void)didVideoCallButtonClick;
+
 @optional
 
 //图片

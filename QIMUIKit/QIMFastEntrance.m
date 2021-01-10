@@ -29,7 +29,7 @@
 
 #if __has_include("QIMNoteManager.h")
 
-#import "QTalkNotesCategoriesVc.h"
+//#import "QTalkNotesCategoriesVc.h"
 
 #endif
 
@@ -1161,24 +1161,24 @@ static QIMFastEntrance *_sharedInstance = nil;
 }
 
 - (UIViewController *)getQTalkNotesVC {
-#if __has_include("QIMNoteManager.h")
-    QTalkNotesCategoriesVc *notesCategoriesVc = [[QTalkNotesCategoriesVc alloc] init];
-    return notesCategoriesVc;
-#endif
+//#if __has_include("QIMNoteManager.h")
+//    QTalkNotesCategoriesVc *notesCategoriesVc = [[QTalkNotesCategoriesVc alloc] init];
+//    return notesCategoriesVc;
+//#endif
     return nil;
 }
 
 + (void)openQTalkNotesVC {
-#if __has_include("QIMNoteManager.h")
-    dispatch_async(dispatch_get_main_queue(), ^{
-        QTalkNotesCategoriesVc *notesCategoriesVc = [[QTalkNotesCategoriesVc alloc] init];
-        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
-        if (!navVC) {
-            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
-        }
-        [navVC pushViewController:notesCategoriesVc animated:YES];
-    });
-#endif
+//#if __has_include("QIMNoteManager.h")
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        QTalkNotesCategoriesVc *notesCategoriesVc = [[QTalkNotesCategoriesVc alloc] init];
+//        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
+//        if (!navVC) {
+//            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
+//        }
+//        [navVC pushViewController:notesCategoriesVc animated:YES];
+//    });
+//#endif
 }
 
 + (void)openLocalMediaWithXmppId:(NSString *)xmppId withRealJid:(NSString *)realJid withChatType:(ChatType)chatType {

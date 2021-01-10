@@ -13,7 +13,7 @@ target 'QIMUIKit' do
 	
   # Pods for QIMUIKit
     mPaaS_pod "mPaaS_LBS"
-    mPaaS_pod "mPaaS_TinyApp_Location"
+    mPaaS_pod "mPaaS_TinyApp"
     mPaaS_pod "mPaaS_AlipaySDK"
     
     pod 'QIMDataBase'

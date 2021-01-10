@@ -161,6 +161,7 @@ static dispatch_once_t __onceMainToken;
         [self changeIcon];
     }
     */
+    
     self.reloadCountQueue = dispatch_queue_create("Reload Main Read Count", DISPATCH_QUEUE_SERIAL);
     [self registerNSNotifications];
 //    self.view.width = [[QIMWindowManager shareInstance] getPrimaryWidth];
@@ -785,7 +786,8 @@ static dispatch_once_t __onceMainToken;
 
 - (QIMWorkFeedView *)momentView {
     if (!_momentView) {
-        QIMWorkFeedView *workfeedView = [[QIMWorkFeedView alloc] initWithFrame:CGRectMake(0, 0, _contentView.width, _contentView.height)];
+//        QIMWorkFeedView *workfeedView = [[QIMWorkFeedView alloc] initWithFrame:CGRectMake(0, 0, _contentView.width, _contentView.height)];
+        QIMWorkFeedView * workfeedView = [[QIMWorkFeedView alloc]initWithFrame:CGRectMake(0, 0, _contentView.width, _contentView.height) userId:nil showNewMomentBtn:YES showNoticView:YES showheaderEntrence:YES];
         workfeedView.rootVC = self;
         _momentView = workfeedView;
     }
@@ -1028,7 +1030,7 @@ static dispatch_once_t __onceMainToken;
         if ([lastUserName isEqualToString:@"appstore"]) {
             [[QIMKit sharedInstance] updateLastTempUserToken:@"appstore"];
 //            [[QIMKit sharedInstance] setUserObject:@"appstore" forKey:@"kTempUserToken"];
-            [[QIMKit sharedInstance] loginWithUserName:@"appstore" WithPassWord:@"appstore"];
+            [[QIMKit sharedInstance] loginWithUserName:@"appstore" WithPassWord:@"194910"];
         } else if ([[lastUserName lowercaseString] isEqualToString:@"qtalktest"]) {
             [[QIMKit sharedInstance] updateLastTempUserToken:@"qtalktest123"];
 //            [[QIMKit sharedInstance] setUserObject:@"qtalktest123" forKey:@"kTempUserToken"];

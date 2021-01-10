@@ -8,7 +8,6 @@
 
 #import "NetWatcher.h"
 #import "AFNetworking/AFNetworking.h"
-#import "SuperPlayerModelInternal.h"
 
 @interface NetWatcher()
 @property NSArray *definitions;

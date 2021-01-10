@@ -24,6 +24,16 @@
 #import "QIMAutoTracker.h"
 #endif
 
+
+#import "QIMWorkMomentTagModel.h"
+#import "QIMWorkMomentHotTagHeaderView.h"
+#import "QIMWorkMomentTagHeaderEntrenceView.h"
+#import "QIMWorkMomentHotTopicViewController.h"
+#import "QIMWorkMomentTagViewController.h"
+#import "QIMWorkFeedTagCirrleViewController.h"
+#import "QIMWorkMomentHeaderTagInfoModel.h"
+
+
 @interface QIMWorkFeedView () <UITableViewDelegate, UITableViewDataSource, QIMWorkMomentNotifyViewDelegtae>
 
 @property (nonatomic, strong) UIButton *addNewMomentBtn;
@@ -46,6 +56,16 @@
 
 @property (nonatomic, strong) QIMWorkOwnerCamalNoDataView * noDataView;
 
+@property (nonatomic, strong) QIMWorkMomentHotTagHeaderView * hotTagView;
+
+@property (nonatomic, strong) QIMWorkMomentTagHeaderEntrenceView * headerEntrenceView;
+
+@property (nonatomic, assign) BOOL isShowDetailTag;
+
+@property (nonatomic, assign) BOOL isShowHeaderEntrence;
+
+@property (nonatomic, strong) QIMWorkMomentTagModel * tagModel;
+
 @end
 
 @implementation QIMWorkFeedView
@@ -53,6 +73,9 @@
 -(QIMWorkOwnerCamalNoDataView *)noDataView{
     if (!_noDataView) {
         _noDataView = [[QIMWorkOwnerCamalNoDataView alloc]initWithFrame:self.frame];
+        if (self.isShowDetailTag) {
+            _noDataView.frame = CGRectMake(0, 50, SCREEN_WIDTH, self.frame.size.height);
+        }
     }
     return _noDataView;
 }
@@ -81,25 +104,90 @@
 
 - (UITableView *)mainTableView {
     if (!_mainTableView) {
-        _mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height) style:UITableViewStyleGrouped];
         _mainTableView.backgroundColor = [UIColor qim_colorWithHex:0xf8f8f8];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
-        _mainTableView.estimatedRowHeight = 0;
-        _mainTableView.estimatedSectionHeaderHeight = 0;
-        CGRect tableHeaderViewFrame = CGRectMake(0, 0, 0, 0.0001f);
-        _mainTableView.tableHeaderView = [[UIView alloc] initWithFrame:tableHeaderViewFrame];
+        
+//        if (@available(iOS 11.0, *)) {
+//        _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//        }
+//
+//        CGRect tableHeaderViewFrame = CGRectMake(0, 0, 0, 0.0001f);
+//        _mainTableView.tableHeaderView = [[UIView alloc] initWithFrame:tableHeaderViewFrame];
         _mainTableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);           //top left bottom right 左右边距相同
-        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTableView.separatorColor = [UIColor qim_colorWithHex:0xdddddd];
         
-        _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadRemoteRecenteMomentsWithNeedScrollTop:)];
-        _mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMoment)];
-        _mainTableView.mj_footer.automaticallyHidden = YES;
+        
+        if (@available(iOS 11.0, *)) {
+            _mainTableView.estimatedRowHeight = 0;
+            _mainTableView.estimatedSectionHeaderHeight = 0;
+            _mainTableView.estimatedSectionFooterHeight = 0;
+            _mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            _mainTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);//iPhoneX这里是88
+            _mainTableView.scrollIndicatorInsets = _mainTableView.contentInset;
+        }
+#pragma mark -设置脱圈头部展示的逻辑，热点
+        if ([[QIMKit sharedInstance]getTopicFlagMomentNotifyConfig] == NO && [[QIMKit sharedInstance] getHotPostMomentNotifyConfig] ==NO) {
+            self.isShowHeaderEntrence = NO;
+        }
+        else{
+        }
+        if (self.isShowDetailTag == YES) {
+            [self requestTopicHeaderNetWork];
+        }
+        if (self.isShowDetailTag == YES) {
+            self.isShowHeaderEntrence = NO;
+        }
+        if (self.isShowHeaderEntrence) {
+            self.headerEntrenceView = [[QIMWorkMomentTagHeaderEntrenceView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 72)];
+            [self.headerEntrenceView setJumpBlock:^(NSInteger tag) {
+                if (tag==0) {
+                    [[QIMAutoTrackerManager sharedInstance] addACTTrackerDataWithEventId:@"04010100" withDescription:@"热帖榜"];
+                    QIMWorkMomentHotTopicViewController * vc = [[QIMWorkMomentHotTopicViewController alloc]init];
+                    [self.rootVC.navigationController pushViewController:vc animated:YES];
+                }
+                else{
+                    [[QIMAutoTrackerManager sharedInstance] addACTTrackerDataWithEventId:@"04010200" withDescription:@"话题池"];
+                    QIMWorkMomentTagViewController * tpVC = [[QIMWorkMomentTagViewController alloc]init];
+                    tpVC.headerTitle = @"话题池";
+                     [self.rootVC.navigationController pushViewController:tpVC animated:YES];
+                }
+            }];
+            _mainTableView.tableHeaderView = self.headerEntrenceView;
+        }
     }
     return _mainTableView;
 }
-
+- (void)requestTopicHeaderNetWork{
+    __weak typeof(self) weakSelf = self;
+    [[QIMKit sharedInstance] getMomentTopicTagHeaderWithTagID:self.tagID CompleteCallBack:^(NSDictionary * _Nonnull dic) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            QIMWorkMomentHeaderTagInfoModel * model = [QIMWorkMomentHeaderTagInfoModel yy_modelWithDictionary:dic];
+            weakSelf.hotTagView = [[QIMWorkMomentHotTagHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88+93)];
+            [weakSelf.hotTagView setHeaderModel:model];
+            
+            if (self.isShowDetailTag) {
+                QIMWorkMomentTagModel * aTagModel = [[QIMWorkMomentTagModel alloc]init];
+                aTagModel.tagId = model.tagId;
+                aTagModel.tagColor = model.topicColor;
+                aTagModel.selected = YES;
+                aTagModel.tagTitle = model.tagTitle;
+                self.tagModel = aTagModel;
+            }
+            
+            weakSelf.mainTableView.tableHeaderView = weakSelf.hotTagView;
+            [weakSelf.hotTagView setChangeHeightBolck:^(CGFloat height) {
+                [weakSelf.hotTagView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.mainTableView reloadData];
+                });
+            }];
+            [weakSelf.mainTableView reloadData];
+        });
+    }];
+}
 - (UIView *)loadFaildView {
     if (!_loadFaildView) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 54)];
@@ -139,14 +227,43 @@
 
 #pragma mark - life ctyle
 
+-(instancetype)initWithFrame:(CGRect)frame
+                       tagID:(NSString *)tagId
+            showNewMomentBtn:(BOOL)showBtn
+               showNoticView:(BOOL)showNtc
+           showHeaderTagView:(BOOL)showTag
+{
+    self.tagID = tagId;
+    self.isShowDetailTag = YES;
+    return [self initWithFrame:frame userId:nil showNewMomentBtn:showBtn showNoticView:showNtc];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame userId:(NSString *)userId showNewMomentBtn:(BOOL)showBtn showNoticView:(BOOL)showNtc{
     self = [super initWithFrame:frame];
     if (self) {
         if (userId) {
             self.userId = userId;
         }
+#pragma mark -这里新添加了view
+        
+        
         [self addSubview:self.mainTableView];
+        
+        self.mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadRemoteRecenteMomentsWithNeedScrollTop:)];
+        
+        self.mainTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMoment)];
+              
+        self.mainTableView.mj_footer.automaticallyHidden = YES;
         self.notReadNoticeMsgCount = [[QIMKit sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
+        
+        if (@available(iOS 11.0, *)) {
+            self.mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            self.mainTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);//iPhoneX这里是88
+            self.mainTableView.scrollIndicatorInsets = self.mainTableView.contentInset;
+        } else {
+            self.rootVC.automaticallyAdjustsScrollViewInsets=NO;
+        }
+        
         if (self.notReadNoticeMsgCount > 0 && self.userId.length <= 0) {
             [self.mainTableView reloadData];
         } else {
@@ -175,12 +292,33 @@
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame userId:nil showNewMomentBtn:YES showNoticView:YES];
+    return [self initWithFrame:frame userId:nil showNewMomentBtn:YES showNoticView:YES showHeaderTagView:NO];
 }
+- (instancetype)initWithFrame:(CGRect)frame userId:(NSString *)userId showNewMomentBtn:(BOOL)showBtn showNoticView:(BOOL)showNtc showHeaderTagView:(BOOL)showTag{
+    self.isShowDetailTag = showTag;
+    return [self initWithFrame:frame userId:userId showNewMomentBtn:showBtn showNoticView:showNtc];
+}
+
+-(instancetype)initWithFrame:(CGRect)frame
+                      userId:(NSString *)userId
+            showNewMomentBtn:(BOOL)showBtn
+               showNoticView:(BOOL)showNtc
+          showheaderEntrence:(BOOL)showheaderEntrence{
+    self.isShowHeaderEntrence = showheaderEntrence;
+    return [self initWithFrame:frame userId:userId showNewMomentBtn:showBtn showNoticView:showNtc];
+}
+
 
 //主动更新驼圈未读数
 - (void)updateMomentView {
-    [self.mainTableView.mj_header beginRefreshing];
+    
+//    [self.mainTableView setContentOffset:CGPointMake(0, 0)];
+//    [self.mainTableView.mj_header setState:MJRefreshStateIdle];
+    
+//    self.mainTableView.adjustedContentInset = UIEdgeInsetsMake(0, 0, self.mainTableView.allowsMultipleSelection, 0);
+    
+    
+//    [self.mainTableView.mj_header endRefreshing];
     self.notReadNoticeMsgCount = [[QIMKit sharedInstance] getWorkNoticeMessagesCountWithEventType:@[@(QIMWorkFeedNotifyTypeComment), @(QIMWorkFeedNotifyTypePOSTAt), @(QIMWorkFeedNotifyTypeCommentAt)]];
     if (self.notReadNoticeMsgCount > 0 && self.userId.length <= 0) {
         [self.mainTableView reloadData];
@@ -188,8 +326,18 @@
         
     }
     [self reloadLocalRecenteMoments:self.notNeedReloadMomentView];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self reloadRemoteRecenteMomentsWithNeedScrollTop:YES];
+    });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (@available(iOS 11.0, *)) {
+            self.mainTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            if (self.mainTableView.contentInset.top > 40) {
+                self.mainTableView.contentInset = UIEdgeInsetsMake(0.5, 0, 0, 0);//iPhoneX这里是88
+            }
+            self.mainTableView.scrollIndicatorInsets = self.mainTableView.contentInset;
+        }
     });
 }
 
@@ -312,57 +460,124 @@
 - (void)reloadLocalRecenteMoments:(BOOL)notNeedReloadMomentView {
     if (notNeedReloadMomentView == NO && self.workMomentList.count <= 0) {
         __weak typeof(self) weakSelf = self;
-        [[QIMKit sharedInstance] getWorkMomentWithLastMomentTime:0 withUserXmppId:self.userId WithLimit:10 WithOffset:0 withFirstLocalMoment:YES WithComplete:^(NSArray * _Nonnull array) {
-            if (array.count) {
-                [weakSelf.workMomentList removeAllObjects];
-                for (NSDictionary *momentDic in array) {
-                    if ([momentDic isKindOfClass:[NSDictionary class]]) {
-                        QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
-                        [weakSelf.workMomentList addObject:model];
+        if (self.tagID && self.tagID.integerValue > 0) {
+            [[QIMKit sharedInstance] getWorkMoreMomentWithLastMomentTime:0 withTagID:self.tagID WithLimit:10 WithOffset:0 withFirstLocalMoment:YES WithComplete:^(NSArray * _Nonnull array) {
+                if (array.count) {
+                    [weakSelf.workMomentList removeAllObjects];
+                    for (NSDictionary *momentDic in array) {
+                        if ([momentDic isKindOfClass:[NSDictionary class]]) {
+                            QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
+                            [weakSelf.workMomentList addObject:model];
+                        }
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.mainTableView reloadData];
+//                        [weakSelf.mainTableView setContentOffset:CGPointZero animated:YES];
+                        [weakSelf.mainTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                    });
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.mainTableView reloadData];
-                    [weakSelf.mainTableView setContentOffset:CGPointZero animated:YES];
-                });
-            }
-        }];
+            }];
+        }
+        else
+        {
+            [[QIMKit sharedInstance] getWorkMomentWithLastMomentTime:0 withUserXmppId:self.userId WithLimit:10 WithOffset:0 withFirstLocalMoment:YES WithComplete:^(NSArray * _Nonnull array) {
+                if (array.count) {
+                    [weakSelf.workMomentList removeAllObjects];
+                    for (NSDictionary *momentDic in array) {
+                        if ([momentDic isKindOfClass:[NSDictionary class]]) {
+                            QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
+                            [weakSelf.workMomentList addObject:model];
+                        }
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.mainTableView reloadData];
+//                        [weakSelf.mainTableView setContentOffset:CGPointZero animated:YES];
+                        [weakSelf.mainTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                    });
+                }
+            }];
+        }
     }
 }
 
 //加载远程最近的帖子
 - (void)reloadRemoteRecenteMomentsWithNeedScrollTop:(BOOL)flag {
-    
+   
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [[QIMKit sharedInstance] getWorkMomentWithLastMomentTime:0 withUserXmppId:self.userId WithLimit:20 WithOffset:0 withFirstLocalMoment:NO WithComplete:^(NSArray * _Nonnull moments) {
-            if (moments.count > 0) {
-                [weakSelf.workMomentList removeAllObjects];
-                for (NSDictionary *momentDic in moments) {
-                    QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
-                    [weakSelf.workMomentList addObject:model];
-                }
-                [[QIMMessageCellCache sharedInstance] clearUp];
+        if (weakSelf.tagID && self.tagID.integerValue > 0) {
+            [[QIMKit sharedInstance] getWorkMoreMomentWithLastMomentTime:0 withTagID:self.tagID WithLimit:20 WithOffset:0 withFirstLocalMoment:NO WithComplete:^(NSArray * _Nonnull moments) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.mainTableView reloadData];
-                    [weakSelf.mainTableView.mj_header endRefreshing];
-                    if (flag) {
-                        [weakSelf.mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                    }
-                    if (weakSelf.noDataView.hidden == NO && self.userId.length > 0) {
-                        //当且仅当打开的是用户驼圈页面时候才会展示没有新动态
-                        self.noDataView.hidden = YES;
-                    }
+                     [weakSelf.mainTableView.mj_header endRefreshing];
                 });
-            } else {
-                [weakSelf.mainTableView.mj_header endRefreshing];
-                if (self.noDataView.hidden == YES && self.userId.length > 0 && self.workMomentList.count == 0) {
-                    //当且仅当打开的是用户驼圈页面时候才会展示没有新动态
-                    self.noDataView.hidden = NO;
+                if (moments.count > 0) {
+                        [weakSelf.workMomentList removeAllObjects];
+                        for (NSDictionary *momentDic in moments) {
+                            QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
+                            [weakSelf.workMomentList addObject:model];
+                        }
+                        [[QIMMessageCellCache sharedInstance] clearUp];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [weakSelf.mainTableView reloadData];
+                            [weakSelf.mainTableView.mj_header endRefreshing];
+                            if (flag) {
+                                [weakSelf.mainTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+//                                [weakSelf.mainTableView setContentOffset:CGPointMake(0,0) animated:YES];
+//                                [weakSelf.mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                            }
+                            if (weakSelf.noDataView.hidden == NO && self.userId.length > 0) {
+                                //当且仅当打开的是用户驼圈页面时候才会展示没有新动态
+                                self.noDataView.hidden = YES;
+                            }
+                        });
+                    } else {
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                             [weakSelf.mainTableView.mj_header endRefreshing];
+                        });
+
+                        if ((self.noDataView.hidden == YES && self.userId.length > 0 && self.workMomentList.count == 0)||(self.noDataView.hidden == YES && self.tagID.integerValue> 0 &&self.tagID && self.workMomentList.count == 0)) {
+                            //当且仅当打开的是用户驼圈页面时候才会展示没有新动态
+                            self.noDataView.hidden = NO;
+                        }
+                    }
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkMoment": @(0)}];
+            }];
+        }
+        else{
+            [[QIMKit sharedInstance] getWorkMomentWithLastMomentTime:0 withUserXmppId:self.userId WithLimit:20 WithOffset:0 withFirstLocalMoment:NO WithComplete:^(NSArray * _Nonnull moments) {
+                if (moments.count > 0) {
+                    [weakSelf.workMomentList removeAllObjects];
+                    for (NSDictionary *momentDic in moments) {
+                        QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
+                        [weakSelf.workMomentList addObject:model];
+                    }
+                    [[QIMMessageCellCache sharedInstance] clearUp];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.mainTableView reloadData];
+                        [weakSelf.mainTableView.mj_header endRefreshing];
+                        if (flag) {
+//                            [weakSelf.mainTableView setContentOffset:CGPointMake(0,0) animated:YES];
+                            [weakSelf.mainTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+//                            [weakSelf.mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                        }
+                        if (weakSelf.noDataView.hidden == NO && self.userId.length > 0) {
+                            //当且仅当打开的是用户驼圈页面时候才会展示没有新动态
+                            self.noDataView.hidden = YES;
+                        }
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                         [weakSelf.mainTableView.mj_header endRefreshing];
+                    });
+
+                    if ((self.noDataView.hidden == YES && self.userId.length > 0 && self.workMomentList.count == 0)||(self.noDataView.hidden == YES && self.tagID.integerValue> 0 &&self.tagID && self.workMomentList.count == 0)) {
+                        //当且仅当打开的是用户驼圈页面时候才会展示没有新动态
+                        self.noDataView.hidden = NO;
+                    }
                 }
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkMoment": @(0)}];
-        }];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyNotReadWorkCountChange object:@{@"newWorkMoment": @(0)}];
+            }];
+        }
     });
 }
 
@@ -372,27 +587,59 @@
     QIMWorkMomentModel *lastModel = [self.workMomentList lastObject];
     QIMVerboseLog(@"lastModel : %@", lastModel);
     
-    [[QIMKit sharedInstance] getWorkMoreMomentWithLastMomentTime:[lastModel.createTime longLongValue] withUserXmppId:self.userId WithLimit:20 WithOffset:self.workMomentList.count withFirstLocalMoment:NO WithComplete:^(NSArray * _Nonnull array) {
-        if (array.count) {
-            for (NSDictionary *momentDic in array) {
-                QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
-                [weakSelf.workMomentList addObject:model];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.mainTableView reloadData];
-                [weakSelf.mainTableView.mj_footer endRefreshing];
-            });
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.mainTableView.mj_footer endRefreshing];
-                weakSelf.mainTableView.mj_footer = nil;
-                weakSelf.mainTableView.tableFooterView = [self loadFaildView];
-                if (weakSelf.workMomentList.count == 0 && self.noDataView.hidden == YES) {
-                    self.noDataView.hidden = NO;
+    if (self.tagID && self.tagID.integerValue> 0) {
+        [[QIMKit sharedInstance] getWorkMoreMomentWithLastMomentTime:[lastModel.createTime longLongValue] withTagID:self.tagID WithLimit:20 WithOffset:self.workMomentList.count withFirstLocalMoment:NO WithComplete:^(NSArray * _Nonnull array) {
+            if (array.count) {
+                for (NSDictionary *momentDic in array) {
+                    QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
+                    [weakSelf.workMomentList addObject:model];
                 }
-            });
-        }
-    }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.mainTableView reloadData];
+                    [weakSelf.mainTableView.mj_footer endRefreshing];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.mainTableView.mj_footer endRefreshing];
+                    weakSelf.mainTableView.mj_footer = nil;
+                    
+                    if (weakSelf.workMomentList.count == 0 && self.noDataView.hidden == YES) {
+                        
+                        self.noDataView.hidden = NO;
+                    }
+                    else{
+                        weakSelf.mainTableView.tableFooterView = [self loadFaildView];
+                    }
+                });
+            }
+        }];
+    }
+    else{
+        [[QIMKit sharedInstance] getWorkMoreMomentWithLastMomentTime:[lastModel.createTime longLongValue] withUserXmppId:self.userId WithLimit:20 WithOffset:self.workMomentList.count withFirstLocalMoment:NO WithComplete:^(NSArray * _Nonnull array) {
+            if (array.count) {
+                for (NSDictionary *momentDic in array) {
+                    QIMWorkMomentModel *model = [weakSelf getMomentModelWithDic:momentDic];
+                    [weakSelf.workMomentList addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.mainTableView reloadData];
+                    [weakSelf.mainTableView.mj_footer endRefreshing];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.mainTableView.mj_footer endRefreshing];
+                    weakSelf.mainTableView.mj_footer = nil;
+                    
+                    if (weakSelf.workMomentList.count == 0 && self.noDataView.hidden == YES) {
+                        self.noDataView.hidden = NO;
+                    }
+                    else{
+                        weakSelf.mainTableView.tableFooterView = [self loadFaildView];
+                    }
+                });
+            }
+        }];
+    }
 }
 
 - (QIMWorkMomentModel *)getMomentModelWithDic:(NSDictionary *)momentDic {
@@ -424,10 +671,12 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.mainTableView reloadData];
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-                [UIView animateWithDuration:0.2 animations:^{
-                    [self.mainTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                } completion:nil];
+//                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+//                [UIView animateWithDuration:0.2 animations:^{
+//                    [self.mainTableView setContentOffset:CGPointMake(0,0) animated:YES];
+                [self.mainTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+//                    [self.mainTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//                } completion:nil];
             });
         }
     });
@@ -450,6 +699,9 @@
 - (void)jumpToAddNewMomentVc {
     
     QIMWorkMomentPushViewController *newMomentVc = [[QIMWorkMomentPushViewController alloc] init];
+    if (self.tagModel) {
+        [newMomentVc setTagModel:self.tagModel];
+    }
     if ([[QIMKit sharedInstance] getIsIpad] == YES) {
         QIMNavController *newMomentNav = [[QIMNavController alloc] initWithRootViewController:newMomentVc];
         newMomentNav.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -480,6 +732,13 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor whiteColor];
     }
+    __weak typeof(self) weakSelf = self;
+    cell.showLine = YES;
+    [cell setTagSelectBlock:^(QIMWorkMomentTagModel * _Nonnull model) {
+        QIMWorkFeedTagCirrleViewController * vc = [[QIMWorkFeedTagCirrleViewController alloc] init];
+        vc.tagId = model.tagId;
+        [weakSelf.rootVC.navigationController pushViewController:vc animated:YES];
+    }];
     cell.delegate = self;
     cell.moment = model;
     cell.tag = indexPath.row;
@@ -503,7 +762,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.notReadNoticeMsgCount > 0 && self.userId.length <= 0) {
+    if (self.showNoticView && self.notReadNoticeMsgCount > 0 && self.userId.length <= 0) {
         return 54.0f;
     }
     return 0.000001f;
@@ -511,7 +770,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (_showNoticView) {
-        if (self.notReadNoticeMsgCount > 0 && self.userId.length <= 0) {
+        if (self.notReadNoticeMsgCount > 0 && self.userId.length <= 0 ) {
             return self.notifyView;
         }
         else{
@@ -636,5 +895,4 @@
     self.notNeedReloadMomentView = YES;
     [self.rootVC.navigationController pushViewController:msgVc animated:YES];
 }
-
 @end

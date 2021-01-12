@@ -12,8 +12,7 @@ target 'QIMUIKit' do
   # use_frameworks!
 	
   # Pods for QIMUIKit
-    mPaaS_pod "mPaaS_LBS"
-    mPaaS_pod "mPaaS_TinyApp"
+    mPaaS_pod "mPaaS_MBProgressHud"
     mPaaS_pod "mPaaS_AlipaySDK"
     
     pod 'QIMDataBase'
@@ -32,9 +31,9 @@ target 'QIMUIKit' do
     pod 'DACircularProgress'
     #使用WKWebView内核，不需要假进度条了
 #    pod 'NJKWebViewProgress'
-#    pod 'AMapSearch'
-#    pod 'AMapLocation'
-#    pod 'AMap3DMap'
+    pod 'AMapSearch-NO-IDFA'
+    pod 'AMapLocation-NO-IDFA'
+    pod 'AMap3DMap-NO-IDFA'
 
     pod 'Toast'
     pod 'MMPickerView'

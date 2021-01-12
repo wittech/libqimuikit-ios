@@ -163,15 +163,16 @@
         }
     }
     else{
-        [[QIMKit sharedInstance] getMomentTagListWithCompleteCallBack:^(NSArray *moments) {
-            for (NSDictionary * dic in moments) {
-                 QIMWorkMomentTopicListModel * model = [QIMWorkMomentTopicListModel yy_modelWithDictionary:dic];
-                [self.dataArr addObject:model];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        }];
+        //TODO:无此接口
+//        [[QIMKit sharedInstance] getMomentTagListWithCompleteCallBack:^(NSArray *moments) {
+//            for (NSDictionary * dic in moments) {
+//                 QIMWorkMomentTopicListModel * model = [QIMWorkMomentTopicListModel yy_modelWithDictionary:dic];
+//                [self.dataArr addObject:model];
+//            }
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.tableView reloadData];
+//            });
+//        }];
     }
 }
 

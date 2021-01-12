@@ -179,10 +179,10 @@
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
         _progressHUD.minSize = CGSizeMake(120, 120);
         _progressHUD.minShowTime = 1;
-        _progressHUD.labelText = @"";
+        [_progressHUD setLabelText:@""];
         [self.view addSubview:_progressHUD];
     }
-    _progressHUD.detailsLabelText = text;
+    [_progressHUD setDetailsLabelText:text];
     return _progressHUD;
 }
 

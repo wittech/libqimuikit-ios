@@ -132,27 +132,28 @@
             [_progressHUD setHidden:YES];
         } else {
             //      切换成Token登录模式
-            NSString *buName = @"app";
-            [[QIMKit sharedInstance] getQChatTokenWithBusinessLineName:buName qcookie:q  vcookie:v tcookie:t withCallBack:^(NSDictionary *qchatToken) {
-                if (qchatToken.count) {
-                    NSString *userNameToken = [qchatToken objectForKey:@"username"];
-                    NSString *pwdToken = [qchatToken objectForKey:@"token"];
-                    //        {"token":{"plat":"app", "macCode":"xxxxxxxxxxxx", "token":"xxxxxxxxxx"}}
-                    NSMutableDictionary *tokenDic = [NSMutableDictionary dictionary];
-                    [tokenDic setObject:buName forKey:@"plat"];
-                    [tokenDic setObject:[[QIMKit sharedInstance] macAddress] forKey:@"macCode"];
-                    [tokenDic setObject:pwdToken forKey:@"token"];
-                    NSString *password = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"token":tokenDic}];
-                    [[QIMKit sharedInstance] updateLastTempUserToken:password];
-                    [[QIMKit sharedInstance] loginWithUserName:userNameToken WithPassWord:password];
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self clearLoginCookie];
-                        [self loadLoginUrl];
-                        [_progressHUD setHidden:YES];
-                    });
-                }
-            }];
+            //TODO:无此接口
+//            NSString *buName = @"app";
+//            [[QIMKit sharedInstance] getQChatTokenWithBusinessLineName:buName qcookie:q  vcookie:v tcookie:t withCallBack:^(NSDictionary *qchatToken) {
+//                if (qchatToken.count) {
+//                    NSString *userNameToken = [qchatToken objectForKey:@"username"];
+//                    NSString *pwdToken = [qchatToken objectForKey:@"token"];
+//                    //        {"token":{"plat":"app", "macCode":"xxxxxxxxxxxx", "token":"xxxxxxxxxx"}}
+//                    NSMutableDictionary *tokenDic = [NSMutableDictionary dictionary];
+//                    [tokenDic setObject:buName forKey:@"plat"];
+//                    [tokenDic setObject:[[QIMKit sharedInstance] macAddress] forKey:@"macCode"];
+//                    [tokenDic setObject:pwdToken forKey:@"token"];
+//                    NSString *password = [[QIMJSONSerializer sharedInstance] serializeObject:@{@"token":tokenDic}];
+//                    [[QIMKit sharedInstance] updateLastTempUserToken:password];
+//                    [[QIMKit sharedInstance] loginWithUserName:userNameToken WithPassWord:password];
+//                } else {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [self clearLoginCookie];
+//                        [self loadLoginUrl];
+//                        [_progressHUD setHidden:YES];
+//                    });
+//                }
+//            }];
         }
         if ([request.URL.absoluteString containsString:@"/personalcenter/myaccount/"]) {
             return NO;

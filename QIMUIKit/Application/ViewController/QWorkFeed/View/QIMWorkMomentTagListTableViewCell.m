@@ -9,7 +9,7 @@
 #import "QIMWorkMomentTopicListModel.h"
 #import "QIMWorkMomentTagView.h"
 #import "QIMWorkMomentTagModel.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "QTalkTipsView.h"
 
 

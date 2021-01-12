@@ -953,6 +953,46 @@
 		2CCD79BC224A22E6006D5207 /* QIMNacConfigTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD79BA224A22E6006D5207 /* QIMNacConfigTableViewCell.m */; };
 		2CF83DE820FE118A00AEB433 /* QIMMeetingRemindCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CF83DE620FE118A00AEB433 /* QIMMeetingRemindCell.h */; };
 		2CF83DE920FE118A00AEB433 /* QIMMeetingRemindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF83DE720FE118A00AEB433 /* QIMMeetingRemindCell.m */; };
+		3347AB1925AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB1325AB3B5600625A87 /* QIMWorkFeedTagCirrleViewController.h */; };
+		3347AB1A25AB3B5700625A87 /* QIMWorkMomentTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB1425AB3B5600625A87 /* QIMWorkMomentTagViewController.m */; };
+		3347AB1B25AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB1525AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.m */; };
+		3347AB1C25AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB1625AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.h */; };
+		3347AB1D25AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB1725AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.m */; };
+		3347AB1E25AB3B5700625A87 /* QIMWorkMomentTagViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB1825AB3B5700625A87 /* QIMWorkMomentTagViewController.h */; };
+		3347AB2725AB3B6900625A87 /* QIMWorkMomentHotTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB1F25AB3B6800625A87 /* QIMWorkMomentHotTopicModel.m */; };
+		3347AB2825AB3B6900625A87 /* QIMWorkMomentTopicListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB2025AB3B6800625A87 /* QIMWorkMomentTopicListModel.m */; };
+		3347AB2925AB3B6900625A87 /* QIMWorkMomentTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB2125AB3B6800625A87 /* QIMWorkMomentTagModel.m */; };
+		3347AB2A25AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB2225AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.h */; };
+		3347AB2B25AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB2325AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.m */; };
+		3347AB2C25AB3B6900625A87 /* QIMWorkMomentTopicListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB2425AB3B6900625A87 /* QIMWorkMomentTopicListModel.h */; };
+		3347AB2D25AB3B6900625A87 /* QIMWorkMomentHotTopicModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB2525AB3B6900625A87 /* QIMWorkMomentHotTopicModel.h */; };
+		3347AB2E25AB3B6900625A87 /* QIMWorkMomentTagModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB2625AB3B6900625A87 /* QIMWorkMomentTagModel.h */; };
+		3347AB4725AB3B8100625A87 /* QIMWorkOwnerCamalNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB2F25AB3B7E00625A87 /* QIMWorkOwnerCamalNoDataView.m */; };
+		3347AB4825AB3B8100625A87 /* QIMWorkMomentTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3025AB3B7E00625A87 /* QIMWorkMomentTagView.m */; };
+		3347AB4925AB3B8100625A87 /* QIMWorkOwnerCamalNoDataView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3125AB3B7E00625A87 /* QIMWorkOwnerCamalNoDataView.h */; };
+		3347AB4A25AB3B8100625A87 /* QIMWorkOwnerCamelTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3225AB3B7E00625A87 /* QIMWorkOwnerCamelTabBar.m */; };
+		3347AB4B25AB3B8100625A87 /* QIMWorkChildCommentListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3325AB3B7E00625A87 /* QIMWorkChildCommentListView.h */; };
+		3347AB4C25AB3B8100625A87 /* QIMWorkMomentHeaderListCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3425AB3B7E00625A87 /* QIMWorkMomentHeaderListCollectionViewCell.h */; };
+		3347AB4D25AB3B8100625A87 /* QIMWorkMomentTagHeaderEntrenceView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3525AB3B7E00625A87 /* QIMWorkMomentTagHeaderEntrenceView.h */; };
+		3347AB4E25AB3B8100625A87 /* QIMWorkMomentVideoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3625AB3B7F00625A87 /* QIMWorkMomentVideoView.h */; };
+		3347AB4F25AB3B8100625A87 /* QIMWorkMomentVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3725AB3B7F00625A87 /* QIMWorkMomentVideoView.m */; };
+		3347AB5025AB3B8100625A87 /* QIMWorkMomentHotTopicTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3825AB3B7F00625A87 /* QIMWorkMomentHotTopicTableViewCell.h */; };
+		3347AB5125AB3B8100625A87 /* QIMWorkMomentHeaderListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3925AB3B7F00625A87 /* QIMWorkMomentHeaderListCollectionViewCell.m */; };
+		3347AB5225AB3B8100625A87 /* QIMWorkMomentHotTagHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3A25AB3B7F00625A87 /* QIMWorkMomentHotTagHeaderView.m */; };
+		3347AB5325AB3B8100625A87 /* QIMWorkAttachCommentCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3B25AB3B7F00625A87 /* QIMWorkAttachCommentCell.h */; };
+		3347AB5425AB3B8100625A87 /* QIMWorkAttachCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3C25AB3B7F00625A87 /* QIMWorkAttachCommentCell.m */; };
+		3347AB5525AB3B8100625A87 /* QIMWorkMomentHotTagHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3D25AB3B7F00625A87 /* QIMWorkMomentHotTagHeaderView.h */; };
+		3347AB5625AB3B8100625A87 /* QIMWorkMomentTagListTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB3E25AB3B8000625A87 /* QIMWorkMomentTagListTableViewCell.h */; };
+		3347AB5725AB3B8100625A87 /* QIMWorkMomentTagListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB3F25AB3B8000625A87 /* QIMWorkMomentTagListTableViewCell.m */; };
+		3347AB5825AB3B8100625A87 /* QIMWorkMomentTagView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB4025AB3B8000625A87 /* QIMWorkMomentTagView.h */; };
+		3347AB5925AB3B8100625A87 /* QIMWorkChildCommentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB4125AB3B8000625A87 /* QIMWorkChildCommentListView.m */; };
+		3347AB5A25AB3B8100625A87 /* QIMWorkOwnerCamelTabBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB4225AB3B8000625A87 /* QIMWorkOwnerCamelTabBar.h */; };
+		3347AB5B25AB3B8100625A87 /* QIMWorkAttachCommentListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB4325AB3B8000625A87 /* QIMWorkAttachCommentListView.h */; };
+		3347AB5C25AB3B8100625A87 /* QIMWorkAttachCommentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB4425AB3B8000625A87 /* QIMWorkAttachCommentListView.m */; };
+		3347AB5D25AB3B8100625A87 /* QIMWorkMomentTagHeaderEntrenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB4525AB3B8000625A87 /* QIMWorkMomentTagHeaderEntrenceView.m */; };
+		3347AB5E25AB3B8100625A87 /* QIMWorkMomentHotTopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB4625AB3B8000625A87 /* QIMWorkMomentHotTopicTableViewCell.m */; };
+		3347AB6125AB3BA800625A87 /* CustomPopOverView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3347AB5F25AB3BA700625A87 /* CustomPopOverView.h */; };
+		3347AB6225AB3BA800625A87 /* CustomPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3347AB6025AB3BA800625A87 /* CustomPopOverView.m */; };
 		336F102324BF374100F746C7 /* QIMMainSplitVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 336F102124BF374100F746C7 /* QIMMainSplitVC.h */; };
 		336F102424BF374100F746C7 /* QIMMainSplitVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F102224BF374100F746C7 /* QIMMainSplitVC.m */; };
 		336F102724BF393200F746C7 /* loginUnSettingNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F102524BF393200F746C7 /* loginUnSettingNavView.m */; };
@@ -2021,6 +2061,46 @@
 		2CCD79BA224A22E6006D5207 /* QIMNacConfigTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QIMNacConfigTableViewCell.m; sourceTree = "<group>"; };
 		2CF83DE620FE118A00AEB433 /* QIMMeetingRemindCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QIMMeetingRemindCell.h; sourceTree = "<group>"; };
 		2CF83DE720FE118A00AEB433 /* QIMMeetingRemindCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QIMMeetingRemindCell.m; sourceTree = "<group>"; };
+		3347AB1325AB3B5600625A87 /* QIMWorkFeedTagCirrleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkFeedTagCirrleViewController.h; sourceTree = "<group>"; };
+		3347AB1425AB3B5600625A87 /* QIMWorkMomentTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentTagViewController.m; sourceTree = "<group>"; };
+		3347AB1525AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentHotTopicViewController.m; sourceTree = "<group>"; };
+		3347AB1625AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentHotTopicViewController.h; sourceTree = "<group>"; };
+		3347AB1725AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkFeedTagCirrleViewController.m; sourceTree = "<group>"; };
+		3347AB1825AB3B5700625A87 /* QIMWorkMomentTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentTagViewController.h; sourceTree = "<group>"; };
+		3347AB1F25AB3B6800625A87 /* QIMWorkMomentHotTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentHotTopicModel.m; sourceTree = "<group>"; };
+		3347AB2025AB3B6800625A87 /* QIMWorkMomentTopicListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentTopicListModel.m; sourceTree = "<group>"; };
+		3347AB2125AB3B6800625A87 /* QIMWorkMomentTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentTagModel.m; sourceTree = "<group>"; };
+		3347AB2225AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentHeaderTagInfoModel.h; sourceTree = "<group>"; };
+		3347AB2325AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentHeaderTagInfoModel.m; sourceTree = "<group>"; };
+		3347AB2425AB3B6900625A87 /* QIMWorkMomentTopicListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentTopicListModel.h; sourceTree = "<group>"; };
+		3347AB2525AB3B6900625A87 /* QIMWorkMomentHotTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentHotTopicModel.h; sourceTree = "<group>"; };
+		3347AB2625AB3B6900625A87 /* QIMWorkMomentTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentTagModel.h; sourceTree = "<group>"; };
+		3347AB2F25AB3B7E00625A87 /* QIMWorkOwnerCamalNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkOwnerCamalNoDataView.m; sourceTree = "<group>"; };
+		3347AB3025AB3B7E00625A87 /* QIMWorkMomentTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentTagView.m; sourceTree = "<group>"; };
+		3347AB3125AB3B7E00625A87 /* QIMWorkOwnerCamalNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkOwnerCamalNoDataView.h; sourceTree = "<group>"; };
+		3347AB3225AB3B7E00625A87 /* QIMWorkOwnerCamelTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkOwnerCamelTabBar.m; sourceTree = "<group>"; };
+		3347AB3325AB3B7E00625A87 /* QIMWorkChildCommentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkChildCommentListView.h; sourceTree = "<group>"; };
+		3347AB3425AB3B7E00625A87 /* QIMWorkMomentHeaderListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentHeaderListCollectionViewCell.h; sourceTree = "<group>"; };
+		3347AB3525AB3B7E00625A87 /* QIMWorkMomentTagHeaderEntrenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentTagHeaderEntrenceView.h; sourceTree = "<group>"; };
+		3347AB3625AB3B7F00625A87 /* QIMWorkMomentVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentVideoView.h; sourceTree = "<group>"; };
+		3347AB3725AB3B7F00625A87 /* QIMWorkMomentVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentVideoView.m; sourceTree = "<group>"; };
+		3347AB3825AB3B7F00625A87 /* QIMWorkMomentHotTopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentHotTopicTableViewCell.h; sourceTree = "<group>"; };
+		3347AB3925AB3B7F00625A87 /* QIMWorkMomentHeaderListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentHeaderListCollectionViewCell.m; sourceTree = "<group>"; };
+		3347AB3A25AB3B7F00625A87 /* QIMWorkMomentHotTagHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentHotTagHeaderView.m; sourceTree = "<group>"; };
+		3347AB3B25AB3B7F00625A87 /* QIMWorkAttachCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkAttachCommentCell.h; sourceTree = "<group>"; };
+		3347AB3C25AB3B7F00625A87 /* QIMWorkAttachCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkAttachCommentCell.m; sourceTree = "<group>"; };
+		3347AB3D25AB3B7F00625A87 /* QIMWorkMomentHotTagHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentHotTagHeaderView.h; sourceTree = "<group>"; };
+		3347AB3E25AB3B8000625A87 /* QIMWorkMomentTagListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentTagListTableViewCell.h; sourceTree = "<group>"; };
+		3347AB3F25AB3B8000625A87 /* QIMWorkMomentTagListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentTagListTableViewCell.m; sourceTree = "<group>"; };
+		3347AB4025AB3B8000625A87 /* QIMWorkMomentTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkMomentTagView.h; sourceTree = "<group>"; };
+		3347AB4125AB3B8000625A87 /* QIMWorkChildCommentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkChildCommentListView.m; sourceTree = "<group>"; };
+		3347AB4225AB3B8000625A87 /* QIMWorkOwnerCamelTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkOwnerCamelTabBar.h; sourceTree = "<group>"; };
+		3347AB4325AB3B8000625A87 /* QIMWorkAttachCommentListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMWorkAttachCommentListView.h; sourceTree = "<group>"; };
+		3347AB4425AB3B8000625A87 /* QIMWorkAttachCommentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkAttachCommentListView.m; sourceTree = "<group>"; };
+		3347AB4525AB3B8000625A87 /* QIMWorkMomentTagHeaderEntrenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentTagHeaderEntrenceView.m; sourceTree = "<group>"; };
+		3347AB4625AB3B8000625A87 /* QIMWorkMomentHotTopicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMWorkMomentHotTopicTableViewCell.m; sourceTree = "<group>"; };
+		3347AB5F25AB3BA700625A87 /* CustomPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOverView.h; sourceTree = "<group>"; };
+		3347AB6025AB3BA800625A87 /* CustomPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOverView.m; sourceTree = "<group>"; };
 		336F102124BF374100F746C7 /* QIMMainSplitVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QIMMainSplitVC.h; sourceTree = "<group>"; };
 		336F102224BF374100F746C7 /* QIMMainSplitVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QIMMainSplitVC.m; sourceTree = "<group>"; };
 		336F102524BF393200F746C7 /* loginUnSettingNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginUnSettingNavView.m; sourceTree = "<group>"; };
@@ -2225,6 +2305,12 @@
 		2C06A00D22045DE8000CAF37 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3347AB1325AB3B5600625A87 /* QIMWorkFeedTagCirrleViewController.h */,
+				3347AB1725AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.m */,
+				3347AB1625AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.h */,
+				3347AB1525AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.m */,
+				3347AB1825AB3B5700625A87 /* QIMWorkMomentTagViewController.h */,
+				3347AB1425AB3B5600625A87 /* QIMWorkMomentTagViewController.m */,
 				336F105424BF4EE300F746C7 /* QIMWorkFeedSearchViewController.h */,
 				336F105524BF4EE400F746C7 /* QIMWorkFeedSearchViewController.m */,
 				2C06A01722045DE8000CAF37 /* QIMWorkFeedDetailViewController.h */,
@@ -2248,6 +2334,14 @@
 		2C06A01A22045DE8000CAF37 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3347AB2225AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.h */,
+				3347AB2325AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.m */,
+				3347AB2525AB3B6900625A87 /* QIMWorkMomentHotTopicModel.h */,
+				3347AB1F25AB3B6800625A87 /* QIMWorkMomentHotTopicModel.m */,
+				3347AB2625AB3B6900625A87 /* QIMWorkMomentTagModel.h */,
+				3347AB2125AB3B6800625A87 /* QIMWorkMomentTagModel.m */,
+				3347AB2425AB3B6900625A87 /* QIMWorkMomentTopicListModel.h */,
+				3347AB2025AB3B6800625A87 /* QIMWorkMomentTopicListModel.m */,
 				2C06A01F22045DE8000CAF37 /* QIMWorkCommentModel.h */,
 				2C06A02722045DE8000CAF37 /* QIMWorkCommentModel.m */,
 				2CA4DBFE2291586200AFB74B /* QIMWorkMomentContentLinkModel.h */,
@@ -2273,6 +2367,30 @@
 		2C06A02D22045DE8000CAF37 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3347AB3B25AB3B7F00625A87 /* QIMWorkAttachCommentCell.h */,
+				3347AB3C25AB3B7F00625A87 /* QIMWorkAttachCommentCell.m */,
+				3347AB4325AB3B8000625A87 /* QIMWorkAttachCommentListView.h */,
+				3347AB4425AB3B8000625A87 /* QIMWorkAttachCommentListView.m */,
+				3347AB3325AB3B7E00625A87 /* QIMWorkChildCommentListView.h */,
+				3347AB4125AB3B8000625A87 /* QIMWorkChildCommentListView.m */,
+				3347AB3425AB3B7E00625A87 /* QIMWorkMomentHeaderListCollectionViewCell.h */,
+				3347AB3925AB3B7F00625A87 /* QIMWorkMomentHeaderListCollectionViewCell.m */,
+				3347AB3D25AB3B7F00625A87 /* QIMWorkMomentHotTagHeaderView.h */,
+				3347AB3A25AB3B7F00625A87 /* QIMWorkMomentHotTagHeaderView.m */,
+				3347AB3825AB3B7F00625A87 /* QIMWorkMomentHotTopicTableViewCell.h */,
+				3347AB4625AB3B8000625A87 /* QIMWorkMomentHotTopicTableViewCell.m */,
+				3347AB3525AB3B7E00625A87 /* QIMWorkMomentTagHeaderEntrenceView.h */,
+				3347AB4525AB3B8000625A87 /* QIMWorkMomentTagHeaderEntrenceView.m */,
+				3347AB3E25AB3B8000625A87 /* QIMWorkMomentTagListTableViewCell.h */,
+				3347AB3F25AB3B8000625A87 /* QIMWorkMomentTagListTableViewCell.m */,
+				3347AB4025AB3B8000625A87 /* QIMWorkMomentTagView.h */,
+				3347AB3025AB3B7E00625A87 /* QIMWorkMomentTagView.m */,
+				3347AB3625AB3B7F00625A87 /* QIMWorkMomentVideoView.h */,
+				3347AB3725AB3B7F00625A87 /* QIMWorkMomentVideoView.m */,
+				3347AB3125AB3B7E00625A87 /* QIMWorkOwnerCamalNoDataView.h */,
+				3347AB2F25AB3B7E00625A87 /* QIMWorkOwnerCamalNoDataView.m */,
+				3347AB4225AB3B8000625A87 /* QIMWorkOwnerCamelTabBar.h */,
+				3347AB3225AB3B7E00625A87 /* QIMWorkOwnerCamelTabBar.m */,
 				2C2A7978221275A000AF2153 /* QIMMarginLabel.h */,
 				2C2A7979221275A000AF2153 /* QIMMarginLabel.m */,
 				2C06A03722045DE8000CAF37 /* QIMWorkCommentCell.h */,
@@ -3535,6 +3653,8 @@
 		2C8AFAAB20B1D51A00CF98EB /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3347AB5F25AB3BA700625A87 /* CustomPopOverView.h */,
+				3347AB6025AB3BA800625A87 /* CustomPopOverView.m */,
 				2C8AFAAD20B1D51A00CF98EB /* QIMChatBubbleView.h */,
 				2C8AFAAF20B1D51A00CF98EB /* QIMChatBubbleView.m */,
 				2C8AFAAC20B1D51A00CF98EB /* QIMMenuImageView.h */,
@@ -4469,9 +4589,11 @@
 			files = (
 				2C4AA84B20D0BED90022B023 /* QIMAppWindowManager.h in Headers */,
 				2C55CCF9216E23C200DD156A /* QIMRemoteNotificationManager.h in Headers */,
+				3347AB4925AB3B8100625A87 /* QIMWorkOwnerCamalNoDataView.h in Headers */,
 				2C8AFCCA20B1D51B00CF98EB /* QIMJumpURLHandle.h in Headers */,
 				2C8AFEA520B1D51C00CF98EB /* QIMNotificationManager.h in Headers */,
 				2CA4DC002291586200AFB74B /* QIMWorkMomentContentLinkModel.h in Headers */,
+				3347AB5525AB3B8100625A87 /* QIMWorkMomentHotTagHeaderView.h in Headers */,
 				2C06A06422045DE8000CAF37 /* QIMWorkMomentModel.h in Headers */,
 				2C8AFCC920B1D51B00CF98EB /* QIMFastEntrance.h in Headers */,
 				2C8AFC3B20B1D51B00CF98EB /* QIMPhoneNumberTextStorage.h in Headers */,
@@ -4561,6 +4683,7 @@
 				336F104024BF471500F746C7 /* LCActionSheetViewController.h in Headers */,
 				2C8AFD6620B1D51C00CF98EB /* QIMEmotionSpirits.h in Headers */,
 				2C8AFD0120B1D51B00CF98EB /* QIMEmotionView.h in Headers */,
+				3347AB1C25AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.h in Headers */,
 				2C8AFD8220B1D51C00CF98EB /* QIMDefaultChatBGImageSelectController.h in Headers */,
 				2C8AFD3720B1D51C00CF98EB /* QIMRecordButton.h in Headers */,
 				2CA51438227086880093E9DC /* QIMImagePickerManager.h in Headers */,
@@ -4575,6 +4698,7 @@
 				2C8AFE7620B1D51C00CF98EB /* QIMPublicNumberCardCommonCell.h in Headers */,
 				2C8AFC0E20B1D51B00CF98EB /* ShareLocationViewController.h in Headers */,
 				2CA5141E227086880093E9DC /* QIMLocationManager.h in Headers */,
+				3347AB2E25AB3B6900625A87 /* QIMWorkMomentTagModel.h in Headers */,
 				336F118624C0AB1D00F746C7 /* UIView+Fade.h in Headers */,
 				336F119924C0AB1E00F746C7 /* SPPlayCGIParserProtocol.h in Headers */,
 				2C8AFF4320B1D8AB00CF98EB /* QIMAACollectionDescCell.h in Headers */,
@@ -4649,6 +4773,7 @@
 				2CC93B8E21EC33C800EEC47D /* QIMUIVendorKit.h in Headers */,
 				2C8AFF7120B1D8AB00CF98EB /* QIMRedPackDescCell.h in Headers */,
 				2C95C4632276ABEF00FDBB8D /* QIMWorkFeedView.h in Headers */,
+				3347AB6125AB3BA800625A87 /* CustomPopOverView.h in Headers */,
 				2C8AFCDC20B1D51B00CF98EB /* QIMFriendQNSettingVC.h in Headers */,
 				2C8AFE6A20B1D51C00CF98EB /* QIMCollectionChatViewController.h in Headers */,
 				2C8AFC1020B1D51B00CF98EB /* FindDirectionsView.h in Headers */,
@@ -4674,6 +4799,7 @@
 				2C8AFDCE20B1D51C00CF98EB /* QIMGroupMaxMemberVC.h in Headers */,
 				33CA89CB24BCC2C3003E31E3 /* QTalkSessionDataManager.h in Headers */,
 				2C8AFF7820B1D8AB00CF98EB /* QIMCommonTrdInfoCell.h in Headers */,
+				3347AB5025AB3B8100625A87 /* QIMWorkMomentHotTopicTableViewCell.h in Headers */,
 				338D817824B45ED40091CD4F /* UIImageView+QIMImageCache.h in Headers */,
 				2CC93BB821EC33C800EEC47D /* HSV.h in Headers */,
 				2C06A05322045DE8000CAF37 /* QIMWorkMomentPushViewController.h in Headers */,
@@ -4684,6 +4810,7 @@
 				2C8AFDF520B1D51C00CF98EB /* QIMFriendListSelectionVC.h in Headers */,
 				2C8AFC2420B1D51B00CF98EB /* QIMAuthorizationManager.h in Headers */,
 				2CA51432227086880093E9DC /* NSBundle+QIMImagePicker.h in Headers */,
+				3347AB5825AB3B8100625A87 /* QIMWorkMomentTagView.h in Headers */,
 				2CA51428227086880093E9DC /* QIMAssetModel.h in Headers */,
 				2C8AFE8420B1D51C00CF98EB /* QIMWebView.h in Headers */,
 				2C8AFBEA20B1D51B00CF98EB /* QIMFilePreviewVC.h in Headers */,
@@ -4698,6 +4825,7 @@
 				2C8AFE7720B1D51C00CF98EB /* QIMPNRichTextCell.h in Headers */,
 				2C8AFF7C20B1D8AB00CF98EB /* QIMC2BGrabSingleCell.h in Headers */,
 				2C8AFD4420B1D51C00CF98EB /* QIMEmojiTextAttachment.h in Headers */,
+				3347AB4E25AB3B8100625A87 /* QIMWorkMomentVideoView.h in Headers */,
 				2C099BB721C0EE2C00F7692A /* QIMMWPhotoSectionBrowserVC.h in Headers */,
 				2C8AFE1B20B1D51C00CF98EB /* QIMBuddyItemCell.h in Headers */,
 				2CAFA2F3211AC76C001F6D97 /* QIMQuickReplySubTableView.h in Headers */,
@@ -4711,6 +4839,7 @@
 				2C8AFD0220B1D51B00CF98EB /* QIMEmotionTipDelegate.h in Headers */,
 				2C0F606220E3C59F007FFD45 /* QIMMWPhotoProtocol.h in Headers */,
 				2CC93BA821EC33C800EEC47D /* QIMXMenu.h in Headers */,
+				3347AB4C25AB3B8100625A87 /* QIMWorkMomentHeaderListCollectionViewCell.h in Headers */,
 				336F118824C0AB1D00F746C7 /* J2Obj.h in Headers */,
 				2C8AFC3620B1D51B00CF98EB /* NSMutableAttributedString+QCTY.h in Headers */,
 				2C8AFCD420B1D51B00CF98EB /* QIMAddSomeCell.h in Headers */,
@@ -4721,6 +4850,7 @@
 				2C8AFE7D20B1D51C00CF98EB /* QIMPublicNumberCardVC.h in Headers */,
 				2C0F605720E3C59F007FFD45 /* UIImage+QIMMWPhotoBrowser.h in Headers */,
 				2C8AFE7520B1D51C00CF98EB /* QIMPublicNumberNoticeCell.h in Headers */,
+				3347AB4D25AB3B8100625A87 /* QIMWorkMomentTagHeaderEntrenceView.h in Headers */,
 				2C8AFC3220B1D51B00CF98EB /* QIMTextContainer.h in Headers */,
 				2C8AFDE920B1D51C00CF98EB /* QIMGroupHasPasswordCell.h in Headers */,
 				2C8AFC0120B1D51B00CF98EB /* QIMVoiceRecordingView.h in Headers */,
@@ -4730,6 +4860,7 @@
 				2C8AFD6E20B1D51C00CF98EB /* QIMMicroTourGuideVC.h in Headers */,
 				336F11B824C0AB1F00F746C7 /* SuperPlayerHelpers.h in Headers */,
 				2C8AFCC620B1D51B00CF98EB /* QIMCommonUserInfoCell.h in Headers */,
+				3347AB5B25AB3B8100625A87 /* QIMWorkAttachCommentListView.h in Headers */,
 				2C8AFE2220B1D51C00CF98EB /* HeadView.h in Headers */,
 				2CC93BA721EC33C800EEC47D /* QIMXMenuItem.h in Headers */,
 				2C8AFDC720B1D51C00CF98EB /* QIMGroupPushSettingCell.h in Headers */,
@@ -4780,6 +4911,7 @@
 				2C95C45D2275A7DD00FDBB8D /* UIImage+QIMUIKit.h in Headers */,
 				2C14835E213D626F009D4AE3 /* UINavigationController+QIMOrientation.h in Headers */,
 				2C8AFD0D20B1D51B00CF98EB /* QIMMyEmotionsManagerViewController.h in Headers */,
+				3347AB5A25AB3B8100625A87 /* QIMWorkOwnerCamelTabBar.h in Headers */,
 				2CC93BAD21EC33C800EEC47D /* KZColorCompareView.h in Headers */,
 				2C8AFD8620B1D51C00CF98EB /* QIMChatBGImagePickerController.h in Headers */,
 				2C8AFE2B20B1D51C00CF98EB /* QIMPushProductViewController.h in Headers */,
@@ -4818,8 +4950,10 @@
 				336F119724C0AB1E00F746C7 /* SPPlayCGIParser_V2.h in Headers */,
 				2C8AFCED20B1D51B00CF98EB /* QIMUserTableViewCell.h in Headers */,
 				2C8AFF7A20B1D8AB00CF98EB /* QIMChatNotifyInfoCell.h in Headers */,
+				3347AB5325AB3B8100625A87 /* QIMWorkAttachCommentCell.h in Headers */,
 				2C8AFDE320B1D51C00CF98EB /* QIMGroupNameCell.h in Headers */,
 				2C8AFE7120B1D51C00CF98EB /* QIMPNActionRichTextCell.h in Headers */,
+				3347AB4B25AB3B8100625A87 /* QIMWorkChildCommentListView.h in Headers */,
 				336F117A24C0AB1D00F746C7 /* UIViewController+SuperPlayerRotation.h in Headers */,
 				2C8AFD6020B1D51C00CF98EB /* QIMNotReadMsgTipViews.h in Headers */,
 				2C099BBB21C0EE4800F7692A /* QIMMWPhotoSectionBrowserCell.h in Headers */,
@@ -4868,6 +5002,7 @@
 				2C8AFCAA20B1D51B00CF98EB /* UIImage+QIMIconFont.h in Headers */,
 				2C8AFF2720B1D8AA00CF98EB /* QTPHGridViewController.h in Headers */,
 				2C8AFEA120B1D51C00CF98EB /* QIMLoginVC.h in Headers */,
+				3347AB1925AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.h in Headers */,
 				2C95C4602276A05300FDBB8D /* QIMUISizeConfig.h in Headers */,
 				2C8AFE2120B1D51C00CF98EB /* QIMCreatePgroupVC.h in Headers */,
 				33CA89CC24BCC2C3003E31E3 /* QIMNewSessionScrollDelegate.h in Headers */,
@@ -4878,6 +5013,7 @@
 				2C8AFE0820B1D51C00CF98EB /* QIMAboutVC.h in Headers */,
 				2C8AFCB820B1D51B00CF98EB /* QIMCommonUserInfoHeaderCell.h in Headers */,
 				2CA5144222718E550093E9DC /* QIMUIFontConfig.h in Headers */,
+				3347AB2C25AB3B6900625A87 /* QIMWorkMomentTopicListModel.h in Headers */,
 				336F11A124C0AB1E00F746C7 /* SPVideoFrameDescription.h in Headers */,
 				2C8AFCD620B1D51B00CF98EB /* QIMFriendNotifyCell.h in Headers */,
 				2C8AFD7020B1D51C00CF98EB /* QIMMicroTourGuideCell.h in Headers */,
@@ -4906,6 +5042,7 @@
 				2C8AFD9C20B1D51C00CF98EB /* QIMExtensibleProductCell.h in Headers */,
 				2C8AFE2020B1D51C00CF98EB /* QIMJoinGroupVC.h in Headers */,
 				2C6109BB21490A8D00C30923 /* QIMRobotQuestionCell.h in Headers */,
+				3347AB2A25AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.h in Headers */,
 				2C8AFC3A20B1D51B00CF98EB /* QIMAttributedLabel.h in Headers */,
 				2C06A07722045DE8000CAF37 /* QIMWorkMomentCell.h in Headers */,
 				2CC93BA221EC33C800EEC47D /* QIMGDPerformanceMonitorProtocol.h in Headers */,
@@ -4917,6 +5054,7 @@
 				2C8AFC2520B1D51B00CF98EB /* QIMSourceCodeVC.h in Headers */,
 				2C8AFD3B20B1D51C00CF98EB /* QIMVoiceGoalBar.h in Headers */,
 				2C06A07F22045DE8000CAF37 /* QIMWorkMomentPushCell.h in Headers */,
+				3347AB1E25AB3B5700625A87 /* QIMWorkMomentTagViewController.h in Headers */,
 				2C8AFD8F20B1D51C00CF98EB /* QIMChatVC.h in Headers */,
 				2C06A07322045DE8000CAF37 /* QIMWorkMomentUserIdentityCell.h in Headers */,
 				2C06A07922045DE8000CAF37 /* QIMWorkMomentNotifyView.h in Headers */,
@@ -4933,6 +5071,7 @@
 				2C8AFDB220B1D51C00CF98EB /* QIMUserInfoTableViewCell.h in Headers */,
 				2C8AFE1E20B1D51C00CF98EB /* QIMPGroupSelectionCell.h in Headers */,
 				2C8AFF5B20B1D8AB00CF98EB /* QIMRedPackCell.h in Headers */,
+				3347AB5625AB3B8100625A87 /* QIMWorkMomentTagListTableViewCell.h in Headers */,
 				2C8AFF5A20B1D8AB00CF98EB /* QIMGroupChatCell.h in Headers */,
 				2C8AFD3D20B1D51C00CF98EB /* QIMVoiceChatView.h in Headers */,
 				2C8AFC1620B1D51B00CF98EB /* UserLocationCoordinate2DTransform.h in Headers */,
@@ -4941,6 +5080,7 @@
 				2C06A06A22045DE8000CAF37 /* QIMWorkCommentTableView.h in Headers */,
 				2C8AFD5920B1D51C00CF98EB /* QIMImageClipView.h in Headers */,
 				2C8AFE9F20B1D51C00CF98EB /* QIMLoginViewController.h in Headers */,
+				3347AB2D25AB3B6900625A87 /* QIMWorkMomentHotTopicModel.h in Headers */,
 				2C06A05822045DE8000CAF37 /* QIMWorkCommentModel.h in Headers */,
 				2C8AFE9420B1D51C00CF98EB /* QIMWebLoginVC.h in Headers */,
 				336F119E24C0AB1E00F746C7 /* SPPlayCGIParseResult.h in Headers */,
@@ -5133,28 +5273,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QIMUIKit/Pods-QIMUIKit-resources.sh",
-				"${PODS_ROOT}/APMCDNImage/APMCDNImage.framework/APMCDNImage.bundle",
-				"${PODS_ROOT}/APMImageProcessing/APMImageProcessing.framework/APMImageProcessing.bundle",
-				"${PODS_ROOT}/APMUtils/APMUtils.framework/APMUtils.bundle",
-				"${PODS_ROOT}/APMap/APMap.framework/APMap.bundle",
-				"${PODS_ROOT}/APMobileFramework/APMobileFramework.framework/APMobileFramework.bundle",
+				"${PODS_ROOT}/AMap3DMap-NO-IDFA/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/APMobileNetwork/APMobileNetwork.framework/APMobileNetwork.bundle",
-				"${PODS_ROOT}/APMultimedia/APMultimedia.framework/APMultimedia.bundle",
-				"${PODS_ROOT}/APRemoteLogging/APRemoteLogging.framework/APRemoteLogging.bundle",
 				"${PODS_ROOT}/AlipaySDK/AlipaySDK.framework/AlipaySDK.bundle",
-				"${PODS_ROOT}/AntUI/AntUI.framework/APCommonUI.bundle",
-				"${PODS_ROOT}/BeeCityPicker/BeeCityPicker.framework/BeeCityPicker.bundle",
-				"${PODS_ROOT}/BeeLocationPicker/BeeLocationPicker.framework/BeeLocationPicker.bundle",
-				"${PODS_ROOT}/MAMapKit/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/NebulaAppManager/NebulaAppManager.framework/NebulaAppManager.bundle",
-				"${PODS_ROOT}/NebulaBiz/NebulaBiz.framework/NebulaBiz.bundle",
-				"${PODS_ROOT}/NebulaBiz/NebulaBiz.framework/NebulaPoseidon.bundle",
-				"${PODS_ROOT}/NebulaConfig/NebulaConfig.framework/NebulaConfig.bundle",
-				"${PODS_ROOT}/NebulaKernel/NebulaKernel.framework/NebulaKernel.bundle",
-				"${PODS_ROOT}/NebulaLogging/NebulaLogging.framework/NebulaLogging.bundle",
-				"${PODS_ROOT}/NebulaSDK/NebulaSDK.framework/NebulaSDK.bundle",
-				"${PODS_ROOT}/NebulaTinyapp/NebulaTinyapp.framework/NebulaTinyapp.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/QIMCommon/QIMCommonResource.bundle",
 				"${PODS_ROOT}/QIMGeneralModule/QIMGeneralModule/WebRTC/RTC/icons/call_bg@2x.png",
 				"${PODS_ROOT}/QIMGeneralModule/QIMGeneralModule/WebRTC/RTC/icons/icon_audio_receive_normal@2x.png",
@@ -5202,34 +5324,13 @@
 				"${PODS_ROOT}/QIMGeneralModule/QIMGeneralModule/WebRTC/RTC/sound/incomingRing.wav",
 				"${PODS_ROOT}/QIMGeneralModule/QIMGeneralModule/WebRTC/RTC/sound/Message_system.mp3",
 				"${PODS_CONFIGURATION_BUILD_DIR}/QIMKitVendor/QIMPinYin.bundle",
-				"${PODS_ROOT}/TTTAttributedLabel/TTTAttributedLabel.framework/TTTAttributedLabel.bundle",
-				"${PODS_ROOT}/Texel/Texel.framework/Texel.bundle",
-				"${PODS_ROOT}/TinyAppCommon/TinyAppCommon.framework/TinyAppCommon.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMCDNImage.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMImageProcessing.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMUtils.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMap.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMobileFramework.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMobileNetwork.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMultimedia.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APRemoteLogging.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlipaySDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APCommonUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BeeCityPicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BeeLocationPicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/APMobileNetwork.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlipaySDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaAppManager.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaBiz.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaPoseidon.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaConfig.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaKernel.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaLogging.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NebulaTinyapp.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QIMCommonResource.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/call_bg@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/icon_audio_receive_normal@2x.png",
@@ -5277,9 +5378,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/incomingRing.wav",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Message_system.mp3",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QIMPinYin.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TTTAttributedLabel.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Texel.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TinyAppCommon.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5305,6 +5403,7 @@
 				2C5ED17D2284147500E51B2E /* QIMATGroupMemberTextAttachment.m in Sources */,
 				2C8AFD5220B1D51C00CF98EB /* QIMImageEditViewController.m in Sources */,
 				2C06A06C22045DE8000CAF37 /* QIMWorkMomentNotifyView.m in Sources */,
+				3347AB2725AB3B6900625A87 /* QIMWorkMomentHotTopicModel.m in Sources */,
 				2C8AFD5A20B1D51C00CF98EB /* QIMMessageBrowserVC.m in Sources */,
 				2C8AFD0420B1D51B00CF98EB /* QIMFaceViewFlowLayout.m in Sources */,
 				2C8AFE9220B1D51C00CF98EB /* QIMLoginViewController.m in Sources */,
@@ -5337,10 +5436,12 @@
 				2CA51427227086880093E9DC /* QIMImagePickerManager.m in Sources */,
 				2C8AFDAA20B1D51C00CF98EB /* QIMMenuImageView.m in Sources */,
 				2C8AFE7E20B1D51C00CF98EB /* QIMPublicNumberSearchVC.m in Sources */,
+				3347AB2925AB3B6900625A87 /* QIMWorkMomentTagModel.m in Sources */,
 				2C8AFC0820B1D51B00CF98EB /* BaseMapViewController.m in Sources */,
 				2C06A05E22045DE8000CAF37 /* QIMWorkNoticeMessageModel.m in Sources */,
 				338D817424B45ED40091CD4F /* UIImageView+QIMImageCache.m in Sources */,
 				2C8AFD7A20B1D51C00CF98EB /* QIMSliderView.m in Sources */,
+				3347AB1A25AB3B5700625A87 /* QIMWorkMomentTagViewController.m in Sources */,
 				2C0F606520E3C59F007FFD45 /* QIMMWCaptionView.m in Sources */,
 				2CC93BA521EC33C800EEC47D /* QIMGDWindowViewController.m in Sources */,
 				2C8AFD4B20B1D51C00CF98EB /* QIMOfficialAccountToolbar.m in Sources */,
@@ -5360,11 +5461,14 @@
 				2C06A07B22045DE8000CAF37 /* QIMWorkMessageCell.m in Sources */,
 				2C8AFE8120B1D51C00CF98EB /* QIMPublicNumberOrderMsgCell.m in Sources */,
 				336F118F24C0AB1E00F746C7 /* J2Obj.m in Sources */,
+				3347AB2825AB3B6900625A87 /* QIMWorkMomentTopicListModel.m in Sources */,
 				2C8AFBE320B1D51B00CF98EB /* QIMContactsManager8.m in Sources */,
 				338D817224B45ED40091CD4F /* QIMImage.m in Sources */,
 				2C4FCFAF2271F64000C5806D /* QIMSearchBar.m in Sources */,
+				3347AB1B25AB3B5700625A87 /* QIMWorkMomentHotTopicViewController.m in Sources */,
 				2C06A07622045DE8000CAF37 /* QIMWorkCommentInputBar.m in Sources */,
 				2C8AFDD320B1D51C00CF98EB /* QIMGroupPassworCell.m in Sources */,
+				3347AB4725AB3B8100625A87 /* QIMWorkOwnerCamalNoDataView.m in Sources */,
 				2C8AFF3520B1D8AB00CF98EB /* QTImageAssetTools.m in Sources */,
 				2CAFA2FC211AECB5001F6D97 /* QIMQuickReplyGroupTagCell.m in Sources */,
 				2C8AFD2620B1D51C00CF98EB /* QIMCollectionEmotionEditorVC.m in Sources */,
@@ -5382,6 +5486,7 @@
 				2CC93BAE21EC33C800EEC47D /* HSV.c in Sources */,
 				2C0F606420E3C59F007FFD45 /* UIImage+QIMMWPhotoBrowser.m in Sources */,
 				336F119124C0AB1E00F746C7 /* TXCUrl.m in Sources */,
+				3347AB1D25AB3B5700625A87 /* QIMWorkFeedTagCirrleViewController.m in Sources */,
 				2C14835F213D626F009D4AE3 /* UINavigationController+QIMOrientation.m in Sources */,
 				2C06A06722045DE8000CAF37 /* QIMWorkMomentImageListView.m in Sources */,
 				2CA4DC012291586200AFB74B /* QIMWorkMomentContentLinkModel.m in Sources */,
@@ -5414,6 +5519,7 @@
 				2C8AFC0C20B1D51B00CF98EB /* PlaceAnnotation.m in Sources */,
 				2CAFA2F8211ADFA0001F6D97 /* QIMQuickReplyGroupCollectionView.m in Sources */,
 				33CA89CD24BCC2C3003E31E3 /* QtalkSessionModel.m in Sources */,
+				3347AB4825AB3B8100625A87 /* QIMWorkMomentTagView.m in Sources */,
 				2C8AFD0820B1D51B00CF98EB /* QIMEmotionView.m in Sources */,
 				2C8AFF8420B1D8AB00CF98EB /* QIMRedPackCell.m in Sources */,
 				2CBCE3A721959A030047D3CD /* QIMTableView.m in Sources */,
@@ -5465,6 +5571,7 @@
 				2C05032022C9E69E002919B0 /* QIMSDKUIHelper.m in Sources */,
 				2C8AFD8520B1D51C00CF98EB /* QIMDefaultChatBGImageSelectController.m in Sources */,
 				2C8AFCFC20B1D51B00CF98EB /* QIMMessageManagerFaceView.m in Sources */,
+				3347AB2B25AB3B6900625A87 /* QIMWorkMomentHeaderTagInfoModel.m in Sources */,
 				2C8AFD4920B1D51C00CF98EB /* QTalkTextView.m in Sources */,
 				2C8AFCC320B1D51B00CF98EB /* QIMMySettingController.m in Sources */,
 				2C8AFF8120B1D8AB00CF98EB /* QIMAACollectionCell.m in Sources */,
@@ -5492,6 +5599,7 @@
 				2C22663F22240F9F00EED2B8 /* QIMWorkMomentParser.m in Sources */,
 				2C8AFCFA20B1D51B00CF98EB /* QIMEmotionManager.m in Sources */,
 				2C2A797B221275A000AF2153 /* QIMMarginLabel.m in Sources */,
+				3347AB5725AB3B8100625A87 /* QIMWorkMomentTagListTableViewCell.m in Sources */,
 				2C8AFF6620B1D8AB00CF98EB /* QIMMessageTableViewManager.m in Sources */,
 				2C2A79BE2216C6F000AF2153 /* QIMPublicLogin.m in Sources */,
 				336F11B624C0AB1E00F746C7 /* MMMaterialDesignSpinner.m in Sources */,
@@ -5512,6 +5620,7 @@
 				336F104924BF4DC200F746C7 /* QIMRedPackManager.m in Sources */,
 				2C8AFC0020B1D51B00CF98EB /* QIMRemoteAudioPlayer.m in Sources */,
 				2C8AFD7F20B1D51C00CF98EB /* QIMColorfulBubbleCell.m in Sources */,
+				3347AB5225AB3B8100625A87 /* QIMWorkMomentHotTagHeaderView.m in Sources */,
 				2CA5142C227086880093E9DC /* QIMLocationManager.m in Sources */,
 				2C0F606320E3C59F007FFD45 /* QIMMWPhotoBrowser.m in Sources */,
 				2C8AFD2220B1D51C00CF98EB /* CamelLoadingView.m in Sources */,
@@ -5543,6 +5652,7 @@
 				2C8AFD3420B1D51C00CF98EB /* CameraViewController.m in Sources */,
 				2C8AFBF420B1D51B00CF98EB /* QIMVoiceOperator.m in Sources */,
 				2C8AFF7F20B1D8AB00CF98EB /* QIMLocationCell.m in Sources */,
+				3347AB5D25AB3B8100625A87 /* QIMWorkMomentTagHeaderEntrenceView.m in Sources */,
 				2C8AC7B320C68EF70091B3C0 /* QIMZBarViewController.m in Sources */,
 				2C95C4642276ABEF00FDBB8D /* QIMWorkFeedView.m in Sources */,
 				2C8AFCD520B1D51B00CF98EB /* QIMOrganizationalVC.m in Sources */,
@@ -5579,6 +5689,7 @@
 				2C06A05C22045DE8000CAF37 /* QIMWorkMomentModel.m in Sources */,
 				2C8AFBED20B1D51B00CF98EB /* HYCircleLoadingView.m in Sources */,
 				2C8AFF1C20B1D8AA00CF98EB /* QTImagePreviewController.m in Sources */,
+				3347AB4A25AB3B8100625A87 /* QIMWorkOwnerCamelTabBar.m in Sources */,
 				2C8AFF3120B1D8AB00CF98EB /* QTPHImagePreviewController.m in Sources */,
 				2C06A06D22045DE8000CAF37 /* QIMWorkMomentCell.m in Sources */,
 				2C8AFD3620B1D51C00CF98EB /* QIMUIImagePickerBrowserVC.m in Sources */,
@@ -5600,9 +5711,11 @@
 				2C8AFCAF20B1D51B00CF98EB /* UIBarButtonItem+Utility.m in Sources */,
 				2C8AFD4620B1D51C00CF98EB /* QIMChatToolBar.m in Sources */,
 				2C06A08222045DF6000CAF37 /* QTPHImagePickerManager.m in Sources */,
+				3347AB5C25AB3B8100625A87 /* QIMWorkAttachCommentListView.m in Sources */,
 				2C8AFF5820B1D8AB00CF98EB /* QIMShareLocationChatCell.m in Sources */,
 				2C8AFC2620B1D51B00CF98EB /* QIMSourceCodeVC.m in Sources */,
 				2C06A04A22045DE8000CAF37 /* QIMWorkMomentUserIdentityVC.m in Sources */,
+				3347AB5425AB3B8100625A87 /* QIMWorkAttachCommentCell.m in Sources */,
 				2C8BBCE8229C1E1500294988 /* QIMRNDebugConfigVc.m in Sources */,
 				2C8AFDDD20B1D51C00CF98EB /* QIMGroupPushSettingCell.m in Sources */,
 				2C8AFD5B20B1D51C00CF98EB /* QIMUserInfoUtil.m in Sources */,
@@ -5648,6 +5761,7 @@
 				2C8AFF7D20B1D8AB00CF98EB /* QIMForecastCell.m in Sources */,
 				2C06A07222045DE8000CAF37 /* QIMWorkMomentPushViewFlowLayout.m in Sources */,
 				2C06A06322045DE8000CAF37 /* QIMWorkMomentUserIdentityModel.m in Sources */,
+				3347AB5925AB3B8100625A87 /* QIMWorkChildCommentListView.m in Sources */,
 				2C06A05D22045DE8000CAF37 /* QIMWorkMomentPanelModel.m in Sources */,
 				2C8AFD7220B1D51C00CF98EB /* QIMPhotoBrowserNavController.m in Sources */,
 				2C0F606120E3C59F007FFD45 /* QIMMWPhoto.m in Sources */,
@@ -5655,6 +5769,7 @@
 				2C8AFD5420B1D51C00CF98EB /* QIMImageUtil.m in Sources */,
 				2C5ED17C2284147500E51B2E /* QIMGroupATNotifyVC.m in Sources */,
 				2C4AA84C20D0BED90022B023 /* QIMAppWindowManager.m in Sources */,
+				3347AB5125AB3B8100625A87 /* QIMWorkMomentHeaderListCollectionViewCell.m in Sources */,
 				2C8AFE0F20B1D51C00CF98EB /* QIMGroupListVC.m in Sources */,
 				2C8AFD1E20B1D51C00CF98EB /* QIMFaceViewDataSource.m in Sources */,
 				2C8AFD7820B1D51C00CF98EB /* QIMChatBubbleFontChangeViewController.m in Sources */,
@@ -5667,6 +5782,7 @@
 				338D81A624B464340091CD4F /* QIMMessageRefreshFooter.m in Sources */,
 				2C8AFCB420B1D51B00CF98EB /* QIMCommonUserProfileCellManager.m in Sources */,
 				2C8AFCEF20B1D51B00CF98EB /* QIMFriendListCell.m in Sources */,
+				3347AB6225AB3BA800625A87 /* CustomPopOverView.m in Sources */,
 				2C8AFDD220B1D51C00CF98EB /* QIMGroupChangeNameVC.m in Sources */,
 				2C8AFE7B20B1D51C00CF98EB /* QIMPNActionRichTextCell.m in Sources */,
 				2C8AFDDA20B1D51C00CF98EB /* QIMGroupSettingCell.m in Sources */,
@@ -5696,6 +5812,7 @@
 				2C8AFCA720B1D51B00CF98EB /* UIImage+QIMButtonIcon.m in Sources */,
 				2C8AFD1720B1D51B00CF98EB /* QIMCollectionEmotionEditorViewCell.m in Sources */,
 				2C8AFD7120B1D51C00CF98EB /* QIMExtensibleProductCell.m in Sources */,
+				3347AB4F25AB3B8100625A87 /* QIMWorkMomentVideoView.m in Sources */,
 				2C6109C02149166700C30923 /* QIMSTAlertView.m in Sources */,
 				2C8AFE1020B1D51C00CF98EB /* QIMUserListView.m in Sources */,
 				2C8AFE0E20B1D51C00CF98EB /* QIMMyFavoitesManager.m in Sources */,
@@ -5743,6 +5860,7 @@
 				2C05033522CCCD4C002919B0 /* QIMWorkFeedMYCirrleViewController.m in Sources */,
 				2C8AFEA320B1D51C00CF98EB /* QIMActivityIndicatorView.m in Sources */,
 				2CC93BA921EC33C800EEC47D /* QIMXMenuItem.m in Sources */,
+				3347AB5E25AB3B8100625A87 /* QIMWorkMomentHotTopicTableViewCell.m in Sources */,
 				336F119D24C0AB1E00F746C7 /* SPSubStreamInfo.m in Sources */,
 				2C06A04922045DE8000CAF37 /* QIMWorkFeedMessageViewController.m in Sources */,
 				2C8AFF7B20B1D8AB00CF98EB /* QIMFileCell.m in Sources */,

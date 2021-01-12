@@ -16,7 +16,6 @@
 #import "QIMWorkOwnerCamalNoDataView.h"
 #import "QIMAutoTracker.h"
 
-
 @interface QIMWorkMomentHotTopicViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UITableView * tableView;
 @property (nonatomic ,strong) NSMutableArray * dataArr;
@@ -40,28 +39,28 @@
 }
 
 - (void)requestNetWorkWithpageSize:(NSNumber *)pageSize{
-    
-    __weak typeof(self) weakSelf = self;
-    [[QIMKit sharedInstance] getMomentTopicTagHeaderWithCurPage:@(self.page) pageSize:pageSize beginTime:nil endTime:nil withCallBack:^(NSArray *moments) {
-        if (self.page == 1) {
-            [self.dataArr removeAllObjects];
-        }
-        
-        for (NSDictionary * dic in moments) {
-            QIMWorkMomentHotTopicModel * model = [QIMWorkMomentHotTopicModel yy_modelWithDictionary:dic];
-            [self.dataArr addObject:model];
-        }
-        
-        if (moments.count == 0 || moments == nil) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else{
-            [self.tableView.mj_footer endRefreshing];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+    //TODO:无此接口
+//    __weak typeof(self) weakSelf = self;
+//    [[QIMKit sharedInstance] getMomentTopicTagHeaderWithCurPage:@(self.page) pageSize:pageSize beginTime:nil endTime:nil withCallBack:^(NSArray *moments) {
+//        if (self.page == 1) {
+//            [self.dataArr removeAllObjects];
+//        }
+//
+//        for (NSDictionary * dic in moments) {
+//            QIMWorkMomentHotTopicModel * model = [QIMWorkMomentHotTopicModel yy_modelWithDictionary:dic];
+//            [self.dataArr addObject:model];
+//        }
+//
+//        if (moments.count == 0 || moments == nil) {
+//            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+//        }
+//        else{
+//            [self.tableView.mj_footer endRefreshing];
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
+//    }];
 }
 
 -(void)addLoadMorehotFooterPageView{

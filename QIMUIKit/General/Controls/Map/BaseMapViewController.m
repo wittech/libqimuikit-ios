@@ -6,18 +6,17 @@
 //  Created by songjian on 13-8-14.
 //  Copyright (c) 2013年 songjian. All rights reserved.
 //
-//FIXME::未实现定位功能
 
 #import "BaseMapViewController.h"
 #define DefaultLocationTimeout  10
 #define DefaultReGeocodeTimeout 10
-@interface BaseMapViewController() <CLLocationManagerDelegate>
+@interface BaseMapViewController() <AMapLocationManagerDelegate>
 
 @property (nonatomic, assign) BOOL isFirstAppear;
 
-//@property (nonatomic, copy) AMapLocatingCompletionBlock completionBlock;
+@property (nonatomic, copy) AMapLocatingCompletionBlock completionBlock;
 
-//@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) AMapLocationManager *locationManager;
 
 @end
 
@@ -29,16 +28,16 @@
 
 - (void)configLocationManager
 {
-//    self.locationManager = [[CLLocationManager alloc] init];
-//
-//    [self.locationManager setDelegate:self];
-//
-//    //设置期望定位精度
-//    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
-//
-//    //设置不允许系统暂停定位
-//    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
-//
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    //设置期望定位精度
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    
+    //设置不允许系统暂停定位
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    
     //设置定位超时时间
 //    [self.locationManager setLocationTimeout:DefaultLocationTimeout];
     
@@ -51,47 +50,31 @@
     [self.mapView removeAnnotations:self.mapView.annotations];
     
     //进行单次带逆地理定位请求
-//    [self.locationManager requestLocationWithReGeocode:YES completionBlock:self.completionBlock];
-//    [self.locationManager requestLocation];
-    
+    [self.locationManager requestLocationWithReGeocode:YES completionBlock:self.completionBlock];
 }
 
 - (void)initCompleteBlock
 {
     __weak BaseMapViewController *weakSelf = self;
-    [LBSLocationManager locationWithRequestBlock:^(LBSLocationRequest *request) {
-        request.bizType = @"MPAAS-DEMO";
-        request.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    } onFinishedLocating:^(BOOL success, CLLocation *location, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *message =[NSString stringWithFormat:@"定位成功, 经度: %.5f, 维度: %.5f, 精确度: %.3f",location.coordinate.longitude, location.coordinate.latitude, location.horizontalAccuracy];
-            if(error){
-                QIMVerboseLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+    self.completionBlock = ^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error)
+    {
+        if (error)
+        {
+            QIMVerboseLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            
+            //如果为定位失败的error，则不进行annotation的添加
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
             }
-            else if(location){
-                weakSelf.location = location;
-            }
-        });
-    }];
-//    self.completionBlock = ^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error)
-//    {
-//        if (error)
-//        {
-//            QIMVerboseLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
-//            
-//            //如果为定位失败的error，则不进行annotation的添加
-//            if (error.code == AMapLocationErrorLocateFailed)
-//            {
-//                return;
-//            }
-//        }
-//        
-//        //得到定位信息，添加annotation
-//        if (location)
-//        {
-//            weakSelf.location = location;
-//        }
-//    };
+        }
+        
+        //得到定位信息，添加annotation
+        if (location)
+        {
+            weakSelf.location = location;
+        }
+    };
 }
 
 

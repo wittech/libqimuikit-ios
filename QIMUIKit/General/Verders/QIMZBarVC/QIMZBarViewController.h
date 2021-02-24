@@ -40,7 +40,7 @@ QIMZBarViewController*vc=[[QIMZBarViewController alloc]initWithBlock:^(NSString 
 
 #import "QIMCommonUIFramework.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ZBarReaderController.h"
+//#import "ZBarReaderController.h"
 #define IOS7 [[[UIDevice currentDevice] systemVersion]floatValue]>=7
 
 typedef enum {
@@ -49,7 +49,7 @@ typedef enum {
     CodeType_QRAndBarCode,
 }CodeType;
 
-@interface QIMZBarViewController : QTalkViewController <AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,ZBarReaderDelegate,AVCaptureMetadataOutputObjectsDelegate>
+@interface QIMZBarViewController : QTalkViewController <AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,AVCaptureMetadataOutputObjectsDelegate>
 {
     int num;
     BOOL upOrdown;

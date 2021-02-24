@@ -412,42 +412,42 @@
 - (void)decodeImage:(UIImage *)image
 {
     
-    self.isScanning = NO;
-    
-    ZBarSymbol *symbol = nil;
-    
-    ZBarReaderController* read = [ZBarReaderController new];
-    
-    read.readerDelegate = self;
-    
-    ZBarImageScanner * scanner = read.scanner;
-    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
-    
-    CGImageRef cgImageRef = image.CGImage;
-    
-    for(symbol in [read scanImage:cgImageRef])break;
-    
-    if (symbol!=nil) {
-        if (timer) {
-            [timer invalidate];
-            timer=nil;
-        }
-        
-        _line.frame = CGRectMake(50, 50, self.view.frame.size.width - 100, 2);
-        num = 0;
-        upOrdown = NO;
-        [self.captureSession stopRunning];
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.ScanResult(symbol.data,YES);
-        }];
-    }else{
-        timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
-        num = 0;
-        upOrdown = NO;
-        self.isScanning = YES;
-        [self.captureSession startRunning];
-
-    }
+//    self.isScanning = NO;
+//    
+//    ZBarSymbol *symbol = nil;
+//    
+//    ZBarReaderController* read = [ZBarReaderController new];
+//    
+//    read.readerDelegate = self;
+//    
+//    ZBarImageScanner * scanner = read.scanner;
+//    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to:0];
+//    
+//    CGImageRef cgImageRef = image.CGImage;
+//    
+//    for(symbol in [read scanImage:cgImageRef])break;
+//    
+//    if (symbol!=nil) {
+//        if (timer) {
+//            [timer invalidate];
+//            timer=nil;
+//        }
+//        
+//        _line.frame = CGRectMake(50, 50, self.view.frame.size.width - 100, 2);
+//        num = 0;
+//        upOrdown = NO;
+//        [self.captureSession stopRunning];
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            self.ScanResult(symbol.data,YES);
+//        }];
+//    }else{
+//        timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
+//        num = 0;
+//        upOrdown = NO;
+//        self.isScanning = YES;
+//        [self.captureSession startRunning];
+//
+//    }
     
 }
 #pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate

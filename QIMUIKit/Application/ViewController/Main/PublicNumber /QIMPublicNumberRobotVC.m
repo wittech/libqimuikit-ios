@@ -40,7 +40,6 @@
 #import "QIMEmotionSpirits.h"
 #import "QIMZBarViewController.h"
 #import "QIMPublicNumberCardVC.h"
-#import "QRCodeGenerator.h"
 #import "QIMJumpURLHandle.h"
 #import "QIMMWPhotoBrowser.h"
 #import "QIMWebView.h"

@@ -1328,6 +1328,17 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
     QIMVerboseLog(@"didReceiveMemoryWarning");
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    // if (self.isBeingDismissed || self.isMovingFromParentViewController
+    //     || (self.navigationController && self.navigationController.isBeingDismissed)) {
+    //     //TODO: release important resource
+    // }
+    //增加滑动返回隐藏；原本的框架未采用mpaas，系统在滑动返回会自动调用这个方法；
+    //当前方法会重置当前会话的全局变量为空，这样新消息到来的时候会自动提示；如果不重置，则默认为当前新消息没有提示且自动为已读；
+    [self selfPopedViewController];
+    [super viewDidDisappear:animated];
+}
+
 - (void)selfPopedViewController {
     
     [super selfPopedViewController];

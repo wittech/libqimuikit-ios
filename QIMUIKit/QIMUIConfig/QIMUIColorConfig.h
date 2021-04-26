@@ -56,30 +56,31 @@
 #define qim_nav_myself_color   [UIColor qim_colorWithHex:0x666666 alpha:1.0]    //驼圈右上角
 
 #define qim_backButtonTextBgColor [UIColor qim_colorWithHex:0xF2F2F2 alpha:1.0]     //返回按钮字体bg
-#define qim_backButtonColor [UIColor qim_colorWithHex:0x666666 alpha:1.0]     //返回按钮Color
+#define qim_backButtonColor [UIColor qim_colorWithHex:0x171A1D alpha:1.0]     //返回按钮Color
 #define qim_backButtonTextColor [UIColor qim_colorWithHex:0xA1A1A1 alpha:1.0]     //返回按钮字体Color
 
 //会话内
-#define qim_chatBgColor [UIColor qim_colorWithHex:0xF0F3F5 alpha:1.0]   //会话背景色
+#define qim_chatBgColor [UIColor qim_colorWithHex:0xF1F2F2 alpha:1.0]   //会话背景色
 
-#define qim_chatWaterMaskBgColor    [UIColor qim_colorWithHex:0xF0F3F5 alpha:1.0]   //会话水印背景色
-#define qim_chatWaterMaskTextColor  [UIColor qim_colorWithHex:0xD4D4D4 alpha:1.0]   //会话水印Text色
+#define qim_chatWaterMaskBgColor    [UIColor qim_colorWithHex:0xF1F2F2 alpha:1.0]   //会话水印背景色
+#define qim_chatWaterMaskTextColor  [UIColor qim_colorWithHex:0xF1F2F2 alpha:1.0]   //会话水印Text色
 
 #define qim_messageLeftBubbleBorderColor [UIColor qim_colorWithHex:0xE1E1E1 alpha:1.0]    //左侧气泡边框颜色
 #define qim_messageRightBubbleBorderColor [UIColor qim_colorWithHex:0xA9D2DA alpha:1.0]    //右侧气泡边框颜色
 
-#define qim_messageLeftBubbleBgColor [UIColor qim_colorWithHex:0xFEFFFE alpha:1.0] //左侧气泡颜色
-#define qim_messageRightBubbleBgColor [UIColor qim_colorWithHex:0xC5EAEE alpha:1.0] //右侧气泡颜色
+#define qim_messageLeftBubbleBgColor [UIColor qim_colorWithHex:0xFEFEFE alpha:1.0] //左侧气泡颜色
+#define qim_messageRightBubbleBgColor [UIColor qim_colorWithHex:0xC9E6FF alpha:1.0] //右侧气泡颜色
 
-#define qim_messageLeftBubbleTextColor [UIColor qim_colorWithHex:0x333333 alpha:1.0] //左侧气泡字体颜色
-#define qim_messageRightBubbleTextColor [UIColor qim_colorWithHex:0x555555 alpha:1.0] //右侧气泡字体颜色
+#define qim_messageLeftBubbleTextColor [UIColor qim_colorWithHex:0x171A1D alpha:1.0] //左侧气泡字体颜色
+#define qim_messageRightBubbleTextColor [UIColor qim_colorWithHex:0x171A1D alpha:1.0] //右侧气泡字体颜色
 
-#define qim_ChatTimestampCellBgColor   [UIColor qim_colorWithHex:0xD3D3D3 alpha:1.0] //时间戳气泡背景颜色
+#define qim_ChatTimestampCellBgColor   [UIColor qim_colorWithHex:0xFEFEFF alpha:1.0] //时间戳气泡背景颜色
+#define qim_ChatTimestampCellFontColor   [UIColor qim_colorWithHex:0x757577 alpha:1.0] //时间戳气泡字体颜色
 
 #define qim_messageText_color  [UIColor qim_colorWithHex:0x333333 alpha:1.0]    //文本消息颜色
 #define qim_messageLinkurl_color [UIColor qim_colorWithHex:0x48A3FF alpha:1.0]         //link颜色back
-#define qim_messageUnReadState_color [UIColor qim_colorWithHex:0x00C1BA alpha:1.0]      //消息未读提示Color
-#define qim_messageReadState_color [UIColor qim_colorWithHex:0xBFBFBF alpha:1.0]      //消息未读提示Color
+#define qim_messageUnReadState_color [UIColor qim_colorWithHex:0x0189FE alpha:1.0]      //消息未读提示Color
+#define qim_messageReadState_color [UIColor qim_colorWithHex:0xBEBEBF alpha:1.0]      //消息已读提示Color
 
 #define qim_newmessageUpArrowBgColor  [UIColor qim_colorWithHex:0xFFFFFF alpha:1.0] //会话内新消息UpArrow textColor
 #define qim_newmessageUpArrowBorderColor  [UIColor qim_colorWithHex:0xE4E4E4 alpha:1.0] //会话内新消息UpArrow BorderColor

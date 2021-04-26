@@ -1344,6 +1344,7 @@ static const NSInteger QIMWORKMOMENTLIMITNUM = 1000;
             //初始化navigation
             QIMPhotoBrowserNavController *nc = [[QIMPhotoBrowserNavController alloc] initWithRootViewController:browser];
             nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            nc.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:nc animated:YES completion:nil];
         } else if (mediaType == QIMWorkMomentMediaTypeVideo) {
             //            NSDictionary *videoDic = @{@"MediaType":@(1), @"VideoDic": @{@"LocalVideoOutPath" : LocalVideoOutPath, @"fileSizeStr":fileSizeStr, @"videoDuration":@(videoDuration), @"thumbImage":thumbImage}};

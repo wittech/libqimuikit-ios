@@ -52,7 +52,7 @@
 
 #import "QIMJSONSerializer.h"
 #import <Masonry/Masonry.h>
-#define FONT_NAME @"FZLTHJW--GB1-0"
+#define FONT_NAME @"PingFangSC-Regular"
 #define FONT_SIZE 18
 
 #define APP [[UIApplication sharedApplication] delegate]

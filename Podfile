@@ -15,10 +15,11 @@ target 'QIMUIKit' do
     #移除mpaas依赖的SDWebImage
     remove_pod "mPaaS_SDWebImage"
     remove_pod "mPaaS_AMap"
-    
+
     mPaaS_pod "mPaaS_MBProgressHud"
     mPaaS_pod "mPaaS_AlipaySDK"
     mPaaS_pod "mPaaS_TinyApp"
+    mPaaS_pod "mPaaS_CommonUI"
     
     pod 'QIMDataBase'
     pod 'QIMKitVendor'

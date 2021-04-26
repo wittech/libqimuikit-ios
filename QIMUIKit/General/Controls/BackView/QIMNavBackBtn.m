@@ -43,7 +43,7 @@ static QIMNavBackBtn *__backBtn = nil;
  
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
     CGFloat imageW = CGRectGetWidth(contentRect) * 0.3;
-    return CGRectMake(0, 11, imageW, 21);
+    return CGRectMake(20, 11, imageW, 21);
 }
 
 - (void)registerNSNotification {

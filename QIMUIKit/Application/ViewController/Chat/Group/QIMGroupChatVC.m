@@ -94,6 +94,9 @@
 #import "QIMIPadWindowManager.h"
 #endif
 
+//设置导航条自动显示效果，需要实现DTNavigationBarAppearanceProtocol协议
+#import <APMobileFramework/DTNavigationBarAppearanceProtocol.h>
+
 #define kPageCount 20
 
 #define kReSendMsgAlertViewTag 10000
@@ -101,7 +104,7 @@
 
 static NSMutableDictionary *__checkGroupMembersCardDic = nil;
 
-@interface QIMGroupChatVC () <UIGestureRecognizerDelegate, QIMGroupChatCellDelegate, QIMSingleChatVoiceCellDelegate, QIMMWPhotoBrowserDelegate, QIMRemoteAudioPlayerDelegate, QIMMsgBaloonBaseCellDelegate, QIMChatBGImageSelectControllerDelegate, QIMContactSelectionViewControllerDelegate, QIMPushProductViewControllerDelegate, UIActionSheetDelegate, UserLocationViewControllerDelegate, PNNoticeCellDelegate, QIMPNRichTextCellDelegate, QIMPNActionRichTextCellDelegate, QIMChatNotifyInfoCellDelegate, QIMTextBarDelegate, QIMNotReadMsgTipViewsDelegate, QIMNotReadAtMsgTipViewsDelegate, QIMPNRichTextCellDelegate, PlayVoiceManagerDelegate, UIViewControllerPreviewingDelegate, QTalkMessageTableScrollViewDelegate, QIMOrganizationalVCDelegate> {
+@interface QIMGroupChatVC () <UIGestureRecognizerDelegate, QIMGroupChatCellDelegate, QIMSingleChatVoiceCellDelegate, QIMMWPhotoBrowserDelegate, QIMRemoteAudioPlayerDelegate, QIMMsgBaloonBaseCellDelegate, QIMChatBGImageSelectControllerDelegate, QIMContactSelectionViewControllerDelegate, QIMPushProductViewControllerDelegate, UIActionSheetDelegate, UserLocationViewControllerDelegate, PNNoticeCellDelegate, QIMPNRichTextCellDelegate, QIMPNActionRichTextCellDelegate, QIMChatNotifyInfoCellDelegate, QIMTextBarDelegate, QIMNotReadMsgTipViewsDelegate, QIMNotReadAtMsgTipViewsDelegate, QIMPNRichTextCellDelegate, PlayVoiceManagerDelegate, UIViewControllerPreviewingDelegate, QTalkMessageTableScrollViewDelegate, QIMOrganizationalVCDelegate, DTNavigationBarAppearanceProtocol> {
     
     bool _isReloading;
     
@@ -207,6 +210,11 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
 @end
 
 @implementation QIMGroupChatVC
+
+//默认自动隐藏设置为NO，flutter页面是自动隐藏，到了原生这边需要设置为不隐藏；
+- (BOOL)autohideNavigationBar{
+    return NO;
+}
 
 - (void)willMoveToParentViewController:(UIViewController*)parent
 {
@@ -720,8 +728,12 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
     _currentPlayVoiceMsgId = nil;
     
     for (int i = 0; i < (int) self.messageManager.dataSource.count - kPageCount * 2; i++) {
-        
         [[QIMMessageCellCache sharedInstance] removeObjectForKey:[(QIMMessageModel *) self.messageManager.dataSource[i] messageId]];
+    }
+    
+    if (self.messageManager.dataSource.count > 0) {
+        //此处直接发送消息到列表页面；将最后一条消息返回去
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationBackButtonClick object:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
     }
 }
 
@@ -1307,7 +1319,6 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
     [self.view endEditing:YES];
     // Mark by OldiPad
     if ([[QIMKit sharedInstance] getIsIpad] == NO) {
-        
         if ([self.delegate respondsToSelector:@selector(backButtonClick:)]) {
             [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
         }
@@ -1329,10 +1340,6 @@ static NSMutableDictionary *__checkGroupMembersCardDic = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    // if (self.isBeingDismissed || self.isMovingFromParentViewController
-    //     || (self.navigationController && self.navigationController.isBeingDismissed)) {
-    //     //TODO: release important resource
-    // }
     //增加滑动返回隐藏；原本的框架未采用mpaas，系统在滑动返回会自动调用这个方法；
     //当前方法会重置当前会话的全局变量为空，这样新消息到来的时候会自动提示；如果不重置，则默认为当前新消息没有提示且自动为已读；
     [self selfPopedViewController];
@@ -2085,6 +2092,7 @@ static CGPoint tableOffsetPoint;
             //初始化navigation
             QIMPhotoBrowserNavController *nc = [[QIMPhotoBrowserNavController alloc] initWithRootViewController:browser];
             nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            nc.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:nc animated:YES completion:nil];
             return;
         } else {

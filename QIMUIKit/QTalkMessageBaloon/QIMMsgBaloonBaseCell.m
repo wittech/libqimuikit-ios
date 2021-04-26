@@ -154,7 +154,7 @@ static UIImage *__rightBallocImage = nil;
 - (UIImageView *)HeadView {
     if (!_HeadView) {
         _HeadView = [[UIImageView alloc] initWithFrame:CGRectMake(AVATAR_SUPER_LEFT, 0, AVATAR_WIDTH, AVATAR_HEIGHT)];
-        _HeadView.layer.cornerRadius = AVATAR_WIDTH / 2.0f;
+        _HeadView.layer.cornerRadius = 10.0f;
         _HeadView.layer.masksToBounds = YES;
         _HeadView.contentMode = UIViewContentModeScaleAspectFit;
         _HeadView.userInteractionEnabled = YES;
@@ -205,23 +205,23 @@ static UIImage *__rightBallocImage = nil;
         _messgaeStateLabel = [[UILabel alloc] init];
         _messgaeStateLabel.adjustsFontSizeToFitWidth = YES;
         _messgaeStateLabel.textAlignment = NSTextAlignmentRight;
-        _messgaeStateLabel.font = [UIFont systemFontOfSize:10];
+        _messgaeStateLabel.font = [UIFont fontWithName:FONT_NAME size:12];
         _messgaeStateLabel.text = @"未读";
         _messgaeStateLabel.hidden = YES;
-        _messgaeStateLabel.frame = CGRectMake(self.backView.left - 40, self.backView.bottom - 12, 35, 12);
-        _messgaeStateLabel.textColor = [UIColor qim_colorWithHex:0x15b0f9 alpha:1.0];
+        _messgaeStateLabel.frame = CGRectMake(self.backView.right - 51, self.backView.bottom + 5, 35, 12);
+        _messgaeStateLabel.textColor = qim_messageUnReadState_color;
     }
     return _messgaeStateLabel;
 }
 
-- (UIImageView *)messgaeStateIcon {
-    if (!_messgaeStateIcon) {
-        _messgaeStateIcon = [[UIImageView alloc] init];
-        _messgaeStateIcon.hidden = YES;
-        _messgaeStateIcon.frame = CGRectMake(self.backView.left - 22, self.backView.bottom - 22, 20, 20);
-    }
-    return _messgaeStateIcon;
-}
+//- (UIImageView *)messgaeStateIcon {
+//    if (!_messgaeStateIcon) {
+//        _messgaeStateIcon = [[UIImageView alloc] init];
+//        _messgaeStateIcon.hidden = YES;
+//        _messgaeStateIcon.frame = CGRectMake(self.backView.left - 22, self.backView.bottom - 22, 20, 20);
+//    }
+//    return _messgaeStateIcon;
+//}
 
 - (UILabel *)messgaeRealStateLabel {
     if (!_messgaeRealStateLabel) {
@@ -230,7 +230,7 @@ static UIImage *__rightBallocImage = nil;
         _messgaeRealStateLabel.textAlignment = NSTextAlignmentRight;
         _messgaeRealStateLabel.frame = CGRectMake(self.backView.left - 80, self.backView.top, 70, 24);
         _messgaeRealStateLabel.numberOfLines = 0;
-        _messgaeRealStateLabel.font = [UIFont systemFontOfSize:10];
+        _messgaeRealStateLabel.font = [UIFont fontWithName:FONT_NAME size:10];
         _messgaeRealStateLabel.textColor = [UIColor redColor];
     }
     return _messgaeRealStateLabel;
@@ -325,7 +325,8 @@ static UIImage *__rightBallocImage = nil;
             } else {
                 self.backView.frame = rect;
             }
-            self.messgaeStateIcon.hidden = NO;
+//            self.messgaeStateIcon.hidden = NO;
+            self.messgaeStateLabel.hidden = NO;
         }
     } else {
         self.HeadView.userInteractionEnabled = YES;
@@ -338,7 +339,8 @@ static UIImage *__rightBallocImage = nil;
             } else {
                 self.backView.frame = rect;
             }
-            self.messgaeStateIcon.hidden = NO;
+//            self.messgaeStateIcon.hidden = NO;
+            self.messgaeStateLabel.hidden = NO;
         }
     }
 }
@@ -413,13 +415,14 @@ static UIImage *__rightBallocImage = nil;
         if (readFlag) {
             [self.indicatorView stopAnimating];
             self.indicatorView.hidden = YES;
-//            self.messgaeStateLabel.hidden = NO;
-//            self.messgaeStateLabel.text = @"已读";
-//            self.messgaeStateLabel.textColor = [UIColor lightGrayColor];
             
+            //设置为已读状态
+            self.messgaeStateLabel.hidden = NO;
+            self.messgaeStateLabel.text = @"已读";
+            self.messgaeStateLabel.textColor = qim_messageReadState_color;
             
-            self.messgaeStateIcon.hidden = NO;
-            self.messgaeStateIcon.image = [UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:qim_messageReadState_font size:20 color:qim_messageReadState_color]];
+//            self.messgaeStateIcon.hidden = NO;
+//            self.messgaeStateIcon.image = [UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:qim_messageReadState_font size:20 color:qim_messageReadState_color]];
             
             self.statusButton.hidden = YES;
         } else {
@@ -428,23 +431,27 @@ static UIImage *__rightBallocImage = nil;
             if (sentFlag) {
                 [self.indicatorView stopAnimating];
                 self.indicatorView.hidden = YES;
-//                self.messgaeStateLabel.hidden = NO;
-                self.messgaeStateIcon.hidden = NO;
-                self.messgaeStateIcon.image = [UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:qim_messageUnReadState_font size:20 color:qim_messageUnReadState_color]];
+                
+                //设置为未读
+                self.messgaeStateLabel.hidden = NO;
+                self.messgaeStateLabel.text = @"未读";
+                self.messgaeStateLabel.textColor = qim_messageUnReadState_color;
+                
+//                self.messgaeStateIcon.hidden = NO;
+//                self.messgaeStateIcon.image = [UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:qim_messageUnReadState_font size:20 color:qim_messageUnReadState_color]];
                 self.statusButton.hidden = YES;
 //                [_sessionButton setImage:[UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:@"\U0000f0f3" size:32 color:[UIColor qim_colorWithHex:0x616161 alpha:1.0]]] forState:UIControlStateNormal];
-
-//                self.messgaeStateLabel.text = @"未读";
-//                self.messgaeStateLabel.textColor = [UIColor qim_colorWithHex:0x15b0f9 alpha:1.0];
             } else {
                 [self.indicatorView stopAnimating];
                 self.indicatorView.hidden = YES;
-//                self.messgaeStateLabel.hidden = NO;
                 self.statusButton.hidden = YES;
-//                self.messgaeStateLabel.text = @"未读";
-//                self.messgaeStateLabel.textColor = [UIColor qim_colorWithHex:0x15b0f9 alpha:1.0];
-                self.messgaeStateIcon.hidden = NO;
-                self.messgaeStateIcon.image = [UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:qim_messageUnReadState_font size:20 color:qim_messageUnReadState_color]];
+                
+                //设置为未读
+                self.messgaeStateLabel.hidden = NO;
+                self.messgaeStateLabel.text = @"未读";
+                self.messgaeStateLabel.textColor = qim_messageUnReadState_color;
+//                self.messgaeStateIcon.hidden = NO;
+//                self.messgaeStateIcon.image = [UIImage qimIconWithInfo:[QIMIconInfo iconInfoWithText:qim_messageUnReadState_font size:20 color:qim_messageUnReadState_color]];
             }
         }
     }
@@ -459,8 +466,8 @@ static UIImage *__rightBallocImage = nil;
         //这里只有单聊，Consult（单人会话）显示消息状态
         if (![[QIMKit sharedInstance] isMiddleVirtualAccountWithJid:self.message.to] && self.message.chatType != ChatType_GroupChat && self.message.chatType != ChatType_System && self.chatType != ChatType_GroupChat && self.chatType != ChatType_System && self.chatType != ChatType_CollectionChat) {
             if ([[QIMKit sharedInstance] qimNav_Showmsgstat]) {
-//                [self.contentView addSubview:self.messgaeStateLabel];
-                [self.contentView addSubview:self.messgaeStateIcon];
+                [self.contentView addSubview:self.messgaeStateLabel];
+//                [self.contentView addSubview:self.messgaeStateIcon];
             }
         }
         if (self.message.messageSendState == QIMMessageSendState_Waiting || self.message.messageSendState == QIMMessageSendState_Faild) {

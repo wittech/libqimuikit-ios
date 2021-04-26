@@ -10,6 +10,10 @@
 
 @implementation QIMMWTapDetectingImageView
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (id)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
 		self.userInteractionEnabled = YES;

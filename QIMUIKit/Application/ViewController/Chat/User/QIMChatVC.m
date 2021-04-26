@@ -120,7 +120,8 @@
 #import "QIMStringTransformTools.h"
 
 //设置导航条自动显示效果，需要实现DTNavigationBarAppearanceProtocol协议
-#import <APMobileFramework/DTNavigationBarAppearanceProtocol.h>
+#import <APMobileFramework/APMobileFramework.h>
+//#import <AntUI/AntUI.h>
 
 #if __has_include("QIMNotifyManager.h")
 
@@ -248,6 +249,42 @@
     return NO;
 }
 
+//- (UIImage *)customNavigationBarBackButtonImage
+//{
+//    // 设置当前页面返回按钮图片
+//    return APCommonUILoadImage(@"back_button_normal_white");
+//}
+//
+//- (void)gotoSetOptionMenu
+//{
+//    // 设置右侧单按钮
+//    self.navigationItem.rightBarButtonItem = [AUBarButtonItem barButtonItemWithImageType:AUBarButtonImageTypeGroupChat target:self action:@selector(onClickRightItem)];
+//}
+//- (void)gotoSetTwoOptionMenu
+//{
+//    // 设置右侧双按钮
+//    AUBarButtonItem *item1 = [AUBarButtonItem barButtonItemWithImageType:AUBarButtonImageTypeGroupChat target:self action:@selector(onClickRightItem)];
+//    AUBarButtonItem *item2 = [AUBarButtonItem barButtonItemWithImageType:AUBarButtonImageTypeHelp target:self action:@selector(onClickRightItem)];
+//    self.navigationItem.rightBarButtonItems = @[item1, item2];
+//}
+
+//- (UIStatusBarStyle)customStatusBarStytle
+//{
+//    // 设置当前页面状态栏样式
+//    return UIStatusBarStyleDefault;
+//}
+//- (UIColor *)customNavigationBarBackButtonTitleColor
+//{
+//    // 设置当前页面返回按钮文案颜色
+//    return [UIColor greenColor];
+//}
+//
+//- (UIColor *)customNavigationBarTitleColor
+//{
+//    // 设置当前页面标题颜色
+//    return [UIColor greenColor];
+//}
+
 - (void)willMoveToParentViewController:(UIViewController*)parent
 {
     [super willMoveToParentViewController:parent];
@@ -262,7 +299,6 @@
             [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
         }
     }
-    
 }
 
 //QIMTextBarDelegate
@@ -271,8 +307,6 @@
         [self.delegate audioCallClick];
     }
 }
-
-
 
 #pragma mark - setter and getter
 
@@ -622,6 +656,7 @@
 }
 
 - (void)setupNavBar {
+    //移除返回按钮的效果，采用系统默认效果
     [self setBackBtn];
     if (self.chatType != ChatType_System) {
         UIView *rightItemView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 70, 44)];
@@ -669,10 +704,10 @@
         } else {
             
         }
-        if (self.chatType != ChatType_CollectionChat) {
-            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemView];
-            [self.navigationItem setRightBarButtonItem:rightItem];
-        }
+//        if (self.chatType != ChatType_CollectionChat) {
+//            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemView];
+//            [self.navigationItem setRightBarButtonItem:rightItem];
+//        }
         
         [self initTitleView];
     } else {
@@ -822,7 +857,7 @@
     
     [super viewWillAppear:animated];
     _isBack = NO;
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     if (![[QIMKit sharedInstance] getIsIpad]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
@@ -857,13 +892,13 @@
         [[QIMMessageCellCache sharedInstance] removeObjectForKey:[(QIMMessageModel *) self.messageManager.dataSource[i] messageId]];
     }
     
+    if (self.messageManager.dataSource.count > 0) {
+        //此处直接发送消息到列表页面；将最后一条消息返回去
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationBackButtonClick object:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    // if (self.isBeingDismissed || self.isMovingFromParentViewController
-    //     || (self.navigationController && self.navigationController.isBeingDismissed)) {
-    //     //TODO: release important resource
-    // }
     //增加滑动返回隐藏；原本的框架未采用mpaas，系统在滑动返回会自动调用这个方法；
     //当前方法会重置当前会话的全局变量为空，这样新消息到来的时候会自动提示；如果不重置，则默认为当前新消息没有提示且自动为已读；
     [self selfPopedViewController];
@@ -1571,6 +1606,7 @@
     [self.view endEditing:YES];
     if ([[QIMKit sharedInstance] getIsIpad] == NO) {
         if (self.messageManager.dataSource.count > 0) {
+            //sessionview页面实现了这里的代理方法，会自动触发；
             if ([self.delegate respondsToSelector:@selector(backButtonClick:)]) {
                 [self.delegate backButtonClick:self.messageManager.dataSource[self.messageManager.dataSource.count-1]];
             }
@@ -3035,9 +3071,9 @@
         }
     } else if (event == MA_Forward) {
         _tableView.editing = YES;
-        [self.navigationController.navigationBar addSubview:[self getForwardNavView]];
-        [self.navigationController.navigationBar addSubview:[self getMaskRightTitleView]];
-        [self.view addSubview:self.forwardBtn];
+//        [self.navigationController.navigationBar addSubview:[self getForwardNavView]];
+//        [self.navigationController.navigationBar addSubview:[self getMaskRightTitleView]];
+//        [self.view addSubview:self.forwardBtn];
         self.fd_interactivePopDisabled = YES;
     } else if (event == MA_Refer) {
         //引用消息
@@ -3125,6 +3161,7 @@ static CGPoint tableOffsetPoint;
             //初始化navigation
             QIMPhotoBrowserNavController *nc = [[QIMPhotoBrowserNavController alloc] initWithRootViewController:browser];
             nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            nc.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:nc animated:YES completion:nil];
             return;
         } else {

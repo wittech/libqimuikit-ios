@@ -45,6 +45,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         [self setDefaultValue];
         [self initSubviews];
     }
@@ -63,7 +64,7 @@
 {
     // barView
     self.image = [[UIImage qim_imageNamedFromQIMUIKitBundle:@"input-bar-flat"] resizableImageWithCapInsets:UIEdgeInsetsMake(2.0f, 0.0f, 0.0f, 0.0f) resizingMode:UIImageResizingModeStretch];
-    self.image = [UIImage qim_imageWithColor:[UIColor whiteColor]];
+    self.image = [UIImage qim_imageWithColor:[UIColor qim_colorWithHex:0xF1F2F2 alpha:1]];
     self.userInteractionEnabled = YES;
     self.previousTextViewHeight = TextViewH;
     

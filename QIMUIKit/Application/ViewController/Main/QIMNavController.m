@@ -73,6 +73,8 @@
 //    [self.navigationBar setBackgroundImage:[UIImage qim_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setBackgroundImage:[UIImage qim_imageWithColor:[UIColor whiteColor]] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    //适配ios13的全屏；
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self becomeFirstResponder];
 }

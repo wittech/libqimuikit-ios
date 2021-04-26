@@ -70,6 +70,8 @@
 #import "QIMImagePickerController.h"
 #endif
 
+#define SINGLE_LINE_HEIGHT           (1 / [UIScreen mainScreen].scale)
+
 @interface NSAttributedString (EmojiExtension)
 - (NSString *)getPlainString;
 @end
@@ -401,7 +403,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
     
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         [self resgisterNSNotifications];
         
         self.hasAtFun = FALSE;
@@ -413,6 +415,11 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
         _image = [UIImage qim_imageFromColor:[UIColor qim_colorWithHex:0xebecef alpha:1]];
         
         self.lastChatKeyboardY = frame.origin.y;
+        
+        //添加一条横向的分隔线，1像素
+        UIView *horizontalLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.width, SINGLE_LINE_HEIGHT)];
+        horizontalLine.backgroundColor = [UIColor qim_colorWithHex:0xD5D7DB alpha:1];
+        [self addSubview:horizontalLine];
         
         [self addSubview:self.chatToolBar];
         _isScrollToBottom = YES;
@@ -1171,7 +1178,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
 
 - (QIMChatToolBar *)chatToolBar {
     if (!_chatToolBar) {
-        _chatToolBar = [[QIMChatToolBar alloc] initWithFrame:CGRectMake(0, 0, self.width, 49)];
+        _chatToolBar = [[QIMChatToolBar alloc] initWithFrame:CGRectMake(0, SINGLE_LINE_HEIGHT, self.width, 49)];
         _chatToolBar.delegate = self;
     }
     return _chatToolBar;
@@ -1180,7 +1187,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
 - (UIView *)maskView {
     if (!_maskView) {
         _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, self.chatToolBar.bottom, self.width, kFacePanelHeight)];
-        _maskView.backgroundColor = [UIColor whiteColor];
+        _maskView.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         [self addSubview:_maskView];
     }
     return _maskView;
@@ -1189,7 +1196,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
 - (UIView *)emotionPanel {
     if (!_emotionPanel) {
         _emotionPanel = [[UIView alloc] initWithFrame:CGRectMake(0, kChatKeyBoardHeight - kFacePanelHeight, self.width, kFacePanelHeight)];
-        _emotionPanel.backgroundColor = [UIColor whiteColor];
+        _emotionPanel.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         [self addSubview:_emotionPanel];
     }
     return _emotionPanel;
@@ -1198,7 +1205,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
 - (QIMTextBarExpandView *)expandPanel {
     if (!_expandPanel) {
         _expandPanel = [[QIMTextBarExpandView alloc] initWithFrame:CGRectMake(0, kChatKeyBoardHeight - kFacePanelHeight, self.width, kFacePanelHeight)];
-        _expandPanel.backgroundColor = [UIColor whiteColor];
+        _expandPanel.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         _expandPanel.delegate = self;
         _expandPanel.type = self.expandViewType;
         _expandPanel.parentVC = (UIViewController *)self.delegate;
@@ -1225,7 +1232,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
         _voiceView = [[QIMVoiceChatView alloc] initWithFrame:CGRectMake(0, kChatKeyBoardHeight - kFacePanelHeight, self.width, kFacePanelHeight)];
         _voiceView.hidden = YES;
         _voiceView.delegate = self;
-        _voiceView.backgroundColor = [UIColor whiteColor];
+        _voiceView.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         [self addSubview:_voiceView];
     }
     return _voiceView;
@@ -1261,7 +1268,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
         _emotionSegScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(38.5, self.expandPanel.height - 38.5, self.width - 100, 38.5)];
         _emotionSegScrollView.contentSize = CGSizeMake(38.5 * emotionsNum, 38.5);
         _emotionSegScrollView.showsHorizontalScrollIndicator = NO;
-        _emotionSegScrollView.backgroundColor = [UIColor whiteColor];
+        _emotionSegScrollView.backgroundColor = [UIColor qim_colorWithHex:0xF1F2F2 alpha:1];
         //这一句话很重要，影响chatvc能不能点击状态栏滚到顶部
         _emotionSegScrollView.scrollsToTop = NO;
     }
@@ -1849,7 +1856,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
             picker.customDoneButtonTitle = @"";
             picker.customCancelButtonTitle = [NSBundle qim_localizedStringForKey:@"Cancel"];
             picker.customNavigationBarPrompt = nil;
-            
+            picker.modalPresentationStyle = UIModalPresentationFullScreen;
             picker.colsInPortrait = 4;
             picker.colsInLandscape = 5;
             picker.minimumInteritemSpacing = 2.0;
@@ -1883,6 +1890,7 @@ static dispatch_once_t __publicNumberTextBarOnceToken;
             CameraViewController * cameraVC = [[CameraViewController alloc] init];
             cameraVC.delegate = self;
             QIMNavController * nav = [[QIMNavController alloc] initWithRootViewController:cameraVC];
+//            nav.modalPresentationStyle = UIModalPresentationFullScreen;
             [(UIViewController *)self.delegate presentViewController:nav animated:YES completion:nil];
         });
     };

@@ -22,10 +22,10 @@
         _timestampButton.frame = CGRectMake(100, 3, SCREEN_WIDTH - 200, 20);
         [_timestampButton setUserInteractionEnabled:NO];
         [_timestampButton setBackgroundImage:[[UIImage qim_imageWithColor:qim_ChatTimestampCellBgColor] stretchableImageWithLeftCapWidth:6 topCapHeight:6] forState:UIControlStateNormal];
-        [_timestampButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
-        _timestampButton.layer.cornerRadius = 2.0f;
+        [_timestampButton.titleLabel setFont:[UIFont fontWithName:FONT_NAME size:11]];
+        _timestampButton.layer.cornerRadius = 4.0f;
         _timestampButton.layer.masksToBounds = YES;
-        [_timestampButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_timestampButton setTitleColor:qim_ChatTimestampCellFontColor forState:UIControlStateNormal];
         _timestampButton.hidden = YES;
     }
     return _timestampButton;

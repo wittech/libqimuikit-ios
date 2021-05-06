@@ -287,6 +287,10 @@ static UIImage *__rightBallocImage = nil;
             CGRect headViewFrame = {{self.frameWidth - AVATAR_WIDTH - selectOffset, AVATAR_SUPER_TOP},{AVATAR_WIDTH,AVATAR_HEIGHT}};
             self.HeadView.frame = headViewFrame;
             self.medalListView.hidden = YES;
+            //如果是群聊则隐藏自己的name，同时气泡往上移动和头像的top对齐；
+            if (self.chatType == ChatType_GroupChat) {
+                self.nameLabel.hidden = YES;
+            }
         }
             break;
         default:
@@ -532,7 +536,7 @@ static UIImage *__rightBallocImage = nil;
             break;
         case QIMMessageDirection_Sent: {
             CGRect frame = {{self.frameWidth - kBackViewCap - backWidth - AVATAR_WIDTH, kCellHeightCap / 2.0 + kBackViewCap},{backWidth,backHeight}};
-           if (self.chatType == ChatType_SingleChat) {
+           if (self.chatType == ChatType_SingleChat || self.chatType == ChatType_GroupChat) {
                frame = CGRectMake(self.frameWidth - kBackViewCap - backWidth - AVATAR_WIDTH, kCellHeightCap / 2.0, backWidth, backHeight);
             } else {
             }
@@ -556,6 +560,7 @@ static UIImage *__rightBallocImage = nil;
 #pragma mark - action
 
 - (void)onHeaderViewClick:(UITapGestureRecognizer *)tapGesture {
+    //点击头像；
     if (self.message.from.length > 0 && self.chatType != ChatType_CollectionChat && self.chatType != ChatType_Consult) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [QIMFastEntrance openUserCardVCByUserId:self.message.from];
@@ -642,11 +647,11 @@ static UIImage *__rightBallocImage = nil;
     NSMutableArray *menuList = [NSMutableArray arrayWithCapacity:4];
     switch (self.message.messageDirection) {
         case QIMMessageDirection_Received: {
-            [menuList addObjectsFromArray:@[@(MA_Refer),@(MA_Repeater), @(MA_Delete), @(MA_Forward)]];
+            [menuList addObjectsFromArray:@[@(MA_Delete)]];
         }
             break;
         case QIMMessageDirection_Sent: {
-                [menuList addObjectsFromArray:@[@(MA_Refer), @(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete), @(MA_Forward)]];
+                [menuList addObjectsFromArray:@[@(MA_ToWithdraw), @(MA_Delete)]];
             }
             break;
         default:

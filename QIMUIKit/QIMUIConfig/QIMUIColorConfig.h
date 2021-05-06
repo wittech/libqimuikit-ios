@@ -49,8 +49,8 @@
 #define qim_sessionCellContentTextColor            [UIColor qim_colorWithHex:0x999999 alpha:1.0]  //会话列表页Content TextColor
 
 
-#define qim_groupchat_rightCard_Color    [UIColor qim_colorWithHex:0x666666 alpha:1.0]       //群右上角
-#define qim_singlechat_rightCard_Color   [UIColor qim_colorWithHex:0x666666 alpha:1.0]       //单人右上角
+#define qim_groupchat_rightCard_Color    [UIColor qim_colorWithHex:0x171A1D alpha:1.0]       //群右上角
+#define qim_singlechat_rightCard_Color   [UIColor qim_colorWithHex:0x171A1D alpha:1.0]       //单人右上角
 
 #define qim_nav_moment_color   [UIColor qim_colorWithHex:0x666666 alpha:1.0]    //驼圈右上角
 #define qim_nav_myself_color   [UIColor qim_colorWithHex:0x666666 alpha:1.0]    //驼圈右上角

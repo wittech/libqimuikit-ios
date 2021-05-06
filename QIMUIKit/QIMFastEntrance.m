@@ -296,32 +296,35 @@ static QIMFastEntrance *_sharedInstance = nil;
 }
 
 + (void)openUserChatInfoByUserId:(NSString *)userId {
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
-        if (!navVC) {
-            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
-        }
-        //打开用户名片页
-        //导航返回的RNUserCardView 为YES时，默认打开RN 名片页
-#if __has_include("QimRNBModule.h")
-
-        if ([[QIMKit sharedInstance] qimNav_RNUserCardView]) {
-            Class RunC = NSClassFromString(@"QimRNBModule");
-            SEL sel = NSSelectorFromString(@"openQIMRNVCWithParam:");
-            if ([RunC respondsToSelector:sel]) {
-                NSDictionary *param = @{@"navVC": navVC, @"hiddenNav": @(YES), @"module": @"UserCard", @"properties": @{@"UserId": userId, @"Screen": @"ChatInfo", @"RealJid": userId, @"HeaderUri": @"33"}};
-                [RunC performSelector:sel withObject:param];
-            }
-        } else {
-#endif
-            QIMUserProfileViewController *userProfileVc = [[QIMUserProfileViewController alloc] init];
-            userProfileVc.userId = userId;
-            [navVC pushViewController:userProfileVc animated:YES];
-#if __has_include("QimRNBModule.h")
-        }
-#endif
-    });
+    NSDictionary *userInfo = [[QIMKit sharedInstance] getUserInfoByUserId:userId];
+    //打开用户信息卡片，这里传递消息到flutter去，不打开RN或者之前的页面；
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOpenUserInfo object:userInfo];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
+//        if (!navVC) {
+//            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
+//        }
+//        //打开用户名片页
+//        //导航返回的RNUserCardView 为YES时，默认打开RN 名片页
+//#if __has_include("QimRNBModule.h")
+//
+//        if ([[QIMKit sharedInstance] qimNav_RNUserCardView]) {
+//            Class RunC = NSClassFromString(@"QimRNBModule");
+//            SEL sel = NSSelectorFromString(@"openQIMRNVCWithParam:");
+//            if ([RunC respondsToSelector:sel]) {
+//                NSDictionary *param = @{@"navVC": navVC, @"hiddenNav": @(YES), @"module": @"UserCard", @"properties": @{@"UserId": userId, @"Screen": @"ChatInfo", @"RealJid": userId, @"HeaderUri": @"33"}};
+//                [RunC performSelector:sel withObject:param];
+//            }
+//        } else {
+//#endif
+//            QIMUserProfileViewController *userProfileVc = [[QIMUserProfileViewController alloc] init];
+//            userProfileVc.userId = userId;
+//            [navVC pushViewController:userProfileVc animated:YES];
+//#if __has_include("QimRNBModule.h")
+//        }
+//#endif
+//    });
 }
 
 - (UIViewController *)getUserCardVCByUserId:(NSString *)userId {
@@ -359,31 +362,36 @@ static QIMFastEntrance *_sharedInstance = nil;
 }
 
 + (void)openUserCardVCByUserId:(NSString *)userId {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
-        if (!navVC) {
-            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
-        }
-        //打开用户名片页
-        //导航返回的RNUserCardView 为YES时，默认打开RN 名片页
-#if __has_include("QimRNBModule.h")
-
-        if ([[QIMKit sharedInstance] qimNav_RNUserCardView]) {
-            Class RunC = NSClassFromString(@"QimRNBModule");
-            SEL sel = NSSelectorFromString(@"openQIMRNVCWithParam:");
-            if ([RunC respondsToSelector:sel]) {
-                NSDictionary *param = @{@"navVC": navVC, @"hiddenNav": @(YES), @"module": @"UserCard", @"properties": @{@"UserId": userId}};
-                [RunC performSelector:sel withObject:param];
-            }
-        } else {
-#endif
-            QIMUserProfileViewController *userProfileVc = [[QIMUserProfileViewController alloc] init];
-            userProfileVc.userId = userId;
-            [navVC pushViewController:userProfileVc animated:YES];
-#if __has_include("QimRNBModule.h")
-        }
-#endif
-    });
+    //TODO:点击头像打开的页面；
+    NSDictionary *userInfo = [[QIMKit sharedInstance] getUserInfoByUserId:userId];
+    //打开用户信息卡片，这里传递消息到flutter去，不打开RN或者之前的页面；
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOpenUserInfo object:userInfo];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
+//        if (!navVC) {
+//            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
+//        }
+//        //打开用户名片页
+//        //导航返回的RNUserCardView 为YES时，默认打开RN 名片页
+//#if __has_include("QimRNBModule.h")
+//
+//        if ([[QIMKit sharedInstance] qimNav_RNUserCardView]) {
+//            Class RunC = NSClassFromString(@"QimRNBModule");
+//            SEL sel = NSSelectorFromString(@"openQIMRNVCWithParam:");
+//            if ([RunC respondsToSelector:sel]) {
+//                NSDictionary *param = @{@"navVC": navVC, @"hiddenNav": @(YES), @"module": @"UserCard", @"properties": @{@"UserId": userId}};
+//                [RunC performSelector:sel withObject:param];
+//            }
+//        } else {
+//#endif
+//            QIMUserProfileViewController *userProfileVc = [[QIMUserProfileViewController alloc] init];
+//            userProfileVc.userId = userId;
+//            [navVC pushViewController:userProfileVc animated:YES];
+//#if __has_include("QimRNBModule.h")
+//        }
+//#endif
+//    });
 }
 
 - (UIViewController *)getQIMGroupCardVCByGroupId:(NSString *)groupId {
@@ -415,34 +423,36 @@ static QIMFastEntrance *_sharedInstance = nil;
 }
 
 + (void)openQIMGroupCardVCByGroupId:(NSString *)groupId {
-
-#if __has_include("QimRNBModule.h")
-
-    if ([[QIMKit sharedInstance] qimNav_RNGroupCardView]) {
-        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
-        if (!navVC) {
-            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
-        }
-        BOOL isGroupOwner = [[QIMKit sharedInstance] isGroupOwner:groupId];
-        Class RunC = NSClassFromString(@"QimRNBModule");
-        SEL sel = NSSelectorFromString(@"openQIMRNVCWithParam:");
-        if ([RunC respondsToSelector:sel]) {
-            QIMGroupIdentity groupIdentity = [[QIMKit sharedInstance] GroupIdentityForUser:[[QIMKit sharedInstance] getLastJid] byGroup:groupId];
-            NSDictionary *param = @{@"navVC": navVC, @"hiddenNav": @(YES), @"module": @"GroupCard", @"properties": @{@"groupId": groupId, @"permissions": @(groupIdentity)}};
-            [RunC performSelector:sel withObject:param];
-        }
-    } else {
-#endif
-        QIMGroupCardVC *groupCardVC = [[QIMGroupCardVC alloc] init];
-        [groupCardVC setGroupId:groupId];
-        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
-        if (!navVC) {
-            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
-        }
-        [navVC pushViewController:groupCardVC animated:YES];
-#if __has_include("QimRNBModule.h")
-    }
-#endif
+    NSDictionary *groupVcard = [[QIMKit sharedInstance] getGroupCardByGroupId:groupId];
+    //打开群组信息消息
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOpenGroupInfo object:groupVcard];
+//#if __has_include("QimRNBModule.h")
+//
+//    if ([[QIMKit sharedInstance] qimNav_RNGroupCardView]) {
+//        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
+//        if (!navVC) {
+//            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
+//        }
+//        BOOL isGroupOwner = [[QIMKit sharedInstance] isGroupOwner:groupId];
+//        Class RunC = NSClassFromString(@"QimRNBModule");
+//        SEL sel = NSSelectorFromString(@"openQIMRNVCWithParam:");
+//        if ([RunC respondsToSelector:sel]) {
+//            QIMGroupIdentity groupIdentity = [[QIMKit sharedInstance] GroupIdentityForUser:[[QIMKit sharedInstance] getLastJid] byGroup:groupId];
+//            NSDictionary *param = @{@"navVC": navVC, @"hiddenNav": @(YES), @"module": @"GroupCard", @"properties": @{@"groupId": groupId, @"permissions": @(groupIdentity)}};
+//            [RunC performSelector:sel withObject:param];
+//        }
+//    } else {
+//#endif
+//        QIMGroupCardVC *groupCardVC = [[QIMGroupCardVC alloc] init];
+//        [groupCardVC setGroupId:groupId];
+//        UINavigationController *navVC = [[UIApplication sharedApplication] visibleNavigationController];
+//        if (!navVC) {
+//            navVC = [[QIMFastEntrance sharedInstance] getQIMFastEntranceRootNav];
+//        }
+//        [navVC pushViewController:groupCardVC animated:YES];
+//#if __has_include("QimRNBModule.h")
+//    }
+//#endif
 }
 
 - (UIViewController *)getFastChatVCByXmppId:(NSString *)userId WithRealJid:(NSString *)realJid WithChatType:(NSInteger)chatType WithFastMsgTimeStamp:(long long)fastMsgTime {

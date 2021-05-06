@@ -249,6 +249,23 @@
     return NO;
 }
 
+//- (UIStatusBarStyle)customStatusBarStytle
+//{
+//    // 设置当前页面状态栏样式
+//    return UIStatusBarStyleDefault;
+//}
+//- (UIColor *)customNavigationBarBackButtonTitleColor
+//{
+//    // 设置当前页面返回按钮文案颜色
+//    return [UIColor greenColor];
+//}
+//
+//- (UIColor *)customNavigationBarTitleColor
+//{
+//    // 设置当前页面标题颜色
+//    return [UIColor greenColor];
+//}
+
 //- (UIImage *)customNavigationBarBackButtonImage
 //{
 //    // 设置当前页面返回按钮图片
@@ -266,23 +283,6 @@
 //    AUBarButtonItem *item1 = [AUBarButtonItem barButtonItemWithImageType:AUBarButtonImageTypeGroupChat target:self action:@selector(onClickRightItem)];
 //    AUBarButtonItem *item2 = [AUBarButtonItem barButtonItemWithImageType:AUBarButtonImageTypeHelp target:self action:@selector(onClickRightItem)];
 //    self.navigationItem.rightBarButtonItems = @[item1, item2];
-//}
-
-//- (UIStatusBarStyle)customStatusBarStytle
-//{
-//    // 设置当前页面状态栏样式
-//    return UIStatusBarStyleDefault;
-//}
-//- (UIColor *)customNavigationBarBackButtonTitleColor
-//{
-//    // 设置当前页面返回按钮文案颜色
-//    return [UIColor greenColor];
-//}
-//
-//- (UIColor *)customNavigationBarTitleColor
-//{
-//    // 设置当前页面标题颜色
-//    return [UIColor greenColor];
 //}
 
 - (void)willMoveToParentViewController:(UIViewController*)parent
@@ -704,10 +704,12 @@
         } else {
             
         }
-//        if (self.chatType != ChatType_CollectionChat) {
-//            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemView];
-//            [self.navigationItem setRightBarButtonItem:rightItem];
-//        }
+        
+        //如果不是代收消息，则添加右侧的按钮
+        if (self.chatType != ChatType_CollectionChat) {
+            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemView];
+            [self.navigationItem setRightBarButtonItem:rightItem];
+        }
         
         [self initTitleView];
     } else {
@@ -1549,17 +1551,18 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kRightCardRemindNotification object:nil];
         [[QIMKit sharedInstance] setUserObject:@(YES) forKey:kRightCardRemindNotification];
     }
-    NSDictionary *userInfo = [[QIMKit sharedInstance] getUserInfoByUserId:self.chatId];
-    NSString *userId = [userInfo objectForKey:@"XmppId"];
-    if (userId.length > 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [QIMFastEntrance openUserChatInfoByUserId:userId];
-        });
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [QIMFastEntrance openUserChatInfoByUserId:self.chatId];
-        });
-    }
+    [QIMFastEntrance openUserChatInfoByUserId:self.chatId];
+//    NSDictionary *userInfo = [[QIMKit sharedInstance] getUserInfoByUserId:self.chatId];
+//    NSString *userId = [userInfo objectForKey:@"XmppId"];
+//    if (userId.length > 0) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [QIMFastEntrance openUserChatInfoByUserId:userId];
+//        });
+//    } else {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [QIMFastEntrance openUserChatInfoByUserId:self.chatId];
+//        });
+//    }
 }
 
 //右上角加密
@@ -3071,9 +3074,9 @@
         }
     } else if (event == MA_Forward) {
         _tableView.editing = YES;
-//        [self.navigationController.navigationBar addSubview:[self getForwardNavView]];
-//        [self.navigationController.navigationBar addSubview:[self getMaskRightTitleView]];
-//        [self.view addSubview:self.forwardBtn];
+        [self.navigationController.navigationBar addSubview:[self getForwardNavView]];
+        [self.navigationController.navigationBar addSubview:[self getMaskRightTitleView]];
+        [self.view addSubview:self.forwardBtn];
         self.fd_interactivePopDisabled = YES;
     } else if (event == MA_Refer) {
         //引用消息

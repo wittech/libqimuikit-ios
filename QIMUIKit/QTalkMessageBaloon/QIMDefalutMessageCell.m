@@ -128,7 +128,7 @@
                 
                 [menuList addObject:@(MA_Collection)];
             }
-            [menuList addObjectsFromArray:@[@(MA_Refer),@(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete), @(MA_Forward)]];
+            [menuList addObjectsFromArray:@[@(MA_ToWithdraw),@(MA_Delete)]];
         }
             break;
         case QIMMessageDirection_Sent: {
@@ -140,7 +140,7 @@
                 
                 [menuList addObject:@(MA_Collection)];
             }
-            [menuList addObjectsFromArray:@[@(MA_Refer), @(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete), @(MA_Forward)]];
+            [menuList addObjectsFromArray:@[@(MA_ToWithdraw), @(MA_Delete)]];
         }
             break;
         default:

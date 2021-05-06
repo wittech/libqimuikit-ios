@@ -9,12 +9,19 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "QTPHImagePickerController.h"
 #import "QTPHAlbumsViewController.h"
+//设置导航条自动显示效果，需要实现DTNavigationBarAppearanceProtocol协议
+#import <APMobileFramework/APMobileFramework.h>
 
-@interface QTPHImagePickerController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate>
+@interface QTPHImagePickerController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate,DTNavigationBarAppearanceProtocol>
 
 @end
 
 @implementation QTPHImagePickerController
+
+//默认自动隐藏设置为NO，flutter页面是自动隐藏，到了原生这边需要设置为不隐藏；
+- (BOOL)autohideNavigationBar{
+    return YES;
+}
 
 - (id)init
 {

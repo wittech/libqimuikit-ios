@@ -355,11 +355,11 @@ static NSArray *_sentImageArray = nil;
     NSMutableArray *menuList = [NSMutableArray arrayWithCapacity:4];
     switch (self.message.messageDirection) {
         case QIMMessageDirection_Received: {
-            [menuList addObjectsFromArray:@[@(MA_Repeater), @(MA_Delete), @(MA_Forward)]];
+            [menuList addObjectsFromArray:@[@(MA_Delete)]];
         }
             break;
         case QIMMessageDirection_Sent: {
-            [menuList addObjectsFromArray:@[@(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete), @(MA_Forward)]];
+            [menuList addObjectsFromArray:@[@(MA_ToWithdraw), @(MA_Delete)]];
         }
             break;
         default:

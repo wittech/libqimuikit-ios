@@ -341,7 +341,7 @@ static double _global_message_cell_width = 0;
                 
                 [menuList addObject:@(MA_Collection)];
             }
-            [menuList addObjectsFromArray:@[@(MA_Refer),@(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete) /*, @(MA_Favorite)*/]];
+            [menuList addObjectsFromArray:@[@(MA_ToWithdraw), @(MA_Delete) /*, @(MA_Favorite)*/]];
             
             
             [_backView setMenuActionTypeList:menuList];
@@ -364,7 +364,7 @@ static double _global_message_cell_width = 0;
                     
                     [menuList addObject:@(MA_Collection)];
                 }
-                [menuList addObjectsFromArray:@[@(MA_Refer),@(MA_Repeater), @(MA_ToWithdraw), @(MA_Delete) /*, @(MA_Favorite)*/]];
+                [menuList addObjectsFromArray:@[@(MA_ToWithdraw), @(MA_Delete) /*, @(MA_Favorite)*/]];
             }
             [_backView setMenuActionTypeList:menuList];
 

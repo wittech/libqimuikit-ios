@@ -13,8 +13,9 @@
 #import "QTImageAlbumCell.h"
 
 #import "QTImageAssetViewController.h"
-
-@interface QTImageAlbumViewController ()<UITableViewDataSource,UITableViewDelegate>{
+//设置导航条自动显示效果，需要实现DTNavigationBarAppearanceProtocol协议
+#import <APMobileFramework/DTNavigationBarAppearanceProtocol.h>
+@interface QTImageAlbumViewController ()<UITableViewDataSource,UITableViewDelegate,DTNavigationBarAppearanceProtocol>{
     NSMutableArray *_group;
     UITableView *_tableView;
     ALAssetsLibrary *_assetsLibrary;
@@ -24,6 +25,11 @@
 @end
 
 @implementation QTImageAlbumViewController
+
+//默认自动隐藏设置为NO，flutter页面是自动隐藏，到了原生这边需要设置为不隐藏；
+- (BOOL)autohideNavigationBar{
+    return YES;
+}
 
 #pragma mark - ALAssetsLibrary
 
